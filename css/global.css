@@ -1,0 +1,231 @@
+@font-face {
+    font-family: "GatwickFont";
+    src: url("../fonts/PPGatwick-GliderSemibold.woff2") format("woff2");
+    src: url("../fonts/PPGatwick-GliderSemibold.woff") format("woff");
+
+}
+
+/* Reset and basic styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    font-family: "GatwickFont", sans-serif;
+    overflow: hidden; /* Prevent default scrollbars if desired */
+}
+
+/* Navbar (logo + dropdown) */
+.navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    z-index: 999;
+    background: rgba(0, 0, 0, 0.2); /* Semi-transparent overlay (optional) */
+}
+
+/* Logo styles */
+.logo img {
+    height: 40px;
+    width: auto;
+}
+
+/* Default: Show full logo, hide short logo */
+.logo-full {
+    display: block;
+}
+
+.logo-short {
+    display: none;
+}
+
+/* When screen width is smaller than 800px, switch to short logo */
+@media (max-width: 800px) {
+    .logo-full {
+        display: none;
+    }
+    .logo-short {
+        display: block;
+    }
+}
+
+/* Basic Navigation Styling */
+nav {
+   
+    padding: 1rem;
+
+    
+  }
+  
+  /* Default: shift menu items a bit to the left */
+.menu {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  margin: 0;
+  transform: translateX(-200px); /* Moves the entries 20px to the left */
+  transition: transform 0.3s ease; /* Smooth transition for the shift */
+}
+
+/* When the screen is smaller, reset the transform so the items align to the right edge */
+@media (max-width: 800px) {
+  .menu {
+    transform: translateX(0);
+  }
+}
+
+  
+  .menu li {
+    position: relative;
+    
+    
+  }
+  
+  .menu li a {
+    position: relative; /* establish positioning context */
+    text-decoration: none;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    z-index: 1; /* make sure text stays above the pseudo-element */
+}
+
+.menu li a::before {
+    content: '';
+    position: absolute;
+    top: -4px;      /* extend background 4px above */
+    left: -4px;     /* extend background 4px to the left */
+    right: -4px;    /* extend background 4px to the right */
+    bottom: -4px;   /* extend background 4px below */
+    background-color: rgba(255, 255, 255, 0.149); /* Milky white with 70% opacity */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);   /* Soft, diffused shadow */
+    border-radius: 10px;                         /* Optional: rounded corners */
+    padding: 20px;                               /* Optional: inner spacing */
+  /* Optional: add a backdrop blur effect for extra depth (works on modern browsers) */
+    backdrop-filter: blur(8px);
+    border-radius: 8px; /* rounded edges */
+    z-index: -1;    /* place behind the text */
+    transition: background-color 0.3s ease;
+}
+
+.menu li a:hover::before {
+    background-color: rgba(255, 255, 255, 0.615); /* more opaque on hover */
+}
+
+
+  
+ /* Remove the background from the dropdown container */
+.dropdown {
+  display: none; /* Hidden by default */
+  position: absolute;
+  top: calc(100% + 10px); /* Starts 10px below the parent element */
+  left: 0;
+  background: transparent; /* Remove black background */
+  padding: 0.5rem 0;
+  list-style: none;
+  min-width: 150px;
+  z-index: 1000;
+}
+
+/* Add vertical spacing between dropdown list items */
+.dropdown li {
+  margin: 0.25rem 0; /* Adjust spacing as needed */
+}
+
+/* Style the dropdown links without any background */
+.dropdown li a {
+  display: block;
+  padding: 0.75rem 1rem; /* Increase vertical padding for more space */
+  color: #fff;
+  text-decoration: none;
+  background: none;
+}
+
+/* Disable any pseudo-element background if applied */
+.dropdown li a::before {
+  content: none;
+}
+
+/* Optional: Maintain transparency on hover */
+.dropdown li a:hover {
+  background-color: transparent;
+}
+
+
+  
+  /* Class to display the dropdown when toggled */
+  .dropdown.show {
+    display: block;
+  }
+  
+
+  .slides-container {
+    display: flex;
+    overflow: hidden; /* Prevents multiple slides from being shown */
+    width: 100vw;
+    height: 100vh;
+    scroll-snap-type: x mandatory; /* Enables snap scrolling */
+    scroll-behavior: smooth;
+}
+
+.slide {
+    flex: 0 0 100vw; /* Each slide takes full viewport width */
+    height: 100vh; /* Each slide takes full viewport height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    scroll-snap-align: start;
+}
+
+
+
+/* Slide backgrounds */
+.slide-1 { background: #3F51B5; }
+.slide-2 { background: #009688; }
+.slide-3 { background: #FF5722; }
+.slide-4 { background: #607D8B; }
+
+/* Navigation dots container */
+.nav-dots {
+    position: fixed;
+    bottom: 100px;       /* 20px from the bottom edge */
+    right: 100px;        /* 20px from the right edge */
+    display: flex;
+    gap: 10px;
+    z-index: 1000;
+}
+
+/* The dots (remain as white outlined circles) */
+.nav-dot {
+    width: 40px;             /* Bigger size */
+    height: 40px;            /* Bigger size */
+    border: 2px solid white; /* White border */
+    background-color: transparent;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;              /* Above the indicator */
+}
+
+/* The moving indicator (filled white circle) */
+.nav-dot-indicator {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: white;
+    top: 0;
+    left: 0;
+    transition: transform 0.5s ease; /* Smooth horizontal movement */
+    z-index: 1; /* Behind the dots */
+}
+

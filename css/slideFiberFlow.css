@@ -1,0 +1,6 @@
+.backgroundFiberFlow {
+    width: 100%;
+    height: 100vh;      /* Makes the image fill the viewport height */
+    object-fit: cover;  /* Ensures the image covers the container while maintaining its aspect ratio */
+  }
+  

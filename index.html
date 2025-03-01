@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moonbow</title>
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/slideFiberFlow.css">
+
+</head>
+<body>
+
+  <!-- Navbar with logo (left) and dropdown menus (right) -->
+  <div class="navbar">
+    <div class="logo">
+      <a href="/">
+        <img src="images/MoonBowLogo.svg" alt="Moonbow Logo" class="logo-full">
+        <img src="images/LogoSmall.svg" alt="Moonbow Short Logo" class="logo-short">
+      </a>
+    </div>
+    <nav>
+        <ul class="menu">
+          
+          <li>
+            <a href="aboutUs" data-dropdown-id="aboutDropdown" onclick="toggleDropdown(event, 'aboutDropdown')">About Us</a>
+            <ul class="dropdown" id="aboutDropdown">
+              <li><a href="History">History</a></li>
+              <li><a href="Vision">Vision</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="products" data-dropdown-id="productsDropdown" onclick="toggleDropdown(event, 'productsDropdown')">Our Products</a>
+            <ul class="dropdown" id="productsDropdown">
+              <li><a href="fiberFlow">FiberFlow</a></li>
+              <li><a href="smartLink">SmartLink</a></li>
+              <li><a href="FastIt">FastIT</a></li>
+              <li><a href="factoryIt">FactoryIT</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      
+  </div>
+
+  <!-- Slides Container -->
+  <div class="slides-container">
+    <!-- Slide 1 -->
+    <div class="slide slide-1" id="slide1">
+
+
+
+
+        <img src="images/backgroundFiberFlow.jpg" alt="backgroundFiberFlow" class="backgroundFiberFlow">
+
+
+
+
+      
+
+
+
+    </div>
+    <!-- Slide 2 -->
+    <div class="slide slide-2" id="slide2">
+      <h1>SmartLink</h1>
+    </div>
+    <!-- Slide 3 -->
+    <div class="slide slide-3" id="slide3">
+      <h1>FastIT</h1>
+    </div>
+    <!-- Slide 4 -->
+    <div class="slide slide-4" id="slide4">
+      <h1>FactoryIT</h1>
+    </div>
+  </div>
+
+ <!-- Navigation Dots -->
+<div class="nav-dots">
+    <a href="#slide1" class="nav-dot" data-slide="slide1"></a>
+    <a href="#slide2" class="nav-dot" data-slide="slide2"></a>
+    <a href="#slide3" class="nav-dot" data-slide="slide3"></a>
+    <a href="#slide4" class="nav-dot" data-slide="slide4"></a>
+    <div class="nav-dot-indicator"></div>
+  </div>
+  
+  
+
+
+
+  
+
+
+
+
+
+  <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/animations.js"></script>
+</body>
+</html>
