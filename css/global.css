@@ -12,12 +12,16 @@
     box-sizing: border-box;
 }
 
+
 html, body {
     width: 100%;
     height: 100%;
+    font-optical-sizing: auto;
     font-family: "GatwickFont", sans-serif;
-    overflow: hidden; /* Prevent default scrollbars if desired */
+    
 }
+
+
 
 /* Navbar (logo + dropdown) */
 .navbar {
@@ -110,6 +114,7 @@ nav {
     border-radius: 10px;                         /* Optional: rounded corners */
     padding: 20px;                               /* Optional: inner spacing */
   /* Optional: add a backdrop blur effect for extra depth (works on modern browsers) */
+    -webkit-backdrop-filter: blur(8px); /* Safari support */
     backdrop-filter: blur(8px);
     border-radius: 8px; /* rounded edges */
     z-index: -1;    /* place behind the text */
@@ -167,32 +172,41 @@ nav {
   }
   
 
-  .slides-container {
-    display: flex;
-    overflow: hidden; /* Prevents multiple slides from being shown */
-    width: 100vw;
-    height: 100vh;
-    scroll-snap-type: x mandatory; /* Enables snap scrolling */
-    scroll-behavior: smooth;
+/* Horizontal slider container */
+.slider-container {
+  display: flex;
+  width: 400vw; /* 4 slides x 100vw */
+  height: 100vh;
+  scroll-behavior: smooth;
+  
+ 
+  -ms-overflow-style: none; /* Hide scrollbar (IE/Edge) */
+  position: relative;
 }
 
+/* Hide scrollbar for WebKit (Chrome, Safari) */
+.slider-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Each slide takes full viewport size */
 .slide {
-    flex: 0 0 100vw; /* Each slide takes full viewport width */
-    height: 100vh; /* Each slide takes full viewport height */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    scroll-snap-align: start;
+  width: 100vw;
+  height: 100vh;
+  flex-shrink: 0; /* Prevent slides from shrinking */
+  
+  position: relative; /* Ensure slides are positioned correctly */
 }
 
 
 
-/* Slide backgrounds */
-.slide-1 { background: #3F51B5; }
-.slide-2 { background: #009688; }
-.slide-3 { background: #FF5722; }
-.slide-4 { background: #607D8B; }
+
+
+
+
+
+
+
 
 /* Navigation dots container */
 .nav-dots {
@@ -225,7 +239,11 @@ nav {
     background-color: white;
     top: 0;
     left: 0;
-    transition: transform 0.5s ease; /* Smooth horizontal movement */
+    transition: transform 0.5s cubic-bezier(0.075, 0.82, 0.165, 1); /* Smooth horizontal movement */
     z-index: 1; /* Behind the dots */
 }
+
+
+
+
 

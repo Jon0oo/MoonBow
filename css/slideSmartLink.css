@@ -1,0 +1,58 @@
+/* Image container: fills the viewport */
+.slide2 .image-section {
+    position: relative;
+    width: 100vw;
+    height: 100vh;      /* Use full viewport height */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* The image: fills the container completely */
+.slide2 .image-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  /* Fills the container and crops minimally */
+    display: block;
+}
+
+/* Overlay content on the image */
+.slide2 header,
+.slide2 main {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    z-index: 1; /* Ensure the overlay content is above the image */
+}
+
+/* Content section below the image */
+.slide2 .content-section {
+    padding: 20px;
+    background: white;
+    box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.slide2 .content fluid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.slide2 .content fluid ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.slide2 .content fluid ul li {
+    margin: 0 10px;
+    font-size: 1.5rem;
+}
+

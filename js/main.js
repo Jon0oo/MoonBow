@@ -21,28 +21,6 @@ function closeDropdown(dropdownId) {
     }
 }
 
-// Toggles a dropdown when clicked.
-function toggleDropdown(event, dropdownId) {
-    event.preventDefault();
-    document.querySelectorAll('.dropdown.show').forEach(dropdown => {
-        if (dropdown.id !== dropdownId) {
-            dropdown.classList.remove('show');
-        }
-    });
-    const dropdown = document.getElementById(dropdownId);
-    if (dropdown) {
-        dropdown.classList.toggle('show');
-    }
-}
-
-// Scroll smoothly to the slide.
-export function scrollToSlide(event, slideId) {
-    event.preventDefault();
-    const slide = document.getElementById(slideId);
-    if (slide) {
-        slide.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
-    }
-}
 
 // Initializes dropdown behavior.
 function setupDropdowns() {
@@ -58,6 +36,16 @@ function setupDropdowns() {
             document.querySelectorAll('.dropdown.show').forEach(dropdown => dropdown.classList.remove('show'));
         }
     });
+}
+
+
+// Scroll smoothly to the slide.
+export function scrollToSlide(event, slideId) {
+    event.preventDefault();
+    const slide = document.getElementById(slideId);
+    if (slide) {
+        slide.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
+    }
 }
 
 // Handles navigation dot clicks.
