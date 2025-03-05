@@ -86,6 +86,7 @@ web_modules/
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 .parcel-cache
+dist
 
 # Next.js build output
 .next
@@ -142,3 +143,12 @@ dist
 .svelte-kit
 
 # End of https://www.toptal.com/developers/gitignore/api/node
+dist/index.0e0ac3d1.css
+dist/index.0e0ac3d1.css.map
+dist/index.5cd8d7a8.js
+dist/index.5cd8d7a8.js.map
+dist/index.df552f88.css
+dist/index.df552f88.css.map
+dist/index.fbb3188c.js
+dist/index.fbb3188c.js.map
+dist/index.html

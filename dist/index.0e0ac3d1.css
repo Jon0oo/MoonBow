@@ -12,9 +12,15 @@
 
 html, body {
   font-optical-sizing: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   width: 100%;
   height: 100%;
   font-family: GatwickFont, sans-serif;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 .navbar {
@@ -139,13 +145,11 @@ nav {
 
 .slider-container {
   scroll-behavior: smooth;
-  scrollbar-width: none;
   -ms-overflow-style: none;
   width: 400vw;
   height: 100vh;
   display: flex;
   position: relative;
-  overflow-x: scroll;
 }
 
 .slider-container::-webkit-scrollbar {

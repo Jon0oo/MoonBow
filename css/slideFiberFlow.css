@@ -13,7 +13,7 @@
 
   .slide1 {
 
-    overflow-x: scroll;
+    
 
   }
 
@@ -27,6 +27,7 @@
     overflow: hidden;
     z-index: 0;
     pointer-events: none;
+    position: fixed;
   }
 
   .slide1 .image-section img {
@@ -54,10 +55,11 @@
   /* The content-wrapper will be animated */
   .slide1 .content-wrapper {
     
-    margin: -4vh;
+    
     min-height: 150vh; 
     position: relative; /* Ensure it moves relative to .content-section */
     min-height: 150vh;/* Ensure enough height for scrolling */
+    width: 100vw;
   }
 
 
@@ -70,7 +72,7 @@
       border: none;
       height: 2px;
       background-color: #fff;
-      margin: 20px 0;
+      margin: -20px;
     }
     
     .slide1 .content-section svg {

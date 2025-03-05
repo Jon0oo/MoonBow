@@ -18,14 +18,24 @@ html, body {
     height: 100%;
     font-optical-sizing: auto;
     font-family: "GatwickFont", sans-serif;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     
 }
+
+
+/* For WebKit browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+  display: none;
+}
+
+
 
 
 
 /* Navbar (logo + dropdown) */
 .navbar {
-    position: absolute;
+  position: fixed;
     top: 0;
     left: 0;
     width: 100%;
