@@ -1,3 +1,15 @@
+import '../css/global.css';
+import '../css/slideFastIt.css';
+import '../css/slideFactoryIt.css';
+import '../css/slideFiberFlow.css';
+import '../css/slideSmartLink.css';
+
+
+
+
+
+
+
 import { observeSlides, setupDotNavigation } from './animations.js';
 
 // Opens a dropdown while closing any other open dropdowns.
@@ -81,3 +93,5 @@ function adjustSlides() {
 // Run on load and window resize
 window.addEventListener('resize', adjustSlides);
 window.addEventListener('DOMContentLoaded', adjustSlides);
+
+

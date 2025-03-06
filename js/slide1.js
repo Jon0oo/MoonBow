@@ -1,7 +1,6 @@
 import { gsap } from "gsap"; // assuming gsap is bundled via Parcel or similar
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CustomEase } from "gsap/CustomEase";
-import LocomotiveScroll from "locomotive-scroll";
 
 gsap.registerPlugin(ScrollTrigger, CustomEase);
 
@@ -58,4 +57,3 @@ window.onpointermove = (e) => {
     progress: e.x / innerWidth
   });
 };
-

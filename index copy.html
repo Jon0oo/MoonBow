@@ -1,0 +1,253 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moonbow</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/slideFiberFlow.css">
+    <link rel="stylesheet" href="css/slideSmartLink.css">
+    <link rel="stylesheet" href="css/slideFastIt.css">
+    <link rel="stylesheet" href="css/slideFactoryIt.css">
+    <link rel="stylesheet" href="css/locomotive-scroll.css">
+  </head>
+  <body >
+
+
+
+    <style>
+      html, body {
+        overflow: hidden;
+        margin: 0;
+        height: 100%;
+      }
+      
+      section {
+        height: 100vh;
+        background: lightblue;
+        border-bottom: 2px solid #000;
+      }
+      </style>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <!-- Navbar with LOGO and dropdown menus -->
+    <div class="navbar" >
+      <div class="logo">
+        <a href="/">
+          <img src="images/MoonBowLogo.svg" alt="Moonbow Logo" class="logo-full">
+          <img src="images/LogoSmall.svg" alt="Moonbow Short Logo" class="logo-short">
+        </a>
+      </div>
+      <nav>
+        <ul class="menu">
+          <li>
+            <a data-dropdown-id="aboutDropdown">About Us</a>
+            <ul class="dropdown" id="aboutDropdown">
+              <li><a href="History">History</a></li>
+              <li><a href="Vision">Vision</a></li>
+            </ul>
+          </li>
+          <li>
+            <a data-dropdown-id="productsDropdown">Our Products</a>
+            <ul class="dropdown" id="productsDropdown">
+              <li><a href="#" data-slide="slide1">FiberFlow</a></li>
+              <li><a href="#" data-slide="slide2">SmartLink</a></li>
+              <li><a href="#" data-slide="slide3">FastIT</a></li>
+              <li><a href="#" data-slide="slide4">FactoryIT</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="slider-container" data-scroll-container >
+      
+      <!-- ssssd  -->
+      <div class="slide slide1" id="slide1"  >
+        <!-- Sticky image section -->
+        <div class="image-section" data-scroll >
+          <img src="images/backgroundFiberFlow.jpg" alt="Slide 1">
+          <!-- FIBER FLOW Text block -->
+          <div class="fiberflow-hero"  >
+            <div class="heading">
+              <div class="pin">
+                <h1>
+                  <span class="clamp">
+                    FIBER
+                    <!-- Inline SVG arc -->
+                    <svg data-name="Layer 1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 842.14 500">
+                      <path class="draw"
+                            d="M336.2,130.05C261.69,118,16.52,122,20.65,244.29c4.17,123,484.3,299.8,734.57,108.37,244-186.65-337.91-311-546.54-268.47"
+                            fill="none"
+                            stroke="#8486aa"
+                            stroke-miterlimit="10"
+                            stroke-width="8" />
+                    </svg>
+                  </span>
+                  <span class="yt">FLOW</span>
+                </h1>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+        
+        <!-- Content section that scrolls up -->
+        <div class="content-section" data-scroll>
+          
+
+            
+
+
+
+            <hr>
+            <svg viewBox="0 0 1280 720">
+              <!-- SVG masks and content -->
+              <mask id="maskLeft">
+                <rect x="-50%" width="100%" height="100%" fill="#fff"/>
+              </mask>
+              <mask id="maskRight">
+                <rect x="50%" width="100%" height="100%" fill="#fff"/>
+              </mask>
+              <g font-size="150">
+                <g mask="url(#maskLeft)" fill="#fff" class="left">
+                  <text y="120">FASTER</text>
+                  <text y="250">BETTER</text>
+                  <text y="380">STRONGER</text>
+                </g>
+                <g mask="url(#maskRight)" fill="#aaa" class="right">
+                  <text y="120">FASTER</text>
+                  <text y="250">BETTER</text>
+                  <text y="380">STRONGER</text>
+                </g>
+              </g>
+            </svg>
+            <div class="info-box-fiber">
+              <h2>Fiber Flow</h2>
+              <ul>
+                <li>Bullet Point 1</li>
+                <li>Bullet Point 2</li>
+                <li>Bullet Point 3</li>
+              </ul>
+            </div>
+            <div class="info-box-fiber-2">
+              <h2>Do this now</h2>
+              <ul>
+                <li>Bullet Point 1</li>
+                <li>Button 1</li>
+                <li>Button 2</li>
+              </ul>
+            </div>
+            <h1>Slide 1 Title</h1>
+            <p>Additional content that appears when scrolling down.</p>
+          </div>
+        
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="slide slide2" id="slide2" >
+        <div class="image-section">
+          <img src="images/backgroundSmartLink.jpg" alt="Slide 2">
+          <header>
+            <h1 class="fluid">you can<br />scroll.</h1>
+          </header>
+          <main>
+            <section class="content fluid">
+              <h2>
+                <span aria-hidden="true">you can&nbsp;</span>
+                <span class="sr-only">you can ship things.</span>
+              </h2>
+              <ul aria-hidden="true" style="--count: 22">
+                <li style="--i: 0">design.</li>
+                <li style="--i: 1">prototype.</li>
+                <li style="--i: 2">solve.</li>
+                <li style="--i: 3">build.</li>
+                <li style="--i: 4">develop.</li>
+                <li style="--i: 5">debug.</li>
+                <li style="--i: 6">learn.</li>
+                <li style="--i: 7">cook.</li>
+                <li style="--i: 8">ship.</li>
+                <li style="--i: 9">prompt.</li>
+                <li style="--i: 10">collaborate.</li>
+                <li style="--i: 11">create.</li>
+                <li style="--i: 12">inspire.</li>
+                <li style="--i: 13">follow.</li>
+                <li style="--i: 14">innovate.</li>
+                <li style="--i: 15">test.</li>
+                <li style="--i: 16">optimize.</li>
+                <li style="--i: 17">teach.</li>
+                <li style="--i: 18">visualize.</li>
+                <li style="--i: 19">transform.</li>
+                <li style="--i: 20">scale.</li>
+                <li style="--i: 21">do it.</li>
+              </ul>
+            </section>
+            <section>
+              <h2 class="fluid">fin.</h2>
+            </section>
+          </main>
+        </div>
+        <div class="content-section">
+          <h1>Slide 2 Title</h1>
+          <p>More details for Slide 2 go here.</p>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="slide slide3" id="slide3" >
+        <div class="image-section">
+          
+        </div>
+        <div class="content-section">
+          <h1>Slide 3 Title</h1>
+          <p>Interesting facts or text for Slide 3.</p>
+        </div>
+      </div>
+
+      <!-- Slide 4 -->
+      <div class="slide slide4" id="slide4" >
+        <div class="image-section">
+          
+        </div>
+        <div class="content-section">
+          <h1>Final slide with additional text.</h1>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Dots -->
+    <div class="nav-dots">
+      <a href="#slide1" class="nav-dot" data-slide="slide1"></a>
+      <a href="#slide2" class="nav-dot" data-slide="slide2"></a>
+      <a href="#slide3" class="nav-dot" data-slide="slide3"></a>
+      <a href="#slide4" class="nav-dot" data-slide="slide4"></a>
+      <div class="nav-dot-indicator"></div>
+    </div>
+
+    
+
+
+    <script type="module" src="/js/main.js"></script>
+    <script type="module" src="js/slide1.js"></script>
+    
+   
+  </body>
+  </html>
