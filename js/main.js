@@ -10,7 +10,34 @@ import '../css/slideSmartLink.css';
 
 
 
-import { observeSlides, setupDotNavigation } from './animations.js';
+import { observeSlides, setupDotNavigation,updateIndicatorPosition } from './animations.js';
+
+
+
+
+
+// On page load, initialize all functionalities.
+document.addEventListener('DOMContentLoaded', function () {
+    setupDropdowns();
+    setupDotClickHandlers();
+    observeSlides();
+    setupDotNavigation();
+    setupDropdownSlideNavigation(); 
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Opens a dropdown while closing any other open dropdowns.
 function openDropdown(dropdownId) {
@@ -51,6 +78,53 @@ function setupDropdowns() {
 }
 
 
+
+
+
+//make dropdown entrys scroll to the slide
+
+function setupDropdownSlideNavigation() {
+    const dropdownLinks = document.querySelectorAll('.dropdown a[data-slide]');
+    dropdownLinks.forEach(link => {
+        link.addEventListener('click', event => {
+            event.preventDefault();
+            const slideId = link.getAttribute('data-slide');
+            // Smoothly scroll to the target slide.
+            scrollToSlide(event, slideId);
+            
+            // Manually update nav dot active state:
+            const dots = document.querySelectorAll('.nav-dot');
+            // Remove 'active' from all nav dots.
+            dots.forEach(dot => dot.classList.remove('active'));
+            // Find the corresponding nav dot.
+            const targetDot = Array.from(dots).find(dot => dot.getAttribute('data-slide') === slideId);
+            if (targetDot) {
+                targetDot.classList.add('active');
+                // Update the indicator position.
+                updateIndicatorPosition(targetDot);
+            }
+            
+            // Optionally close the dropdown after clicking.
+            const dropdown = link.closest('.dropdown');
+            if (dropdown) {
+                dropdown.classList.remove('show');
+            }
+        });
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Scroll smoothly to the slide.
 export function scrollToSlide(event, slideId) {
     event.preventDefault();
@@ -71,13 +145,7 @@ function setupDotClickHandlers() {
     });
 }
 
-// On page load, initialize all functionalities.
-document.addEventListener('DOMContentLoaded', function () {
-    setupDropdowns();
-    setupDotClickHandlers();
-    observeSlides();
-    setupDotNavigation();
-});
+
 
 
 
