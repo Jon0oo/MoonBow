@@ -1,0 +1,66 @@
+@font-face {
+    font-family: "GatwickFont";
+    src: url("../fonts/PPGatwick-GliderSemibold.woff2") format("woff2");
+    src: url("../fonts/PPGatwick-GliderSemibold.woff") format("woff");
+
+}
+
+
+
+
+
+.footer-vision {
+ 
+bottom:0px;
+position:absolute;
+
+}
+ 
+
+
+.vision-page {
+    background-color: black;
+    color: white;
+    font-family: GatwickFont, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    padding: 20px;
+}   
+
+
+.container {
+    
+    overflow: hidden;
+    
+
+    display: inline-block; /* Ensures the text only expands downward */
+    vertical-align: bottom; 
+
+
+
+    white-space: normal;
+    overflow-wrap: break-word;
+
+
+    max-width: 50vw;
+    margin: auto;
+
+
+    font-size: 40px;
+}
+
+
+
+
+.cursor {
+  display: inline-block;
+  width: 20px;
+  background-color: orange;
+  margin-left: 2px;
+  animation: blink 0.7s infinite;
+  z-index: 50;
+  height: 1em; 
+}

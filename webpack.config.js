@@ -6,11 +6,35 @@ module.exports = {
   entry: {
     main: [
       './js/main.js',
+    ],
+    slide1: [
       './js/slide1.js',
+    ],
+    slide2: [
       './js/slide2.js',
+    ],
+    slide3: [
       './js/slide3.js',
+    ],
+    slide4: [
       './js/slide4.js',
     ],
+    vision: [
+      './js/vision.js',
+    ],
+    history: [
+      './js/history.js',
+    ],
+
+
+
+
+    
+      
+      
+      
+      
+      
   },
   output: {
     filename: '[name].js',
@@ -43,9 +67,21 @@ module.exports = {
     ],
   },
   plugins: [
+    // For your main page
     new HtmlWebpackPlugin({
       template: 'index.html',
+      filename: 'index.html',
       favicon: 'images/favicon.ico',
+    }),
+    // For your history page
+    new HtmlWebpackPlugin({
+      template: '../html/history.html',
+      filename: '../html/history.html',
+    }),
+    // For your vision page
+    new HtmlWebpackPlugin({
+      template: '../html/vision.html',
+      filename: '../html/vision.html',
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css', // Creates a main.css file (and others if multiple entry points exist)

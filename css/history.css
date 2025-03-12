@@ -1,0 +1,86 @@
+@font-face {
+    font-family: "GatwickFont";
+    src: url("../fonts/PPGatwick-GliderSemibold.woff2") format("woff2"),
+         url("../fonts/PPGatwick-GliderSemibold.woff") format("woff");
+}
+
+.footer-history {
+  bottom: 0;
+  position: absolute;
+}
+
+/* Set the parent container to relative so absolute children are positioned relative to it */
+.history-page {
+    position: relative;
+    background-color: black;
+    color: white;
+    font-family: GatwickFont, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align items from the top */
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    padding: 20px;
+    overflow: visible;
+}
+
+/* Generic container styling */
+.container {
+    overflow: hidden;
+    display: block;
+    white-space: normal;
+    overflow-wrap: break-word;
+    max-width: 50vw;
+    margin: auto;
+    font-size: 40px;
+    height: fit-content;
+}
+
+/* Additional containers (if needed) */
+.container-head {
+    overflow: hidden;
+    display: block;
+    white-space: normal;
+    overflow-wrap: break-word;
+    max-width: 50vw;
+    margin: auto;
+    font-size: 40px;
+    margin-top: 15vh;
+}
+
+.container-sub {
+    overflow: hidden;
+    display: block;
+    white-space: normal;
+    overflow-wrap: break-word;
+    max-width: 50vw;
+    margin: auto;
+    font-size: 40px;
+    margin-top: 13vh;
+}
+
+/* Absolutely position the typewriter container to fix its top position */
+#historyText {
+    position: absolute;
+    top: 10%;          /* Adjust this value as needed to set the starting vertical offset */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50vw;
+}
+
+/* Cursor styling */
+.cursor {
+  display: inline-block;
+  width: 20px;
+  height: 1em;              /* Ensures the cursor is as tall as the text line */
+  background-color: orange;
+  margin-left: 2px;
+  animation: blink 0.7s infinite;
+  z-index: 50;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}

@@ -3,6 +3,8 @@ import '../css/slideFastIt.css';
 import '../css/slideFactoryIt.css';
 import '../css/slideFiberFlow.css';
 import '../css/slideSmartLink.css';
+import '../css/vision.css';
+import '../css/history.css';
 
 
 
