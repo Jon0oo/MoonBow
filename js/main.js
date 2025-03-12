@@ -3,8 +3,6 @@ import '../css/slideFastIt.css';
 import '../css/slideFactoryIt.css';
 import '../css/slideFiberFlow.css';
 import '../css/slideSmartLink.css';
-import '../css/vision.css';
-import '../css/history.css';
 
 
 
@@ -18,18 +16,39 @@ import { observeSlides, setupDotNavigation,updateIndicatorPosition } from './ani
 
 
 
-// On page load, initialize all functionalities.
 document.addEventListener('DOMContentLoaded', function () {
     setupDropdowns();
     setupDotClickHandlers();
     observeSlides();
     setupDotNavigation();
     setupDropdownSlideNavigation(); 
+
+    // Check for slide parameter in URL
+    const params = new URLSearchParams(window.location.search);
+    const slideId = params.get('slide');
+    if (slideId) {
+        navigateToSlide(slideId);
+    }
 });
 
 
 
+// Function to handle smooth scrolling to a slide
+function navigateToSlide(slideId) {
+    const slide = document.getElementById(slideId);
+    if (slide) {
+        slide.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
 
+        // Update nav dots
+        const dots = document.querySelectorAll('.nav-dot');
+        dots.forEach(dot => dot.classList.remove('active'));
+        const targetDot = Array.from(dots).find(dot => dot.getAttribute('data-slide') === slideId);
+        if (targetDot) {
+            targetDot.classList.add('active');
+            updateIndicatorPosition(targetDot);
+        }
+    }
+}
 
 
 
@@ -91,26 +110,16 @@ function setupDropdownSlideNavigation() {
         link.addEventListener('click', event => {
             event.preventDefault();
             const slideId = link.getAttribute('data-slide');
-            // Smoothly scroll to the target slide.
-            scrollToSlide(event, slideId);
-            
-            // Manually update nav dot active state:
-            const dots = document.querySelectorAll('.nav-dot');
-            // Remove 'active' from all nav dots.
-            dots.forEach(dot => dot.classList.remove('active'));
-            // Find the corresponding nav dot.
-            const targetDot = Array.from(dots).find(dot => dot.getAttribute('data-slide') === slideId);
-            if (targetDot) {
-                targetDot.classList.add('active');
-                // Update the indicator position.
-                updateIndicatorPosition(targetDot);
+
+            // Check if we are on index.html
+            if (!window.location.pathname.includes('index.html') && window.location.pathname !== '/') {
+                // Redirect to index.html with slide parameter
+                window.location.href = `/index.html?slide=${slideId}`;
+                return;
             }
-            
-            // Optionally close the dropdown after clicking.
-            const dropdown = link.closest('.dropdown');
-            if (dropdown) {
-                dropdown.classList.remove('show');
-            }
+
+            // If already on index.html, scroll to slide
+            navigateToSlide(slideId);
         });
     });
 }

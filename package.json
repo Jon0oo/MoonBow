@@ -1,7 +1,7 @@
 {
   "dependencies": {
-    "gsap": "^3.12.7",
-    "locomotive-scroll": "^4.1.4"
+    "gsap": "^3.12.7"
+    
   },
   "name": "moonbow.github.io",
   "version": "1.0.0",

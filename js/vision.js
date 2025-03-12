@@ -1,3 +1,8 @@
+import '../css/global.css';
+import '../css/vision.css';
+
+
+
 import { gsap } from "gsap"; // assuming gsap is bundled via Parcel or similar
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CustomEase } from "gsap/CustomEase";
@@ -7,45 +12,103 @@ gsap.registerPlugin(ScrollTrigger, CustomEase);
 document.addEventListener("DOMContentLoaded", function () {
     console.log("DOMContentLoaded event fired.");
 
-    // Check if the current page is vision.html
-    if (window.location.pathname.endsWith("vision.html")) {
-        console.log("Executing script on vision.html");
+    // Ensure the script runs only on vision.html
+if (window.location.pathname.endsWith("vision.html")) {
+    console.log("Executing script on vision.html");
 
-        const text = "Moonbow was founded with a singular ambition: to redefine the way organizations communicate internally. Recognizing the inefficiencies in traditional communication infrastructures, our founders set out to create a company that seamlessly blends cutting-edge technology with intuitive, human-centric solutions. <br> <br> The Beginning: A Vision of Change. <br> <br> The idea behind Moonbow emerged from a simple yet profound realization—communication within organizations, no matter how advanced their technology, was often fragmented and inefficient. Inspired by the elusive beauty of a moonbow, our founders saw an opportunity to bring clarity, efficiency, and innovation to internal networks and IT management. From the outset, Moonbow was built on the principle that technology should not only be powerful but also effortless to use. With a deep focus on smart connectivity, streamlined IT solutions, and sustainable innovation, we embarked on a mission to revolutionize digital and physical networks. <br> <br> Growth & Innovation As Moonbow evolved, we expanded our product offerings to address both physical-level and software-level communication challenges. <br> <br> Our flagship solutions—FiberFlow, SmartLink, FastIT, and FactoryIT—were developed to empower businesses of all sizes, ensuring seamless integration between digital and physical infrastructures. <br> <br> By staying ahead of industry trends and embracing emerging technologies like AI, IoT, and automation, Moonbow has continued to refine its approach. Today, we stand as a leader in smart, scalable, and sustainable communication solutions. <br> <br> Looking to the Future While our journey has been one of innovation and progress, the essence of Moonbow remains unchanged: We challenge the ordinary, push the boundaries of technology, and deliver solutions that not only meet but exceed expectations. As we move forward, our commitment to excellence, sustainability, and customer-centric innovation continues to guide us toward new horizons. <br> <br> At Moonbow, the future of communication isn't just something we anticipate—it's something we create.";
+    let refreshCounter = 0; // Start counter at 0
+    const textElement = document.getElementById("text");
+    const fullText = `At <big> Moonbow </big>, we empower organizations to achieve unparalleled communication efficiency by merging cutting-edge technology with intuitive, user-friendly solutions. <br> <br> <br> A moonbow is a rare and extraordinary phenomenon—a nighttime rainbow that appears under unique conditions. Unlike the common rainbow, a moonbow stands out as something unexpected and awe-inspiring. <br> <br> <br> This reflects our commitment to delivering solutions that break the mold, bringing both innovation and elegance to the world of business communication. <br>`;
+    // Split text into tokens (words, spaces, <br> tags)
+    const tokens = fullText.split(/(<big>.*?<\/big>|\s+|<br\s*\/?>)/gi).filter(token => token !== "");
+    let tokenIndex = 0;
+    const delay = 30; // Delay in ms between tokens
 
-        let index = 0;
-        const speed = 50; // Milliseconds between each character
+    function typeWriter() {
+        if (tokenIndex < tokens.length) {
+            let newToken = tokens[tokenIndex];
 
-        function typeWriter() {
-            const textSpan = document.getElementById("text");
-
-            if (index < text.length) {
-                if (text.substring(index, index + 4) === "<br>") {
-                    textSpan.innerHTML += "<br>";
-                    index += 4;
-                } else {
-                    textSpan.innerHTML += text.charAt(index);
-                    index++;
-                }
-                setTimeout(typeWriter, speed);
+            // Convert <big> tags into spans for styling & animation
+            if (newToken.startsWith("<big>") && newToken.endsWith("</big>")) {
+                let wordInside = newToken.replace(/<\/?big>/g, ""); // Extract the word
+                newToken = `<span class="highlight">${wordInside}</span>`;
             }
+
+            textElement.innerHTML += newToken;
+            tokenIndex++;
+            refreshCounter++;
+
+            // Animate highlighted words
+            if (newToken.includes('class="highlight"')) {
+                gsap.fromTo(".highlight:last-child",
+                    { fontSize: "4rem" },
+                    { fontSize: "4rem", duration: 5, yoyo: true, repeat: 1, ease: "power4.inOut" }
+                );
+            }
+
+            // Refresh ScrollTrigger every 10 tokens for smooth scrolling
+            if (refreshCounter % 10 === 0 && typeof ScrollTrigger !== "undefined") {
+                ScrollTrigger.refresh();
+            }
+
+            setTimeout(typeWriter, delay);
         }
+    }
 
-        typeWriter();
+    typeWriter();
 
-        // Create the ScrollTrigger
-        gsap.to(".contentHistory", {
-            y: "-40vh",
+
+
+        gsap.to(".vision-page", {
+            backgroundColor: "#6e6e6e", // Transition to a light gray
             ease: "none",
-            duration: 1,
             scrollTrigger: {
-                trigger: ".contentHistory",
-                markers: true,
-                start: "1% top top",
-                end: "bottom bottom",
-                scrub: 2,
+              trigger: ".contentVision",
+              start: "10% top top",
+              end: "bottom top",
+              scrub: true,
+              
             }
-        });
+          });
+
+
+
+
+
+
+
+          gsap.to(".contentVision", {
+            y: "-20vh", 
+            ease: "none", // Linear easing ensures the movement matches the scroll exactly
+            duration: 1, // The duration of the animation
+            scrollTrigger: {
+              trigger: ".contentVision",
+              
+              //markers:true,
+          
+              
+              start: "10% top top",
+              end: "bottom top",     
+              scrub: 2,               // Smoothly links the animation to the scroll position
+            }
+          });
+
+
+
+
+
+
+
+
+          if (module.hot) {
+            module.hot.accept('./vision.js', () => {
+              console.log('HMR accepted update forr vision.js');
+            });
+          }
+          
+
+          
+
     } else {
         console.log("Script not executed: This is not vision.html");
     }

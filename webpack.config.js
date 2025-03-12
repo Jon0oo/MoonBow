@@ -4,27 +4,14 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   entry: {
-    main: [
-      './js/main.js',
-    ],
-    slide1: [
-      './js/slide1.js',
-    ],
-    slide2: [
-      './js/slide2.js',
-    ],
-    slide3: [
-      './js/slide3.js',
-    ],
-    slide4: [
-      './js/slide4.js',
-    ],
-    vision: [
-      './js/vision.js',
-    ],
-    history: [
-      './js/history.js',
-    ],
+    main: './js/main.js',
+    slide1: './js/slide1.js',
+    slide2: './js/slide2.js',
+    slide3: './js/slide3.js',
+    slide4: './js/slide4.js',
+    vision: './js/vision.js',
+    history: './js/history.js',
+  },
 
 
 
@@ -35,9 +22,9 @@ module.exports = {
       
       
       
-  },
+  
   output: {
-    filename: '[name].js',
+    filename: 'js/[name].js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/', // Ensures the HMR update chunks are requested from the correct URL
   },
@@ -67,21 +54,24 @@ module.exports = {
     ],
   },
   plugins: [
-    // For your main page
+    // Index page (loads everything except vision.js and history.js)
     new HtmlWebpackPlugin({
       template: 'index.html',
       filename: 'index.html',
+      chunks: ['main', 'slide1', 'slide2', 'slide3', 'slide4'],
       favicon: 'images/favicon.ico',
     }),
-    // For your history page
+    // Vision page (only loads vision.js)
     new HtmlWebpackPlugin({
-      template: '../html/history.html',
-      filename: '../html/history.html',
+      template: '../moonbow.github.io/html/vision.html',
+      filename: 'html/vision.html',
+      chunks: ['main', 'vision'],
     }),
-    // For your vision page
+    // History page (only loads history.js)
     new HtmlWebpackPlugin({
-      template: '../html/vision.html',
-      filename: '../html/vision.html',
+      template: '../moonbow.github.io/html/history.html',
+      filename: 'html/history.html',
+      chunks: ['main' ,'history'],
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css', // Creates a main.css file (and others if multiple entry points exist)
