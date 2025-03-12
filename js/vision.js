@@ -47,7 +47,7 @@ if (window.location.pathname.endsWith("vision.html")) {
             }
 
             // Refresh ScrollTrigger every 10 tokens for smooth scrolling
-            if (refreshCounter % 10 === 0 && typeof ScrollTrigger !== "undefined") {
+            if (refreshCounter % 20 === 0 && typeof ScrollTrigger !== "undefined") {
                 ScrollTrigger.refresh();
             }
 
