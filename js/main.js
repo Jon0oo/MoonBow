@@ -15,6 +15,17 @@ import { observeSlides, setupDotNavigation,updateIndicatorPosition } from './ani
 
 
 
+// Überprüfen, ob der <base>-Tag bereits existiert
+let baseTag = document.querySelector('base');
+if (!baseTag) {
+    baseTag = document.createElement('base');
+    document.head.appendChild(baseTag);
+}
+// Setzen der href-Eigenschaft des <base>-Tags auf das MoonBow-Verzeichnis
+baseTag.href = '/MoonBow/';
+
+
+
 
 document.addEventListener('DOMContentLoaded', function () {
     setupDropdowns();
@@ -114,7 +125,7 @@ function setupDropdownSlideNavigation() {
             // Check if we are on index.html
             if (!window.location.pathname.includes('index.html') && window.location.pathname !== '/') {
                 // Redirect to index.html with slide parameter
-                window.location.href = `/index.html?slide=${slideId}`;
+                window.location.href = `index.html?slide=${slideId}`;
                 return;
             }
 
@@ -172,5 +183,8 @@ function adjustSlides() {
 // Run on load and window resize
 window.addEventListener('resize', adjustSlides);
 window.addEventListener('DOMContentLoaded', adjustSlides);
+
+
+
 
 

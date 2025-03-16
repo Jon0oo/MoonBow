@@ -63,7 +63,7 @@ window.onpointermove = (e) => {
 
 
 // Create the ScrollTrigger
-gsap.to(".content-section", {
+gsap.to(".slide1 content-section", {
   y: "-20vh", 
   ease: "none", // Linear easing ensures the movement matches the scroll exactly
   duration: 1, // The duration of the animation

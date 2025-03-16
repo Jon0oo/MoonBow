@@ -23,7 +23,6 @@
     "url": "https://github.com/Jon0oo/moonbow.github.io/issues"
   },
   "homepage": "https://jon0oo.github.io/MoonBow/",
-
   "devDependencies": {
     "@babel/core": "^7.26.9",
     "@babel/preset-env": "^7.26.9",

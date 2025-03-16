@@ -26,7 +26,7 @@ module.exports = {
   output: {
     filename: 'js/[name].js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/', // Ensures the HMR update chunks are requested from the correct URL
+    publicPath: '/MoonBow/',
   },
   module: {
     rules: [

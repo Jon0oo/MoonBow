@@ -54,10 +54,33 @@ export function updateIndicatorPosition(activeDot) {
                 slides[index].scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
                 updateIndicatorPosition(dot);
   
+
+
+                
                 // Update active dot manually since IntersectionObserver might not update instantly
                 dots.forEach(d => d.classList.remove('active'));
                 dot.classList.add('active');
+
+
+
+// Update the URL to reflect the active slide
+updateURLWithSlide(slides[index].id);
+
+
             }
         });
     });
   }
+
+
+  // Function to update the URL with the active slide's ID
+export function updateURLWithSlide(slideId) {
+    // Check if we are on index.html
+    if (!window.location.pathname.includes('index.html') && window.location.pathname !== '/') {
+        // Redirect to index.html with slide parameter
+        window.history.pushState(null, null, `?slide=${slideId}`);
+    } else {
+        // If we're already on index.html, update the URL without reloading
+        window.history.pushState(null, null, `?slide=${slideId}`);
+    }
+}
