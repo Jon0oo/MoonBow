@@ -309,6 +309,13 @@ nav {
 
 
 
+.slide2{
+
+
+  
+}
+
+
 
     
     /* ====================================
@@ -611,19 +618,34 @@ nav {
 .slide2 .image-section {
     position: relative;
     width: 100vw;
-    height: 100vh;      /* Use full viewport height */
+    /* Remove fixed height so the container grows with the full image */
+    height: auto;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
+
+
+    
+    
+}
+
+
+.slide2 .image-section-wrapper{
+
+    overflow: hidden;
+
+    height: 300vh;
+
 }
 
 /* The image: fills the container completely */
 .slide2 .image-section img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;  /* Fills the container and crops minimally */
+    height: auto;
+    object-fit: cover;
     display: block;
+    background-size: cover;
 }
 
 /* Overlay content on the image */
@@ -640,10 +662,20 @@ nav {
 
 /* Content section below the image */
 .slide2 .content-section {
-    padding: 20px;
+   
     background: white;
     box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.1);
 }
+
+
+
+.slide2 .content-section hr {
+    border: none;
+    height: 2px;
+    background-color: #fff;
+    width:100vw;
+  }
+
 
 .slide2 .content fluid {
     display: flex;
@@ -665,4 +697,80 @@ nav {
     font-size: 1.5rem;
 }
 
+.svgCarLine {
 
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: fit-content;
+    height: 100%;
+
+}
+
+
+.svgCarPath {
+
+    position:absolute;
+    
+}
+
+.carDiv{
+    position:absolute;
+    width:5.5%;
+    height: 5.5%;
+    background: url(/MoonBow/images/8be5f59581329ae83e60.png) no-repeat center center;
+  background-size: contain;
+  
+
+}
+
+
+
+.svgLightLine{
+
+
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: fit-content;
+    height: 100%;
+
+}
+
+.svgCarLightPath{
+
+    position:absolute;
+    stroke: url(#trailGradient); 
+    stroke-width: 60; 
+    fill: none; 
+    
+    filter: url(#glow);
+    
+
+}
+
+
+
+
+
+.slide2 .content-section .footer{
+
+
+    position: relative;
+}
+
+/* Keyframes for the fade-out animation */
+@keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  /* Apply the fade-out animation to the path */
+  .fadeOutLine {
+    animation: fadeOut 5s linear forwards; /* 5s is the duration, you can adjust as needed */
+  }
