@@ -158,3 +158,43 @@
   .fadeOutLine {
     animation: fadeOut 5s linear forwards; /* 5s is the duration, you can adjust as needed */
   }
+
+
+
+
+
+
+  .slide2 .info-box-link-1{
+
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.149);
+    color: antiquewhite;
+
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);   /* Soft, diffused shadow */
+    border-radius: 10px;                         /* Optional: rounded corners */
+    padding: 20px;                               /* Optional: inner spacing */
+  /* Optional: add a backdrop blur effect for extra depth (works on modern browsers) */
+    -webkit-backdrop-filter: blur(8px); /* Safari support */
+    backdrop-filter: blur(8px);
+    
+  }
+
+
+  .slide2 #info-box-link-1-head{
+
+    margin-bottom: 335vh;
+    margin-right: 70vw;
+  }
+
+  .slide2 #info-box-link-1-text{
+
+    margin-bottom: 270vh;
+    margin-right: 61vw;
+    max-width: 30vw;
+  }
+
+  .slide2 #ul-element-info-link{
+
+    list-style-type: none;
+  }
