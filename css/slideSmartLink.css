@@ -8,6 +8,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+
+    
+    
+}
+
+
+.slide2 .image-section-wrapper{
+
+    overflow: hidden;
+
+    height: 300vh;
+
 }
 
 /* The image: fills the container completely */
@@ -113,13 +126,35 @@
 
     position:absolute;
     stroke: url(#trailGradient); 
-    stroke-width: 8; 
+    stroke-width: 60; 
     fill: none; 
     
     filter: url(#glow);
-    top: 0;
-    left: 0;
-    width: fit-content;
-    height: 100%;
+    
 
 }
+
+
+
+
+
+.slide2 .content-section .footer{
+
+
+    position: relative;
+}
+
+/* Keyframes for the fade-out animation */
+@keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  /* Apply the fade-out animation to the path */
+  .fadeOutLine {
+    animation: fadeOut 5s linear forwards; /* 5s is the duration, you can adjust as needed */
+  }
