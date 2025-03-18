@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
 const slide2 = document.querySelector(".slide2");
 
 
-const infoBox = document.getElementById("info-box-link-1-head");
+const infoBoxLink2Text = document.getElementById("info-box-link-2-text");
 const infoBoxLink1Text = document.getElementById("info-box-link-1-text");
 // Ensure the element's transform origin is set in CSS, e.g.:
 // #info-box-link-1-head { transform-origin: top center; }
@@ -177,17 +177,16 @@ console.log("Scrolling Down?", isScrollingDown);
 // Set transform-origin based on scroll direction
 if (isScrollingDown) {
   infoBoxLink1Text.style.transformOrigin = "bottom center";
+  infoBoxLink2Text.style.transformOrigin = "bottom center";
   console.log("Transform Origin set to: TOP");
 } else {
   infoBoxLink1Text.style.transformOrigin = "top center";
+  infoBoxLink2Text.style.transformOrigin = "top center";
   console.log("Transform Origin set to: BOTTOM");
 }
 
 
-// 🔥 Force browser to apply changes
-infoBoxLink1Text.style.display = "none";
-infoBoxLink1Text.offsetHeight; // Trigger a reflow
-infoBoxLink1Text.style.display = "block";
+
 
 // Update lastScrollTop **AFTER** checking direction
 lastScrollTop = currentScrollTop;
@@ -200,8 +199,8 @@ lastScrollTop = currentScrollTop;
 
     // Calculate scaleFactor and CLAMP it between 1 and 1.5
     const minScale = 1; // Minimum scale (normal size)
-    const maxScale = 1.2; // Maximum stretch limit
-    const scaleFactor = Math.min(maxScale, Math.max(minScale, 1 + slide2.scrollTop / 800));
+    const maxScale = 1.1; // Maximum stretch limit
+    const scaleFactor = Math.min(maxScale, Math.max(minScale, 1 + slide2.scrollTop / 1200));
 
     // Animate the scaling using GSAP with easing
    
@@ -212,11 +211,23 @@ lastScrollTop = currentScrollTop;
       ease: "power2.out",  // Smooth easing effect
     });
 
+    gsap.to(infoBoxLink2Text, {
+      scaleY: scaleFactor,
+      duration: 0.5,  // Animation duration (adjust as needed)
+      ease: "power2.out",  // Smooth easing effect
+    });
+
     // Reset animation when scrolling stops
     scrollTimeout = setTimeout(() => {
       
 
       gsap.to(infoBoxLink1Text, {
+        scaleY: 1, 
+        duration: 0.7,  // Make reset animation slightly smoother
+        ease: "power2.out",
+      });
+
+      gsap.to(infoBoxLink2Text, {
         scaleY: 1, 
         duration: 0.7,  // Make reset animation slightly smoother
         ease: "power2.out",

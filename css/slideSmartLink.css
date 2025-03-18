@@ -164,7 +164,8 @@
 
 
 
-  .slide2 .info-box-link-1{
+  .slide2 .info-box-link-1,
+  .slide2 .info-box-link-2{
 
     position: absolute;
     background-color: rgba(255, 255, 255, 0.149);
@@ -193,6 +194,25 @@
     margin-right: 61vw;
     max-width: 30vw;
   }
+
+
+
+
+
+
+  .slide2 #info-box-link-2-head{
+
+    margin-bottom: 181.4vh;
+    margin-right: -26.4vw;
+  }
+
+  .slide2 #info-box-link-2-text{
+
+    margin-bottom: 118.4vh;
+    margin-right: -37.2vw;
+    max-width: 30vw;
+  }
+  
 
   .slide2 #ul-element-info-link{
 
