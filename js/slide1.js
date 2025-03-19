@@ -63,7 +63,7 @@ window.onpointermove = (e) => {
 
 
 // Create the ScrollTrigger
-gsap.to(".slide1 content-section", {
+gsap.to(".slide1 .content-section", {
   y: "-20vh", 
   ease: "none", // Linear easing ensures the movement matches the scroll exactly
   duration: 1, // The duration of the animation
@@ -161,6 +161,67 @@ document.querySelectorAll(".rect-info-box").forEach((rect) => {
       toggleActions: "play none none none", // Only play once
       //markers: true,
       scrub: 2,
+    }
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const contactContainer = document.querySelector(".slide1 .contact-container");
+  const contactBtn = document.querySelector(".slide1 .contact-btn");
+  const contactBtnSvg = document.getElementById("svg-info-box-button");
+  const emailBtn = document.querySelector(".slide1 .email");
+  const callBtn = document.querySelector(".slide1 .call");
+
+  // Mouseenter event with delayed scaling.
+  contactBtn.addEventListener("mouseenter", () => {
+    emailBtn.style.transform = "translateX(30px)";
+    callBtn.style.transform = "translateX(-30px)";
+    contactBtn.style.pointerEvents = "none";
+
+    contactBtnSvg.style.opacity = "0";
+
+    contactBtn.style.opacity = "0";
+    emailBtn.style.opacity = "1";
+    callBtn.style.opacity = "1";
+
+    // Delay pointer events enabling so the scaling isn't immediately seen.
+    setTimeout(() => {
+      emailBtn.style.pointerEvents = "auto";
+      callBtn.style.pointerEvents = "auto";
+    }, 300); // adjust delay as needed
+  });
+
+  // Mouseleave event with delayed scaling reset.
+  contactContainer.addEventListener("mouseleave", (event) => {
+    const related = event.relatedTarget;
+    if (
+      !contactContainer.contains(related) &&
+      !emailBtn.contains(related) &&
+      !callBtn.contains(related)
+    ) {
+      emailBtn.style.transform = "translateX(0)";
+      callBtn.style.transform = "translateX(0)";
+      emailBtn.style.opacity = "0";
+      callBtn.style.opacity = "0";
+      contactBtn.style.opacity = "1";
+      contactBtnSvg.style.opacity = "1";
+
+      // Disable pointer events after a delay.
+      setTimeout(() => {
+        contactBtn.style.pointerEvents = "auto";
+        emailBtn.style.pointerEvents = "none";
+        callBtn.style.pointerEvents = "none";
+      }, 300); // adjust delay as needed
     }
   });
 });

@@ -1,316 +1,346 @@
+/*! tailwindcss v4.0.14 | MIT License | https://tailwindcss.com */
+.visible {
+  visibility: visible;
+}
+.absolute {
+  position: absolute;
+}
+.relative {
+  position: relative;
+}
+.static {
+  position: static;
+}
+.left-1\/2 {
+  left: calc(1/2 * 100%);
+}
+.container {
+  width: 100%;
+}
+.block {
+  display: block;
+}
+.flex {
+  display: flex;
+}
+.inline {
+  display: inline;
+}
+.inline-block {
+  display: inline-block;
+}
+.min-h-screen {
+  min-height: 100vh;
+}
+.grow {
+  flex-grow: 1;
+}
+.-translate-x-1\/2 {
+  --tw-translate-x: calc(calc(1/2 * 100%) * -1);
+  translate: var(--tw-translate-x) var(--tw-translate-y);
+}
+.transform {
+  transform: var(--tw-rotate-x) var(--tw-rotate-y) var(--tw-rotate-z) var(--tw-skew-x) var(--tw-skew-y);
+}
+.resize {
+  resize: both;
+}
+.items-center {
+  align-items: center;
+}
+.justify-center {
+  justify-content: center;
+}
+.filter {
+  filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
+}
+.transition-all {
+  transition-property: all;
+  transition-timing-function: var(--tw-ease, ease);
+  transition-duration: var(--tw-duration, 0s);
+}
 @font-face {
-    font-family: "GatwickFont";
-    src: url("../fonts/PPGatwick-GliderSemibold.woff2") format("woff2");
-    src: url("../fonts/PPGatwick-GliderSemibold.woff") format("woff");
-
+  font-family: "GatwickFont";
+  src: url("../fonts/PPGatwick-GliderSemibold.woff2") format("woff2");
+  src: url("../fonts/PPGatwick-GliderSemibold.woff") format("woff");
 }
-
-/* Reset and basic styles */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
-
 html, body {
-    width: 100%;
-    height: 100%;
-    font-optical-sizing: auto;
-    font-family: "GatwickFont", sans-serif;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    scroll-behavior: smooth;
-    flex-direction: column;
-    display: flex;
-
-    
-    
+  width: 100%;
+  height: 100%;
+  font-optical-sizing: auto;
+  font-family: "GatwickFont", sans-serif;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+  flex-direction: column;
+  display: flex;
 }
-
-
-
-
-body, .slider-wrapper{
-
+body, .slider-wrapper {
   overflow-x: hidden;
-    touch-action: pan-y;
-    
-
+  touch-action: pan-y;
 }
-
-
-/* For WebKit browsers (Chrome, Safari) */
 ::-webkit-scrollbar {
   display: none;
 }
-
-
-
-
-/* Navbar (logo + dropdown) */
 .navbar {
   position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    z-index: 999;
-    background: rgba(0, 0, 0, 0.2); /* Semi-transparent overlay (optional) */
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  z-index: 999;
+  background: rgba(0, 0, 0, 0.2);
 }
-
-/* Logo styles */
 .logo img {
-    height: 40px;
-    width: auto;
+  height: 40px;
+  width: auto;
 }
-
-/* Default: Show full logo, hide short logo */
 .logo-full {
-    display: block;
+  display: block;
 }
-
 .logo-short {
-    display: none;
+  display: none;
 }
-
-/* When screen width is smaller than 800px, switch to short logo */
 @media (max-width: 800px) {
-    .logo-full {
-        display: none;
-    }
-    .logo-short {
-        display: block;
-    }
-}
-
-/* Basic Navigation Styling */
-nav {
-   
-    padding: 1rem;
-
-    
+  .logo-full {
+    display: none;
   }
-  
-  /* Default: shift menu items a bit to the left */
+  .logo-short {
+    display: block;
+  }
+}
+nav {
+  padding: 1rem;
+}
 .menu {
   list-style: none;
   display: flex;
   gap: 1rem;
   margin: 0;
-  transform: translateX(-200px); /* Moves the entries 20px to the left */
-  transition: transform 0.3s ease; /* Smooth transition for the shift */
+  transform: translateX(-200px);
+  transition: transform 0.3s ease;
 }
-
-/* When the screen is smaller, reset the transform so the items align to the right edge */
 @media (max-width: 800px) {
   .menu {
     transform: translateX(0);
   }
 }
-
-  
-  .menu li {
-    position: relative;
-    
-    
-  }
-  
-  .menu li a {
-    position: relative; /* establish positioning context */
-    text-decoration: none;
-    color: #fff;
-    padding: 0.5rem 1rem;
-    z-index: 1; /* make sure text stays above the pseudo-element */
+.menu li {
+  position: relative;
 }
-
+.menu li a {
+  position: relative;
+  text-decoration: none;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  z-index: 1;
+}
 .menu li a::before {
-    content: '';
-    position: absolute;
-    top: -4px;      /* extend background 4px above */
-    left: -4px;     /* extend background 4px to the left */
-    right: -4px;    /* extend background 4px to the right */
-    bottom: -4px;   /* extend background 4px below */
-    background-color: rgba(255, 255, 255, 0.149); /* Milky white with 70% opacity */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);   /* Soft, diffused shadow */
-    border-radius: 10px;                         /* Optional: rounded corners */
-    padding: 20px;                               /* Optional: inner spacing */
-  /* Optional: add a backdrop blur effect for extra depth (works on modern browsers) */
-    -webkit-backdrop-filter: blur(8px); /* Safari support */
-    backdrop-filter: blur(8px);
-    border-radius: 8px; /* rounded edges */
-    z-index: -1;    /* place behind the text */
-    transition: background-color 0.3s ease;
-}
-
-.menu li a:hover::before {
-    background-color: rgba(255, 255, 255, 0.615); /* more opaque on hover */
-}
-
-
-  
- /* Remove the background from the dropdown container */
-.dropdown {
-  display: none; /* Hidden by default */
+  content: '';
   position: absolute;
-  top: calc(100% + 10px); /* Starts 10px below the parent element */
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  background-color: rgba(255, 255, 255, 0.149);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 20px;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-radius: 8px;
+  z-index: -1;
+  transition: background-color 0.3s ease;
+}
+.menu li a:hover::before {
+  background-color: rgba(255, 255, 255, 0.615);
+}
+.dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 10px);
   left: 0;
-  background: transparent; /* Remove black background */
+  background: transparent;
   padding: 0.5rem 0;
   list-style: none;
   min-width: 150px;
   z-index: 1000;
 }
-
-/* Add vertical spacing between dropdown list items */
 .dropdown li {
-  margin: 0.25rem 0; /* Adjust spacing as needed */
+  margin: 0.25rem 0;
 }
-
-/* Style the dropdown links without any background */
 .dropdown li a {
   display: block;
-  padding: 0.75rem 1rem; /* Increase vertical padding for more space */
+  padding: 0.75rem 1rem;
   color: #fff;
   text-decoration: none;
   background: none;
 }
-
-/* Disable any pseudo-element background if applied */
 .dropdown li a::before {
   content: none;
 }
-
-/* Optional: Maintain transparency on hover */
 .dropdown li a:hover {
   background-color: transparent;
 }
-
-
-  
-  /* Class to display the dropdown when toggled */
-  .dropdown.show {
-    display: block;
-  }
-  
-  .slider-wrapper {
-    height: 100vh;
-    overflow-y: auto;
-    flex: 1; /* Allow this section to take up remaining space */
-  
-    
-  }
-
-
-/* Horizontal slider container */
+.dropdown.show {
+  display: block;
+}
+.slider-wrapper {
+  height: 100vh;
+  overflow-y: auto;
+  flex: 1;
+}
 .slider-container {
   display: flex;
-  width: 400vw; /* 4 slides x 100vw */
+  width: 400vw;
   height: 100%;
   scroll-behavior: smooth;
   overflow-y: auto;
-  
- 
-  -ms-overflow-style: none; /* Hide scrollbar (IE/Edge) */
+  -ms-overflow-style: none;
   position: relative;
 }
-
-/* Hide scrollbar for WebKit (Chrome, Safari) */
 .slider-container::-webkit-scrollbar {
   display: none;
 }
-
-/* Each slide takes full viewport size */
 .slide {
   width: 100vw;
   height: 100vh;
-  flex-shrink: 0; /* Prevent slides from shrinking */
-  
-  
+  flex-shrink: 0;
   overflow-y: auto;
-  
-  position: relative; /* Ensure slides are positioned correctly */
+  position: relative;
 }
-
-
-
-
-
-
-
-
-
-
-
-/* Navigation dots container */
 .nav-dots {
-    position: fixed;
-    bottom: 100px;       /* 20px from the bottom edge */
-    right: 100px;        /* 20px from the right edge */
-    display: flex;
-    gap: 10px;
-    z-index: 1000;
+  position: fixed;
+  bottom: 100px;
+  right: 100px;
+  display: flex;
+  gap: 10px;
+  z-index: 1000;
 }
-
-/* The dots (remain as white outlined circles) */
 .nav-dot {
-    width: 40px;             /* Bigger size */
-    height: 40px;            /* Bigger size */
-    border: 2px solid white; /* White border */
-    background-color: transparent;
-    border-radius: 50%;
-    cursor: pointer;
-    position: relative;
-    z-index: 2;              /* Above the indicator */
+  width: 40px;
+  height: 40px;
+  border: 2px solid white;
+  background-color: transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
 }
-
-/* The moving indicator (filled white circle) */
 .nav-dot-indicator {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: white;
-    top: 0;
-    left: 0;
-    transition: transform 0.5s cubic-bezier(0.075, 0.82, 0.165, 1); /* Smooth horizontal movement */
-    z-index: 1; /* Behind the dots */
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: white;
+  top: 0;
+  left: 0;
+  transition: transform 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+  z-index: 1;
 }
-
-
-
 .footer {
-  
   background: #000000;
   color: white;
   padding: 20px;
   text-align: center;
-  
 }
-
-/* Footer Links */
 .footer-nav {
   margin-top: 10px;
 }
-
 .footer-nav a {
   color: #fff;
   text-decoration: none;
   margin: 0 10px;
   font-size: 0.85rem;
 }
-
 .footer-nav a:hover {
   text-decoration: underline;
 }
-
-
-
-.slide2{
-
-
-  
+@property --tw-translate-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-translate-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-translate-z {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-rotate-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: rotateX(0);
+}
+@property --tw-rotate-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: rotateY(0);
+}
+@property --tw-rotate-z {
+  syntax: "*";
+  inherits: false;
+  initial-value: rotateZ(0);
+}
+@property --tw-skew-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: skewX(0);
+}
+@property --tw-skew-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: skewY(0);
+}
+@property --tw-blur {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-brightness {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-contrast {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-grayscale {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-hue-rotate {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-invert {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-opacity {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-saturate {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-sepia {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-drop-shadow {
+  syntax: "*";
+  inherits: false;
 }

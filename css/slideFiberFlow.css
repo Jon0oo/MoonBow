@@ -151,10 +151,12 @@
     .slide1 .info-box-fiber-2 {
       /* Example positioning; adjust as needed */
       width: 25vw;
-      height: 25vh;
+      height: 30vh;
       bottom: 43.0vh;
     left: 71.2vw;
       padding-left: 63.8px;
+
+      overflow: visible;
     }
 
 
@@ -296,3 +298,192 @@
      stroke-width:4;
      overflow: visible;
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.contact-container {
+  position: absolute;
+  display: inline-block;
+
+  padding: 0 100px;
+  height: 10vh;
+  width: 18vw;
+
+ 
+
+
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.contact-btn {
+  padding: 10px 20px;
+  background-color: #00000000;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  position: relative;
+  transition: opacity 0.3s ease-in-out;
+
+  
+  
+
+
+
+  overflow: visible;
+}
+
+
+
+
+#svg-info-box-button{
+
+  position: absolute;
+  width: 32%;
+  height: 50%;
+  margin: 0;
+
+
+
+  background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+  
+  clip-path: inset(0 round 15px);
+
+
+
+}
+
+.contact-button-wrapper{
+
+  position: relative;
+  width: auto;
+  height: auto;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  
+
+}
+
+.contact-options {
+  position: absolute;
+  
+  
+  display: flex;
+  gap: 10px;
+  opacity: 1;
+  pointer-events: none; /* Prevent accidental clicks when hidden */
+
+
+  
+  position: absolute;
+
+
+  justify-content: center;
+  align-items: center;
+  display: flex;
+
+
+
+  z-index: 10;
+}
+
+.contact-option {
+  padding: 8px 16px;
+  border-radius: 8px;
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  white-space: nowrap;
+  opacity: 0;
+  position: absolute;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  z-index: 10;
+}
+
+
+
+
+.contact-option::before {
+  content: "";
+  position: absolute;
+  top: -4px; /* Increase negative values for thicker outline */
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border-radius: 10px; /* Match the border-radius */
+  padding: 3px; /* Make sure padding matches top/left/right/bottom */
+  background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+  -webkit-mask: linear-gradient(white, white) content-box, linear-gradient(white, white);
+  mask: linear-gradient(white, white) content-box, linear-gradient(white, white);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Individual button styles */
+.email {
+  background-color: rgb(255, 255, 255);
+  left: 50%;
+  color:rgb(0, 0, 0);
+}
+
+.call {
+  background-color: rgb(255, 255, 255);
+  right: 50%;
+  color:rgb(0, 0, 0);
+  
+}

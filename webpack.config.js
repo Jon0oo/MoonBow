@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   entry: {
     main: './js/main.js',
+   
     slide1: './js/slide1.js',
     slide2: './js/slide2.js',
     slide3: './js/slide3.js',
@@ -28,12 +29,26 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/MoonBow/',
   },
+
+  resolve: {
+    extensions: ['.js', '.jsx'], // Allow imports without specifying extensions
+  },
   module: {
     rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
         use: 'babel-loader',
+      },
+      {
+        test: /\.(js|jsx)$/, // Allow .jsx files
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react'], // Add React preset
+          },
+        },
       },
       {
         test: /\.css$/,
