@@ -113,8 +113,6 @@ function setupDropdowns() {
 
 
 
-//make dropdown entrys scroll to the slide
-
 function setupDropdownSlideNavigation() {
     const dropdownLinks = document.querySelectorAll('.dropdown a[data-slide]');
     dropdownLinks.forEach(link => {
@@ -122,18 +120,24 @@ function setupDropdownSlideNavigation() {
             event.preventDefault();
             const slideId = link.getAttribute('data-slide');
 
-            // Check if we are on index.html
-            if (!window.location.pathname.includes('index.html') && window.location.pathname !== '/') {
-                // Redirect to index.html with slide parameter
-                window.location.href = `index.html?slide=${slideId}`;
+            // Ensure the base path is correct for MoonBow
+            const basePath = "/MoonBow/";
+
+            // Check if we are NOT already on the homepage
+            if (!window.location.pathname.startsWith(basePath) || 
+                (window.location.pathname !== basePath && !window.location.pathname.endsWith('/'))) {
+                
+                // Redirect to /MoonBow/ while keeping the slide parameter
+                window.location.href = `${basePath}?slide=${slideId}`;
                 return;
             }
 
-            // If already on index.html, scroll to slide
+            // If already on /MoonBow/, navigate to the slide smoothly
             navigateToSlide(slideId);
         });
     });
 }
+
 
 
 
@@ -174,13 +178,22 @@ function setupDotClickHandlers() {
 
 function adjustSlides() {
     const slides = document.querySelectorAll('.slide');
+    const slidesContainer = document.querySelector('.slides-container');
+
     slides.forEach(slide => {
         slide.style.width = `${window.innerWidth}px`;
         slide.style.height = `${window.innerHeight}px`;
     });
+
+    // Ensure the active slide is properly centered after resizing
+    const activeDot = document.querySelector('.nav-dot.active');
+    if (activeDot) {
+        const slideId = activeDot.getAttribute('data-slide');
+        setTimeout(() => navigateToSlide(slideId), 50); // Small delay to allow resizing adjustments
+    }
 }
 
-// Run on load and window resize
+// Run on window resize and DOM load
 window.addEventListener('resize', adjustSlides);
 window.addEventListener('DOMContentLoaded', adjustSlides);
 

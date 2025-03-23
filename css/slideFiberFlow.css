@@ -106,8 +106,8 @@
     }
     
     .slide1 .info-box-fiber-1-1 {
-      width: 35vw;
-      height: 23vh;
+      width: fit-content;
+      height: fit-content;
       bottom: 114.4vh;
       left: 3vw;
       padding-left: 2vw;
@@ -117,8 +117,8 @@
 
 
     .slide1 .info-box-fiber-1-2 {
-      width: 35vw;
-      height: 20vh;
+      width: fit-content;
+      height: fit-content;
       bottom: 80vh;
       left: 3vw;
       padding-left: 2vw;
@@ -128,8 +128,8 @@
 
 
     .slide1 .info-box-fiber-1-3 {
-      width: 35vw;
-      height: 25vh;
+      width: fit-content;
+      height: fit-content;
       left: 3vw;
       padding-left: 2vw;
       margin-top: 60vh;
@@ -144,14 +144,15 @@
     .slide1 .info-box-fiber-1-2 ul,
     .slide1 .info-box-fiber-1-3 ul {
       font-size: 30px;
+      list-style: none;
     }
     
     
     
     .slide1 .info-box-fiber-2 {
       /* Example positioning; adjust as needed */
-      width: 25vw;
-      height: 30vh;
+      width: fit-content;
+      height: fit-content;
       bottom: 43.0vh;
     left: 71.2vw;
       padding-left: 63.8px;
@@ -352,17 +353,17 @@
 
 
 .contact-container {
-  position: absolute;
+  position: relative;
   display: inline-block;
 
   padding: 0 100px;
   height: 10vh;
   width: 18vw;
 
- 
+  margin-left: -20%;
 
 
-  justify-content: center;
+  
   align-items: center;
   display: flex;
 }
@@ -429,7 +430,7 @@
 
 
   
-  position: absolute;
+  
 
 
   justify-content: center;
@@ -449,7 +450,7 @@
   font-size: 14px;
   white-space: nowrap;
   opacity: 0;
-  position: absolute;
+  position: relative;
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
   z-index: 10;
 }
@@ -477,13 +478,91 @@
 /* Individual button styles */
 .email {
   background-color: rgb(255, 255, 255);
-  left: 50%;
+  left: 30%;
   color:rgb(0, 0, 0);
 }
 
 .call {
   background-color: rgb(255, 255, 255);
-  right: 50%;
+  right: 70%;
   color:rgb(0, 0, 0);
   
+}
+
+
+
+
+
+
+@media (max-width:1900px){
+.slide1 .info-box-fiber-1-2{
+margin-left: 55vw;
+margin-top: -40vh;
+}
+}
+
+@media (max-width:1700px){
+  .slide1 .info-box-fiber-1-2{
+  margin-left: 50vw;
+  margin-top: -20vh;
+}
+}
+
+@media (max-width:1500px){
+   .slide1 .info-box-fiber-1-2{
+    margin-left: 40vw;
+    
+}
+
+  .slide1 .info-box-fiber-1-1{
+    margin-left: 0vw;
+}
+}
+
+@media (max-width:1200px){
+  .slide1 .info-box-fiber-1-2{
+   margin-left: 30vw;
+   
+}
+}
+
+@media (max-width:1050px){
+  .slide1 .info-box-fiber-1-2{
+   margin-left: 25vw;
+   
+}
+}
+
+@media (max-width:950px){
+  .slide1 .info-box-fiber-1-2{
+   margin-left: 20vw;
+   
+}
+}
+
+@media (max-width:880px){
+  .slide1 .info-box-fiber-1-2{
+   margin-left: 10vw;
+   
+}
+}
+
+@media (max-width:800px){
+  .slide1 .info-box-fiber-1-1{
+   margin-left: 0vw;
+   max-width: 90vw;
+   margin-top: -25vh;
+}
+
+.slide1 .info-box-fiber-1-2{
+  margin-left: 0vw;
+  max-width: 90vw;
+  margin-top: -30vh;
+}
+
+.slide1 .content-section .svg-animation-words {
+  margin-top: 90vh;
+  height: 45.2vh;
+  margin-bottom: 0vh;
+  }
 }

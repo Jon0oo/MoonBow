@@ -74,13 +74,8 @@ updateURLWithSlide(slides[index].id);
 
 
   // Function to update the URL with the active slide's ID
-export function updateURLWithSlide(slideId) {
-    // Check if we are on index.html
-    if (!window.location.pathname.includes('index.html') && window.location.pathname !== '/') {
-        // Redirect to index.html with slide parameter
-        window.history.pushState(null, null, `?slide=${slideId}`);
-    } else {
-        // If we're already on index.html, update the URL without reloading
-        window.history.pushState(null, null, `?slide=${slideId}`);
-    }
+  export function updateURLWithSlide(slideId) {
+    const url = new URL(window.location);
+    url.searchParams.set("slide", slideId);
+    window.history.pushState(null, "", url.pathname + url.search);
 }
