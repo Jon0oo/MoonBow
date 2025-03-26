@@ -179,8 +179,9 @@
     
     .slide1 .content-section p {
       font-size: 1.25rem;
-      color: #fff;
-      margin-top: 10px;
+      color: #000000;
+      margin-top: 40px;
+      margin-bottom:20px;
     }
     .svg-overflow-visible {
       overflow: visible;
@@ -365,10 +366,10 @@
 
 
 
-.scedule-demo-container {
+.schedule-demo-container {
   position: relative;
   display: inline-block;
-  padding: 0 15%;
+  
   height: 10vh;
   width: 18vw;
   align-items: center;
@@ -395,7 +396,7 @@
   overflow: visible;
 }
 
-.scedule-demo-btn {
+.schedule-demo-btn {
   position: relative;
   padding: 10px 20px;
   background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
@@ -412,7 +413,7 @@
 }
 
 /* Gradient border effect */
-.scedule-demo-btn::before {
+.schedule-demo-btn::before {
   content: "";
   position: absolute;
   top: -4px;
@@ -432,7 +433,7 @@
 }
 
 /* Animated white background sliding from left to right */
-.scedule-demo-btn::after {
+.schedule-demo-btn::after {
   content: "";
   position: absolute;
   top: 0;
@@ -445,12 +446,12 @@
 }
 
 /* Hover Effect */
-.scedule-demo-btn:hover {
+.schedule-demo-btn:hover {
   color: black;
 }
 
 /* Ensure text is above sliding background */
-.scedule-demo-btn span {
+.schedule-demo-btn span {
   position: relative;
   z-index: 3;
   display: inline-block;
@@ -459,30 +460,14 @@
 }
 
 /* Make gradient border visible */
-.scedule-demo-btn:hover::before {
+.schedule-demo-btn:hover::before {
   opacity: 1;
 }
 
 /* Slide in white background */
-.scedule-demo-btn:hover::after {
+.schedule-demo-btn:hover::after {
   left: 0;
 }
-
-/* Basic button styling */
-.submit-btn {
-  position: relative;
-  padding: 10px 20px;
-  border: none;
-  background-color: #74aa57;
-  color: white;
-  cursor: pointer;
-  overflow: hidden;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-}
-
-
-
 
 
 
@@ -509,7 +494,7 @@
 
 
 .contact-button-wrapper{
-
+  height: 50px;
   position: relative;
   width: auto;
   height: auto;
@@ -525,7 +510,7 @@
 .contact-options {
   position: absolute;
   
-  
+  height: 50px;
   display: flex;
   gap: 10px;
   opacity: 1;
@@ -556,6 +541,11 @@
   position: relative;
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
   z-index: 10;
+
+  height: 50px;
+  display: grid;
+  justify-content: center;
+  align-content: center;
 }
 
 
@@ -642,7 +632,11 @@
   cursor: pointer;
 }
 
-#sceduleDemoPopupP{
+#sceduleDemoPopupH2{
+  font-size: 33px;
+}
+
+#scheduleDemoPopupP{
   color:black;
   margin-top: 3rem;
 }
@@ -661,13 +655,68 @@
   text-align: left; /* change to center if you prefer */
 }
 
+
+
+#scheduleDemoForm input, 
+#scheduleDemoForm textarea {
+  position: relative;
+  border: none;
+  font-size: 16px;
+  width: 100%;
+  background: transparent;
+  transition: all 0.3s ease-in-out;
+  outline: none;
+  box-shadow: none;
+
+  width: 100% !important;
+}
+
+.slide1 .input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.input-wrapper::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  
+  
+  height: 2px;          /* Thickness of the underline */
+  background: rgb(0, 0, 0);
+  transition: width 0.3s ease-in-out;
+
+  left: 0%;
+  width: 20%;
+}
+
+/* Expand underline on hover of the container or when the input is focused */
+.input-wrapper:hover::after,
+.input-wrapper:focus-within::after {
+  width: 100%;
+}
+
+/* Remove extra styling for telephone inputs */
+#scheduleDemoForm input[type="tel"] {
+  -webkit-appearance: none; /* Remove default styling on WebKit browsers */
+  -moz-appearance: none;
+  appearance: none;
+  border: none;  /* make sure there's no default border */
+}
+
+
+
+
+
+
+
 #scheduleDemoPopup .modal-content form button{
   width:25%;
   text-align: center;
 }
 
 
-#sceduleDemoPopupH2{
+#scheduleDemoPopupH2{
   font-size: 30px;
 }
 
@@ -681,6 +730,7 @@ form#scheduleDemoForm {
   display: flex;
   align-items: center; /* Align text and input field */
   gap: 10px;
+  justify-content: space-between;
 }
 
 .slide1 .form-group label {
@@ -691,8 +741,7 @@ form#scheduleDemoForm {
 .slide1 .form-group input {
   flex: 1; /* Let input fields take up remaining space */
   padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  
 }
 
 .slide1 #demo-message{
@@ -712,13 +761,25 @@ form#scheduleDemoForm {
 .product-toggle {
   padding: 8px 16px;
   background: #eee;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 0px solid #ccc;
+  border-radius: 7px;
   cursor: pointer;
   transition: background 0.3s, border-color 0.3s, color 0.3s;
   width: 20%;
   font-family: Gatwick;
   font-size: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Soft shadow on each button */
+  border-radius: 4px;  /* Optional: round the corners of the buttons */
+  transition: box-shadow 0.3s ease;  /* Optional: smooth transition for shadow on hover */
+
+
+  display: grid;
+  justify-content: center;
+  align-content: center;
+}
+
+.product-toggle:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);  /* Darker shadow on hover */
 }
 
 /* Active state styling */
@@ -728,80 +789,172 @@ form#scheduleDemoForm {
   border-color: #ffffff00;
 }
 
+/*begin paperplane css */
 
 
 
-
-#sendButtonDemo {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 120px;
-  height: 40px;
-  background-color: #191919;
-  color: white;
-  border: none;
-  border-radius: 20px;
-  font-size: 16px;
-  cursor: pointer;
-  overflow: hidden;
-  transition: background-color 0.3s, width 0.3s, height 0.3s, border-radius 0.3s;
+.button-sent-demo-request[disabled] {
+ 
+  pointer-events: none;  /* Prevent any interaction, including hover cursor */
 }
 
-#buttonSendText {
-  transition: opacity 0.3s;
-  font-family: Gatwick;
-  font-size: 30px;
+.button-sent-demo-request {
+    --primary: #74aa57;
+    --primary-dark: #53793f;
+    --primary-darkest: #3f5d2f;
+    --text: #FFFFFF;
+    --text-opacity: 1;
+    --success: #2B3044;
+    --success-scale: .2;
+    --success-opacity: 0;
+    --border-radius: 7;
+    --overflow: hidden;
+    --rotate: 0;
+    --plane-x: 0;
+    --plane-y: 0;
+    --plane-opacity: 1;
+    --left-wing-background: var(--primary);
+    --left-wing-first-x: 0;
+    --left-wing-first-y: 0;
+    --left-wing-second-x: 50;
+    --left-wing-second-y: 0;
+    --left-wing-third-x: 0;
+    --left-wing-third-y: 100;
+    --left-body-background: var(--primary);
+    --left-body-first-x: 50;
+    --left-body-first-y: 0;
+    --left-body-second-x: 50;
+    --left-body-second-y: 100;
+    --left-body-third-x: 0;
+    --left-body-third-y: 100;
+    --right-wing-background: var(--primary);
+    --right-wing-first-x: 50;
+    --right-wing-first-y: 0;
+    --right-wing-second-x: 100;
+    --right-wing-second-y: 0;
+    --right-wing-third-x: 100;
+    --right-wing-third-y: 100;
+    --right-body-background: var(--primary);
+    --right-body-first-x: 50;
+    --right-body-first-y: 0;
+    --right-body-second-x: 50;
+    --right-body-second-y: 100;
+    --right-body-third-x: 100;
+    --right-body-third-y: 100;
+
+
+
+    overflow:visible;
+
+
+    display: block;
+    cursor: pointer;
+    position: relative;
+    border: 0;
+    padding: 8px 0;
+    min-width: 100px;
+    text-align: center;
+    margin: 0;
+    line-height: 24px;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 14px;
+    background: none;
+    outline: none;
+    color: var(--text);
+    transform: rotate(calc(var(--rotate) * 1deg)) translateZ(0);
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
+    .left,
+    .right {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        opacity: var(--plane-opacity);
+        transform: translate(calc(var(--plane-x) * 1px), calc(var(--plane-y) * 1px)) translateZ(0);
+        &:before,
+        &:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: calc(var(--border-radius) * 1px);
+            transform: translate(var(--x, .4%), var(--y, 0)) translateZ(0);
+            z-index: var(--z-index, 2);
+            background: var(--background, var(--left-wing-background));
+            clip-path: polygon(calc(var(--first-x, var(--left-wing-first-x)) * 1%) calc(var(--first-y, var(--left-wing-first-y)) * 1%), calc(var(--second-x, var(--left-wing-second-x)) * 1%) calc(var(--second-y, var(--left-wing-second-y)) * 1%), calc(var(--third-x, var(--left-wing-third-x)) * 1%) calc(var(--third-y, var(--left-wing-third-y)) * 1%));
+        }
+    }
+    .left:after {
+        --x: 0;
+        --z-index: 1;
+        --background: var(--left-body-background);
+        --first-x: var(--left-body-first-x);
+        --first-y: var(--left-body-first-y);
+        --second-x: var(--left-body-second-x);
+        --second-y: var(--left-body-second-y);
+        --third-x: var(--left-body-third-x);
+        --third-y: var(--left-body-third-y);
+    }
+    .right:before {
+        --x: -.4%;
+        --z-index: 2;
+        --background: var(--right-wing-background);
+        --first-x: var(--right-wing-first-x);
+        --first-y: var(--right-wing-first-y);
+        --second-x: var(--right-wing-second-x);
+        --second-y: var(--right-wing-second-y);
+        --third-x: var(--right-wing-third-x);
+        --third-y: var(--right-wing-third-y);
+    }
+    .right:after {
+        --x: 0;
+        --z-index: 1;
+        --background: var(--right-body-background);
+        --first-x: var(--right-body-first-x);
+        --first-y: var(--right-body-first-y);
+        --second-x: var(--right-body-second-x);
+        --second-y: var(--right-body-second-y);
+        --third-x: var(--right-body-third-x);
+        --third-y: var(--right-body-third-y);
+    }
+    span {
+        display: block;
+        position: relative;
+        z-index: 4;
+        opacity: var(--text-opacity);
+        &.success {
+            z-index: 0;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 8px;
+            transform: rotate(calc(var(--rotate) * -1deg)) scale(var(--success-scale)) translateZ(0);
+            opacity: var(--success-opacity);
+            color: var(--success);
+            width:fit-content;
+        }
+    }
 }
 
-#sendButtonDemo:hover {
-  background-color: #bf522e;
-}
-
-/* Hide the SVG initially or position it off-screen as needed */
-.paper-plane {
-  width: 24px;
-  height: 24px;
-  vertical-align: middle;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  /* Optionally hide the SVG until hover */
-  opacity: 0;
-}
-
-/* When hovering, change button style and reveal/transform the SVG */
-.submit-btn:hover {
-  background-color: #b5b7ba;
-}
-
-.submit-btn:hover .button-text {
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-/* Hover styles (placed before .fly rule) */
-.submit-btn:hover .paper-plane {
-  opacity: 1;
-  transform: scale(1.2) rotate(10deg);
-}
-
-/* Flight animation overrides hover styles */
-.fly .paper-plane {
-  animation: flyRight 0.8s forwards !important;
-}
 
 
-/* Keyframes to move the paper plane to the right and fade it out */
-@keyframes flyRight {
-  0% {
-    transform: translateX(0) scale(1.2) rotate(10deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(200px) scale(1.2) rotate(10deg);
-    opacity: 0;
-  }
-}
+
+
+
+
+
+
+
+
+
+/* end of css for paperplane button */
+
+
 
 
 
@@ -828,6 +981,10 @@ form#scheduleDemoForm {
 .info-box-fiber-2-button-wrapper{
   width:26vw;
 }
+
+.slide1 .schedule-demo-container{
+  width:21vw;
+}
 }
 
 @media (max-width:1500px){
@@ -852,6 +1009,12 @@ form#scheduleDemoForm {
 }
 }
 
+@media (max-width:1400px){
+  .slide1 .schedule-demo-container{
+    width:25vw;
+  }
+}
+
 @media (max-width:1300px){
   .slide1 .info-box-fiber-1-2{
    left:40%;
@@ -866,10 +1029,13 @@ form#scheduleDemoForm {
   .slide1 .info-box-fiber-1-2{
    left:32%;
    
-}
-.info-box-fiber-2-button-wrapper{
+  }
+  .info-box-fiber-2-button-wrapper{
   width:35vw;
-}
+  }
+  .slide1 .schedule-demo-container{
+  width:40vw;
+  }
 }
 
 @media (max-width:1050px){
@@ -882,6 +1048,9 @@ form#scheduleDemoForm {
   }
   .info-box-fiber-2-button-wrapper{
     width:43vw;
+  }
+  .slide1 .info-box-fiber-2-button-wrapper{
+    justify-content: space-between;
   }
 }
 @media (max-width:1000px){
@@ -928,8 +1097,8 @@ margin-left:-15%;
 }
 
   .slide1 .info-box-fiber-2 {
-    left:0%;
-    max-width: 90vw;
+    left:10%;
+    max-width: 80vw;
   }
 
   .slide1 .fiberflow-hero h1{
@@ -937,7 +1106,11 @@ margin-left:-15%;
   }
   .info-box-fiber-2-button-wrapper{
     width: 55vw;
-    justify-content: space-between;
+    justify-content: space-around;
+  }
+
+  .slide1 .info-box-fiber-2-button-wrapper {
+    width:75vw;
   }
 }
 
@@ -948,6 +1121,13 @@ margin-left:-15%;
   }
   .info-box-fiber-2-button-wrapper{
     width: 60vw;
+  }
+
+  .slide1 .product-selection-span{
+    font-size: 20px;
+  }
+  .slide1 .product-toggle{
+    width: 23%;
   }
 }
 @media (max-width:570px){
@@ -966,5 +1146,11 @@ margin-left:-15%;
   }
   .info-box-fiber-2-button-wrapper{
     width: 83vw;
+  }
+  .slide1 .product-toggle{
+    width: 24%;
+  }
+  .slide1 .product-selection-span{
+    font-size:18px;
   }
 }

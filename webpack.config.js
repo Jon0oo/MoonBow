@@ -5,6 +5,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   entry: {
     main: './js/main.js',
+
+    firebase: './js/firebase.js',
    
     slide1: './js/slide1.js',
     slide2: './js/slide2.js',
@@ -73,7 +75,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'index.html',
       filename: 'index.html',
-      chunks: ['main', 'slide1', 'slide2', 'slide3', 'slide4'],
+      chunks: ['main', 'firebase', 'slide1', 'slide2', 'slide3', 'slide4'],
       favicon: 'images/favicon.ico',
     }),
     // Vision page (only loads vision.js)

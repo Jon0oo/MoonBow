@@ -21,7 +21,7 @@
 <body >
 
 
-  <!-- Injecting React components-->
+
   
 
 
@@ -155,12 +155,12 @@
                 <rect x="50%" width="100%" height="100%" fill="#fff"/>
               </mask>
               <g font-size="150">
-                <g mask="url(#maskLeft)" fill="#fff" class="left">
+                <g mask="url(#maskLeft)" fill="#fff" class="leftText">
                   <text y="120">BOLD</text>
                   <text y="250">SEAMLESS</text>
                   <text y="380">NEXT GEN</text>
                 </g>
-                <g mask="url(#maskRight)" fill="#aaa" class="right">
+                <g mask="url(#maskRight)" fill="#aaa" class="rightText">
                   <text y="120">BOLD</text>
                   <text y="250">SEAMLESS</text>
                   <text y="380">NEXT GEN</text>
@@ -229,11 +229,11 @@
 
 
 
-                    <div class="scedule-demo-container">
+                    <div class="schedule-demo-container">
 
                       
     
-                      <button class="scedule-demo-btn"><span>Schedule Demo</span></button>
+                      <button class="schedule-demo-btn"><span>Schedule Demo</span></button>
 
                         
                     </div>
@@ -279,10 +279,18 @@
                     <p id="sceduleDemoPopupP">Select what you're interested in</p>
 
                     <div class="product-selection">
-                      <button class="product-toggle" data-product="product1">FiberFlow</button>
-                      <button class="product-toggle" data-product="product2">SmartLink</button>
-                      <button class="product-toggle" data-product="product3">FastIT</button>
-                      <button class="product-toggle" data-product="product4">FactoryIT</button>
+                      <button class="product-toggle active" data-product="product1">
+                        <span class="product-selection-span">FiberFlow</span>
+                      </button>
+                      <button class="product-toggle" data-product="product2">
+                        <span class="product-selection-span">SmartLink</span>
+                        </button>
+                      <button class="product-toggle" data-product="product3">
+                        <span class="product-selection-span">FastIT</span>
+                        </button>
+                      <button class="product-toggle" data-product="product4">
+                        <span class="product-selection-span">FactoryIT</span>
+                        </button>
                     </div>
                     
 
@@ -290,33 +298,57 @@
                     <form id="scheduleDemoForm">
                       <div class="form-group">
                         <label for="fullName">Full Name:</label>
+                        <div class="input-wrapper">
                         <input type="text" id="fullName" name="fullName" required>
+                      </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="phone">Company</label>
+                        <div class="input-wrapper">
+                        <input type="text" id="company" name="company">
+                      </div>
                       </div>
                     
                       <div class="form-group">
                         <label for="email">Email:</label>
+                        <div class="input-wrapper">
                         <input type="email" id="email" name="email" required>
+                      </div>
                       </div>
                     
                       <div class="form-group">
                         <label for="phone">Phone:</label>
+                        <div class="input-wrapper">
                         <input type="tel" id="phone" name="phone">
+                      </div>
                       </div>
 
                       <div class="form-group">
                         <label for="demo-message">Want to say more?</label>
+                        <div class="input-wrapper">
                         <textarea id="demo-message" name="demo-message" rows="4" ></textarea>
                       </div>
+                      </div>
+
+                      
                     
-                      <button type="submit" class="submit-btn"id="SendButtonDemo">
-                        <span class="button-text" id="buttonSendText">Send</span>
-                        
-                        <svg class="paper-plane" width="24" height="24" viewBox="0 0 503.467 503.467" fill="black" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M139.947,499.201L250.88,388.267l0,0l-42.667-17.067L498.347,4.267l-358.4,341.333V499.201L139.947,499.201z M498.347,4.267l-358.4,341.333l-119.467-51.2c-23.04-10.24-22.187-30.72,0-42.667L498.347,4.267z M498.347,4.267l-87.04,409.6c-4.267,20.48-20.48,29.013-40.96,20.48L250.88,387.414l-42.667-17.067L498.347,4.267z"/>
-                        </svg>
+                      
+                      <button type="button" class="button-sent-demo-request" type="submit">
+                        <span class="default">Send</span>
+                        <span class="success">Sent, you´ll hear from us</span>
+                        <div class="left"></div>
+                        <div class="right"></div>
+                    </button>
+                  
+                    
 
 
-                      </button>
+
+
+
+
+
                       
                     </form>
                     

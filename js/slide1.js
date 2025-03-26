@@ -1,7 +1,7 @@
 import { gsap } from "gsap"; // assuming gsap is bundled via Parcel or similar
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CustomEase } from "gsap/CustomEase";
-import anime from 'animejs';
+import anime from '../node_modules/animejs/lib/anime.es.js';
 
 
 gsap.registerPlugin(ScrollTrigger, CustomEase);
@@ -15,7 +15,7 @@ const tl = gsap.timeline({
   }
 })
 .fromTo(
-  '.left, .right',
+  '.leftText, .rightText',
   {
     svgOrigin: '640 500',
     skewY: (i) => [-30, 15][i],
@@ -233,7 +233,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // Get references to the necessary elements
-const scheduleDemoBtn = document.querySelector('.scedule-demo-btn');
+const scheduleDemoBtn = document.querySelector('.schedule-demo-btn');
 const modalPopup = document.getElementById('scheduleDemoPopup');
 const closeButton = modalPopup.querySelector('.modal-close');
 
@@ -241,6 +241,7 @@ const closeButton = modalPopup.querySelector('.modal-close');
 function openModal() {
   modalPopup.classList.add('active');
   modalPopup.setAttribute('aria-hidden', 'false');
+  document.dispatchEvent(new Event('dialogOpened'));
   // Optionally, shift focus to the first input in the modal for accessibility
   const firstInput = modalPopup.querySelector('input');
   if (firstInput) {
@@ -292,25 +293,125 @@ document.querySelectorAll('.product-toggle').forEach(button => {
 });
 
 
-document.getElementById('SendButtonDemo').addEventListener('click', function(e) {
-  // Prevent the default form submission behavior if needed
-  e.preventDefault();
-  anime({
-    targets: '#morphPath',
-    d: [
-      {
-        // Morph into the paper plane shape – ensure that the path is compatible (consider using a tool to match path commands)
-        value: "M139.947,499.201L250.88,388.267l0,0l-42.667-17.067L498.347,4.267l-358.4,341.333V499.201L139.947,499.201z M498.347,4.267l-358.4,341.333l-119.467-51.2c-23.04-10.24-22.187-30.72,0-42.667L498.347,4.267z M498.347,4.267l-87.04,409.6c-4.267,20.48-20.48,29.013-40.96,20.48L250.88,387.414l-42.667-17.067L498.347,4.267z"
-      }
-    ],
-    duration: 800,
-    easing: 'easeInOutQuad'
+
+//begin animation for submit button
+
+document.querySelectorAll('.button-sent-demo-request').forEach(button => {
+
+  let getVar = variable => getComputedStyle(button).getPropertyValue(variable);
+
+  button.addEventListener('click', e => {
+    e.preventDefault();
+
+    if (!button.classList.contains('active')) {
+      button.classList.add('active');
+
+      gsap.to(button, {
+        keyframes: [{
+          '--left-wing-first-x': 50,
+          '--left-wing-first-y': 100,
+          '--right-wing-second-x': 50,
+          '--right-wing-second-y': 100,
+          duration: .2,
+          onComplete() {
+            gsap.set(button, {
+              '--left-wing-first-y': 0,
+              '--left-wing-second-x': 40,
+              '--left-wing-second-y': 100,
+              '--left-wing-third-x': 0,
+              '--left-wing-third-y': 100,
+              '--left-body-third-x': 40,
+              '--right-wing-first-x': 50,
+              '--right-wing-first-y': 0,
+              '--right-wing-second-x': 60,
+              '--right-wing-second-y': 100,
+              '--right-wing-third-x': 100,
+              '--right-wing-third-y': 100,
+              '--right-body-third-x': 60
+            });
+          }
+        }, {
+          '--left-wing-third-x': 20,
+          '--left-wing-third-y': 90,
+          '--left-wing-second-y': 90,
+          '--left-body-third-y': 90,
+          '--right-wing-third-x': 80,
+          '--right-wing-third-y': 90,
+          '--right-body-third-y': 90,
+          '--right-wing-second-y': 90,
+          duration: .2
+        }, {
+          '--rotate': 50,
+          '--left-wing-third-y': 95,
+          '--left-wing-third-x': 27,
+          '--right-body-third-x': 45,
+          '--right-wing-second-x': 45,
+          '--right-wing-third-x': 60,
+          '--right-wing-third-y': 83,
+          duration: .25
+        }, {
+          '--rotate': 55,
+          '--plane-x': -8,
+          '--plane-y': 24,
+          duration: .2
+        }, {
+          '--rotate': 40,
+          '--plane-x': 45,
+          '--plane-y': -180,
+          '--plane-opacity': 0,
+          duration: .3
+        }]
+      });
+
+      gsap.to(button, {
+        keyframes: [{
+          '--text-opacity': 0,
+          '--border-radius': 0,
+          '--left-wing-background': getVar('--primary-darkest'),
+          '--right-wing-background': getVar('--primary-darkest'),
+          duration: .1
+        }, {
+          '--left-wing-background': getVar('--primary'),
+          '--right-wing-background': getVar('--primary'),
+          duration: .1
+        }, {
+          '--left-body-background': getVar('--primary-dark'),
+          '--right-body-background': getVar('--primary-darkest'),
+          duration: .4
+        }, {
+          '--success-opacity': 1,
+          '--success-scale': 1,
+          duration: .25,
+          delay: .25
+        }]
+      });
+
+      // After the button is clicked and sent:
+gsap.to(button, {
+  onComplete() {
+    button.classList.add('sent');
+    button.disabled = true;  // Disable the button
+    console.log('Button has been sent and is now disabled');
+  }
+});
+
+    }
+  });
+
+  document.addEventListener('dialogOpened', () => {
+    button.classList.remove('active');
+    button.removeAttribute('style');
+    button.disabled = false;  // Re-enable the button when the dialog is opened again
+    button.classList.remove('sent');  // Remove the 'sent' class when the dialog is opened again
+    console.log('Dialog opened, button reset');
   });
 });
 
 
 
 
+
+//end animation submit button
 
 
 
