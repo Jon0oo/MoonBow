@@ -1,8 +1,8 @@
 {
   "dependencies": {
     "@tailwindcss/cli": "^4.0.14",
+    "anime": "^0.1.2",
     "gsap": "^3.12.7"
-    
   },
   "name": "moonbow.github.io",
   "version": "1.0.0",

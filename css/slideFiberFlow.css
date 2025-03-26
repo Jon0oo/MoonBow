@@ -62,7 +62,9 @@
     position: relative; /* Ensure it moves relative to .content-section */
     background: rgba(0, 0, 0, 1);
     width: 100vw;
-    
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
   }
 
   .slide1 .content-spacer{
@@ -88,9 +90,9 @@
     
     .slide1 .content-section .svg-animation-words {
       width: 100%;
-      margin-top: 45vh;
+      
       height: 135.2vh;
-      margin-bottom: 40vh;
+      position: relative;
       
     }
     
@@ -108,22 +110,20 @@
     .slide1 .info-box-fiber-1-1 {
       width: fit-content;
       height: fit-content;
-      bottom: 114.4vh;
+      
       left: 3vw;
       padding-left: 2vw;
-      margin-top: -100vh;
-      margin-left: -2vw;
+      
     }
 
 
     .slide1 .info-box-fiber-1-2 {
       width: fit-content;
       height: fit-content;
-      bottom: 80vh;
-      left: 3vw;
+      left: 65%;
+      
       padding-left: 2vw;
-      margin-top: -44vh;
-      margin-left: 60vw;
+      
     }
 
 
@@ -132,7 +132,7 @@
       height: fit-content;
       left: 3vw;
       padding-left: 2vw;
-      margin-top: 60vh;
+      
     }
 
     .slide1 .info-box-fiber-1-1 h2,
@@ -148,14 +148,15 @@
     }
     
     
-    
     .slide1 .info-box-fiber-2 {
       /* Example positioning; adjust as needed */
       width: fit-content;
       height: fit-content;
-      bottom: 43.0vh;
-    left: 71.2vw;
-      padding-left: 63.8px;
+      
+      left: 71.2vw;
+      
+
+      position: relative;
 
       overflow: visible;
     }
@@ -261,14 +262,7 @@
 
 
 
-  .logo-full-footer{
-    position:relative;
-    width:10%;
-    height: auto;
-    vertical-align: middle;
-    padding-bottom:10px;
-
-  }
+  
 
 
 
@@ -301,6 +295,9 @@
   }
 
 
+  #svg-info-box-get-to-know{
+    margin-left: 0;
+  }
 
 
 
@@ -332,8 +329,11 @@
 
 
 
-
-
+.info-box-fiber-2-button-wrapper{
+  display:flex;
+  width: 22vw;
+  justify-content: space-around;
+}
 
 
 
@@ -355,57 +355,158 @@
 .contact-container {
   position: relative;
   display: inline-block;
-
-  padding: 0 100px;
+  padding: 0 15%;
   height: 10vh;
   width: 18vw;
-
-  margin-left: -20%;
-
-
-  
+  margin-left: -10%;
   align-items: center;
   display: flex;
 }
 
+
+
+.scedule-demo-container {
+  position: relative;
+  display: inline-block;
+  padding: 0 15%;
+  height: 10vh;
+  width: 18vw;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
 .contact-btn {
-  padding: 10px 20px;
   background-color: #00000000;
   color: white;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 16px;
-  position: relative;
+  font-size: 22px;
+  position: absolute;
   transition: opacity 0.3s ease-in-out;
-
+  font-family: Gatwick;
   
-  
+  width: 110px;
+  height: 50px;
 
 
 
   overflow: visible;
 }
 
+.scedule-demo-btn {
+  position: relative;
+  padding: 10px 20px;
+  background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 22px;
+  white-space: nowrap;
+  height: 50%;
+  font-family: Gatwick;
+  overflow: hidden;
+  transition: color 0.3s ease-in-out;
+}
 
-
-
-#svg-info-box-button{
-
+/* Gradient border effect */
+.scedule-demo-btn::before {
+  content: "";
   position: absolute;
-  width: 32%;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border-radius: 10px;
+  padding: 3px;
+  background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+  -webkit-mask: linear-gradient(white, white) content-box, linear-gradient(white, white);
+  mask: linear-gradient(white, white) content-box, linear-gradient(white, white);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0; /* Hidden initially */
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Animated white background sliding from left to right */
+.scedule-demo-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: white;
+  transform: skewX(-20deg); /* Adds slight tilt effect */
+  transition: left 0.5s ease-in-out;
+}
+
+/* Hover Effect */
+.scedule-demo-btn:hover {
+  color: black;
+}
+
+/* Ensure text is above sliding background */
+.scedule-demo-btn span {
+  position: relative;
+  z-index: 3;
+  display: inline-block;
+  width: 100%;
+  transition: color 0.3s ease-in-out;
+}
+
+/* Make gradient border visible */
+.scedule-demo-btn:hover::before {
+  opacity: 1;
+}
+
+/* Slide in white background */
+.scedule-demo-btn:hover::after {
+  left: 0;
+}
+
+/* Basic button styling */
+.submit-btn {
+  position: relative;
+  padding: 10px 20px;
+  border: none;
+  background-color: #74aa57;
+  color: white;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+
+
+
+
+
+
+#svg-info-box-button-contact{
+  position: relative;
+  width: 110px;
   height: 50%;
   margin: 0;
-
-
-
   background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
-  
-  clip-path: inset(0 round 15px);
-
-
-
+  clip-path: inset(0 round 8px);
 }
+
+#svg-info-box-button-demo{
+  position: relative;
+  width: 150px;
+  height: 50%;
+  margin: 0;
+  background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+  clip-path: inset(0 round 15px);
+  transition: transform 0.2s ease; /* Smooth transition */
+}
+
+
 
 .contact-button-wrapper{
 
@@ -418,6 +519,8 @@
   
 
 }
+
+
 
 .contact-options {
   position: absolute;
@@ -494,75 +597,374 @@
 
 
 
-@media (max-width:1900px){
-.slide1 .info-box-fiber-1-2{
-margin-left: 55vw;
-margin-top: -40vh;
+/* Modal backdrop & container */
+.modal-popup {
+  display: none; /* Hidden by default */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent backdrop */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it's above other content */
+  transition: opacity 0.3s ease;
+  opacity: 0;
 }
+
+/* Active state: visible modal */
+.modal-popup.active {
+  display: flex;
+  opacity: 1;
+}
+
+/* Modal content box */
+.modal-content {
+  background-color: #fff;
+  padding: 20px 30px;
+  border-radius: 8px;
+  max-width: 650px;
+  width: 90%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  margin-top: 180vh;
+}
+
+/* Close button styles */
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+#sceduleDemoPopupP{
+  color:black;
+  margin-top: 3rem;
+}
+
+#scheduleDemoPopup .modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem; /* space between items, adjust as needed */
+  align-items: stretch; /* makes items use the full width available */
+}
+
+#scheduleDemoPopup .modal-content form label,
+#scheduleDemoPopup .modal-content form input,
+#scheduleDemoPopup .modal-content form button {
+  width: 20%;
+  text-align: left; /* change to center if you prefer */
+}
+
+#scheduleDemoPopup .modal-content form button{
+  width:25%;
+  text-align: center;
+}
+
+
+#sceduleDemoPopupH2{
+  font-size: 30px;
+}
+
+form#scheduleDemoForm {
+  display: flex;
+  flex-direction: column; /* Stack form entries vertically */
+  gap: 15px; /* Space between form entries */
+}
+
+.slide1 .form-group{
+  display: flex;
+  align-items: center; /* Align text and input field */
+  gap: 10px;
+}
+
+.slide1 .form-group label {
+  width: 120px; /* Set a fixed width for alignment */
+  text-align: right; /* Align text to the right for consistency */
+}
+
+.slide1 .form-group input {
+  flex: 1; /* Let input fields take up remaining space */
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.slide1 #demo-message{
+  width: 23vw;
+  max-height: 300px;
+}
+
+
+.product-selection {
+  display: flex;
+  gap: 10px; /* space between buttons */
+  margin: 20px 0;
+  margin-bottom: 8vh;
+
+}
+
+.product-toggle {
+  padding: 8px 16px;
+  background: #eee;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s, border-color 0.3s, color 0.3s;
+  width: 20%;
+  font-family: Gatwick;
+  font-size: 20px;
+}
+
+/* Active state styling */
+.product-toggle.active {
+  background: #74aa57;
+  color: #fff;
+  border-color: #ffffff00;
+}
+
+
+
+
+
+#sendButtonDemo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 40px;
+  background-color: #191919;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: background-color 0.3s, width 0.3s, height 0.3s, border-radius 0.3s;
+}
+
+#buttonSendText {
+  transition: opacity 0.3s;
+  font-family: Gatwick;
+  font-size: 30px;
+}
+
+#sendButtonDemo:hover {
+  background-color: #bf522e;
+}
+
+/* Hide the SVG initially or position it off-screen as needed */
+.paper-plane {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  /* Optionally hide the SVG until hover */
+  opacity: 0;
+}
+
+/* When hovering, change button style and reveal/transform the SVG */
+.submit-btn:hover {
+  background-color: #b5b7ba;
+}
+
+.submit-btn:hover .button-text {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Hover styles (placed before .fly rule) */
+.submit-btn:hover .paper-plane {
+  opacity: 1;
+  transform: scale(1.2) rotate(10deg);
+}
+
+/* Flight animation overrides hover styles */
+.fly .paper-plane {
+  animation: flyRight 0.8s forwards !important;
+}
+
+
+/* Keyframes to move the paper plane to the right and fade it out */
+@keyframes flyRight {
+  0% {
+    transform: translateX(0) scale(1.2) rotate(10deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(200px) scale(1.2) rotate(10deg);
+    opacity: 0;
+  }
+}
+
+
+
+@media (max-width:2000px){
+  .slide1 .info-box-fiber-1-2{
+  left:55%;
+  }
+  
+  }
+
+@media (max-width:1900px){
+    .slide1 .info-box-fiber-2 {
+      left:60%;
+    }
+    .info-box-fiber-2-button-wrapper{
+      width:24vw;
+    }
 }
 
 @media (max-width:1700px){
   .slide1 .info-box-fiber-1-2{
-  margin-left: 50vw;
-  margin-top: -20vh;
+    left:50%;
+}
+.info-box-fiber-2-button-wrapper{
+  width:26vw;
 }
 }
 
 @media (max-width:1500px){
    .slide1 .info-box-fiber-1-2{
-    margin-left: 40vw;
-    
+    left:45%;
 }
 
-  .slide1 .info-box-fiber-1-1{
-    margin-left: 0vw;
+
+
+  .slide1 .content-section .svg-animation-words{
+    height:100vh;
+}
+
+  .slide1 .content-wrapper{
+    gap:70px;
+}
+.slide1 .info-box-fiber-2 {
+  left:50%;
+}
+.info-box-fiber-2-button-wrapper{
+  width:29vw;
 }
 }
 
-@media (max-width:1200px){
+@media (max-width:1300px){
   .slide1 .info-box-fiber-1-2{
-   margin-left: 30vw;
+   left:40%;
    
+}
+.info-box-fiber-2-button-wrapper{
+  width:33vw;
+}
+}
+
+@media (max-width:1150px){
+  .slide1 .info-box-fiber-1-2{
+   left:32%;
+   
+}
+.info-box-fiber-2-button-wrapper{
+  width:35vw;
 }
 }
 
 @media (max-width:1050px){
   .slide1 .info-box-fiber-1-2{
-   margin-left: 25vw;
+   left:25%;
    
 }
+  .slide1 .fiberflow-hero h1{
+    font-size: 11rem;
+  }
+  .info-box-fiber-2-button-wrapper{
+    width:43vw;
+  }
+}
+@media (max-width:1000px){
+  .info-box-fiber-2-button-wrapper{
+    width:42vw;
+  }
 }
 
-@media (max-width:950px){
+@media (max-width:900px){
   .slide1 .info-box-fiber-1-2{
-   margin-left: 20vw;
+   left:18%
    
+}
+.slide1 .info-box-fiber-2 {
+  left:10%;
+}
+
+.slide1 .fiberflow-hero h1{
+  font-size: 10rem;
+}
+.info-box-fiber-2-button-wrapper{
+  width: 48vw;
 }
 }
 
-@media (max-width:880px){
-  .slide1 .info-box-fiber-1-2{
-   margin-left: 10vw;
-   
-}
-}
-
-@media (max-width:800px){
+@media (max-width:850px){
   .slide1 .info-box-fiber-1-1{
-   margin-left: 0vw;
    max-width: 90vw;
-   margin-top: -25vh;
+   
 }
-
 .slide1 .info-box-fiber-1-2{
-  margin-left: 0vw;
+  left:0%;
   max-width: 90vw;
-  margin-top: -30vh;
+  
 }
 
-.slide1 .content-section .svg-animation-words {
-  margin-top: 90vh;
-  height: 45.2vh;
-  margin-bottom: 0vh;
+.slide1 .info-box-fiber-1-3{
+  max-width: 90vw;
+}
+
+.slide1 .info-box-fiber-2 .contact-container{
+margin-left:-15%;
+
+}
+
+  .slide1 .info-box-fiber-2 {
+    left:0%;
+    max-width: 90vw;
+  }
+
+  .slide1 .fiberflow-hero h1{
+    font-size: 9rem;
+  }
+  .info-box-fiber-2-button-wrapper{
+    width: 55vw;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width:666px){
+
+  .slide1 .fiberflow-hero h1{
+    font-size: 8rem;
+  }
+  .info-box-fiber-2-button-wrapper{
+    width: 60vw;
+  }
+}
+@media (max-width:570px){
+
+  .slide1 .fiberflow-hero h1{
+    font-size: 7rem;
+  }
+  .info-box-fiber-2-button-wrapper{
+    width: 70vw;
+  }
+}
+@media (max-width:500px){
+
+  .slide1 .fiberflow-hero h1{
+    font-size: 6rem;
+  }
+  .info-box-fiber-2-button-wrapper{
+    width: 83vw;
   }
 }

@@ -98,7 +98,9 @@ module.exports = {
       watch: true,
     },
     port: 8000,
-    hot: true,
-    
+    hot: false,
+    devMiddleware: {
+    publicPath: '/MoonBow/',
   },
+},
 };

@@ -1,6 +1,8 @@
 import { gsap } from "gsap"; // assuming gsap is bundled via Parcel or similar
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CustomEase } from "gsap/CustomEase";
+import anime from 'animejs';
+
 
 gsap.registerPlugin(ScrollTrigger, CustomEase);
 
@@ -178,7 +180,7 @@ document.querySelectorAll(".rect-info-box").forEach((rect) => {
 document.addEventListener("DOMContentLoaded", () => {
   const contactContainer = document.querySelector(".slide1 .contact-container");
   const contactBtn = document.querySelector(".slide1 .contact-btn");
-  const contactBtnSvg = document.getElementById("svg-info-box-button");
+  const contactBtnSvg = document.getElementById("svg-info-box-button-contact");
   const emailBtn = document.querySelector(".slide1 .email");
   const callBtn = document.querySelector(".slide1 .call");
 
@@ -224,4 +226,97 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 300); // adjust delay as needed
     }
   });
+
+
+
+
+
+
+// Get references to the necessary elements
+const scheduleDemoBtn = document.querySelector('.scedule-demo-btn');
+const modalPopup = document.getElementById('scheduleDemoPopup');
+const closeButton = modalPopup.querySelector('.modal-close');
+
+// Function to open the modal
+function openModal() {
+  modalPopup.classList.add('active');
+  modalPopup.setAttribute('aria-hidden', 'false');
+  // Optionally, shift focus to the first input in the modal for accessibility
+  const firstInput = modalPopup.querySelector('input');
+  if (firstInput) {
+    firstInput.focus();
+  }
+}
+
+// Function to close the modal
+function closeModal() {
+  modalPopup.classList.remove('active');
+  modalPopup.setAttribute('aria-hidden', 'true');
+  // Optionally, return focus to the schedule demo button
+  scheduleDemoBtn.focus();
+}
+
+// Toggle the modal open when the button is clicked
+scheduleDemoBtn.addEventListener('click', openModal);
+
+// Close the modal when the close button is clicked
+closeButton.addEventListener('click', closeModal);
+
+// Optionally: close the modal if the user clicks outside the modal content (on the backdrop)
+modalPopup.addEventListener('click', (event) => {
+  // Check if the click target is the modal container (backdrop)
+  if (event.target === modalPopup) {
+    closeModal();
+  }
+});
+
+// Optionally: close the modal if the user presses the Escape key
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && modalPopup.classList.contains('active')) {
+    closeModal();
+  }
+});
+
+
+
+
+
+
+
+
+document.querySelectorAll('.product-toggle').forEach(button => {
+  button.addEventListener('click', () => {
+    // Toggle the active class on this button
+    button.classList.toggle('active');
+  });
+});
+
+
+document.getElementById('SendButtonDemo').addEventListener('click', function(e) {
+  // Prevent the default form submission behavior if needed
+  e.preventDefault();
+  anime({
+    targets: '#morphPath',
+    d: [
+      {
+        // Morph into the paper plane shape – ensure that the path is compatible (consider using a tool to match path commands)
+        value: "M139.947,499.201L250.88,388.267l0,0l-42.667-17.067L498.347,4.267l-358.4,341.333V499.201L139.947,499.201z M498.347,4.267l-358.4,341.333l-119.467-51.2c-23.04-10.24-22.187-30.72,0-42.667L498.347,4.267z M498.347,4.267l-87.04,409.6c-4.267,20.48-20.48,29.013-40.96,20.48L250.88,387.414l-42.667-17.067L498.347,4.267z"
+      }
+    ],
+    duration: 800,
+    easing: 'easeInOutQuad'
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+  
 });

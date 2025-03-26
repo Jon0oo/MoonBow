@@ -1,3 +1,3 @@
 import gsap from "../node_modules/gsap/index.js";
 
-// Add your slide 2 specific animations here
+// Add your slide 4 specific animations here
