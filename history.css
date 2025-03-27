@@ -103,18 +103,56 @@
     height: 40px;
     width: auto;
   }
+
+
+
+  
   .logo-full {
     display: block;
   }
+
+
+  .logo-full-footer{
+    display:inline;
+    
+    position:relative;
+    width:10%;
+    height: auto;
+    vertical-align: middle;
+    padding-bottom:10px;
+  
+    
+  }
+
+
   .logo-short {
     display: none;
   }
+
+
+  .logo-short-footer{
+    display: none;
+    position:relative;
+    width:6%;
+    height: auto;
+    vertical-align: middle;
+    padding-bottom:10px;
+  }
+
+
+
   @media (max-width: 800px) {
     .logo-full {
       display: none;
     }
+    .logo-full-footer{
+      display: none;
+    }
     .logo-short {
       display: block;
+    }
+    .logo-short-footer{
+      display: inline;
     }
   }
   nav {
@@ -364,3 +402,5 @@
 
 
 
+
+/*# sourceMappingURL=history.css.map*/
