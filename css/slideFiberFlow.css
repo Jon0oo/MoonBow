@@ -618,7 +618,7 @@
   width: 90%;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   position: relative;
-  margin-top: 180vh;
+  margin-top: 190vh;
 }
 
 /* Close button styles */
@@ -754,7 +754,7 @@ form#scheduleDemoForm {
   display: flex;
   gap: 10px; /* space between buttons */
   margin: 20px 0;
-  margin-bottom: 8vh;
+  margin-bottom: 11vh;
 
 }
 
@@ -788,6 +788,67 @@ form#scheduleDemoForm {
   color: #fff;
   border-color: #ffffff00;
 }
+
+
+input:invalid {
+  border-color: #ff3860;
+}
+
+/* Style the validation message popup */
+input::-webkit-validation-bubble-message {
+  color: white;
+  background: #333;
+  border-radius: 5px;
+  padding: 8px;
+  font-size: 14px;
+}
+
+.validation-message{
+
+background-color: transparent;
+display: none; 
+color: rgb(0, 0, 0); 
+font-size: 0.8em;
+margin:0px !important;
+}
+
+.validation-message-wrapper.isVisible {
+  /* Styles when the element is visible */
+  display: block;
+  animation: pulse 0.5s ease-in-out 1;
+}
+
+/* Define the pulse animation */
+@keyframes pulse {
+  0% {
+    background-color: transparent;
+    filter: blur(0);
+    transform: scale(1);
+  }
+  50% {
+    background-color: rgba(255, 0, 0, 0.337);
+    filter: blur(2px);
+    transform: scale(1.1);
+  }
+  100% {
+    background-color: transparent;
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+
+.validation-message-wrapper {
+  display: inline-block;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: transparent;
+
+  width: fit-content;
+  height: fit-content;
+  position: absolute;
+  top: 27%;
+}
+
 
 /*begin paperplane css */
 
@@ -932,11 +993,11 @@ form#scheduleDemoForm {
             position: absolute;
             left: 0;
             right: 0;
-            top: 8px;
             transform: rotate(calc(var(--rotate) * -1deg)) scale(var(--success-scale)) translateZ(0);
             opacity: var(--success-opacity);
             color: var(--success);
             width:fit-content;
+            top: -20px;
         }
     }
 }

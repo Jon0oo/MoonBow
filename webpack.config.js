@@ -6,7 +6,10 @@ module.exports = {
   entry: {
     main: './js/main.js',
 
-    firebase: './js/firebase.js',
+    firebase: {
+      import: './js/firebase.js',
+      filename: 'js/firebase.js'
+    },
    
     slide1: './js/slide1.js',
     slide2: './js/slide2.js',
@@ -18,7 +21,7 @@ module.exports = {
 
 
 
-
+  devtool: process.env.NODE_ENV === 'production' ? 'none' : 'source-map',
     
       
       
