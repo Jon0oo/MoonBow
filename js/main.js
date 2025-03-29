@@ -10,6 +10,7 @@ import '../css/slideSmartLink.css';
 
 
 
+
 import { observeSlides, setupDotNavigation,updateIndicatorPosition } from './animations.js';
 
 
@@ -33,6 +34,25 @@ document.addEventListener('DOMContentLoaded', function () {
     observeSlides();
     setupDotNavigation();
     setupDropdownSlideNavigation(); 
+
+
+//handle footer links
+    
+        const loginLink = document.getElementById("loginLink");
+        if (loginLink) {
+          const basePath = window.location.pathname.includes("/MoonBow/") ? "/MoonBow" : "";
+          loginLink.href = `${basePath}/html/signin.html`;
+        }
+      
+      
+
+
+
+
+
+
+
+
 
     // Check for slide parameter in URL
     const params = new URLSearchParams(window.location.search);

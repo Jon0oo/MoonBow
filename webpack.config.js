@@ -6,10 +6,10 @@ module.exports = {
   entry: {
     main: './js/main.js',
 
-    firebase: {
-      import: './js/firebase.js',
-      filename: 'js/firebase.js'
-    },
+    
+    firebaseConfig: './js/firebaseConfig.js',
+    demoRequests: './js/demoRequests.js',
+    firebaseHelpers: './js/firebaseHelpers.js',
    
     slide1: './js/slide1.js',
     slide2: './js/slide2.js',
@@ -17,11 +17,13 @@ module.exports = {
     slide4: './js/slide4.js',
     vision: './js/vision.js',
     history: './js/history.js',
+    signin:  './js/signin.js',
+    admin:  './js/admin.js',
   },
 
 
 
-  devtool: process.env.NODE_ENV === 'production' ? 'none' : 'source-map',
+ 
     
       
       
@@ -78,7 +80,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'index.html',
       filename: 'index.html',
-      chunks: ['main', 'firebase', 'slide1', 'slide2', 'slide3', 'slide4'],
+      chunks: ['main', 'firebaseConfig', 'firebaseHelpers', 'demoRequests', 'slide1', 'slide2', 'slide3', 'slide4'],
       favicon: 'images/favicon.ico',
     }),
     // Vision page (only loads vision.js)
@@ -93,8 +95,20 @@ module.exports = {
       filename: 'html/history.html',
       chunks: ['main' ,'history'],
     }),
+    //for the signin page
+    new HtmlWebpackPlugin({
+      template: '../moonbow.github.io/html/signin.html',
+      filename: 'html/signin.html',
+      chunks: ['main',  'firebaseConfig', 'signin'],
+    }),
+    //for the admin page
+    new HtmlWebpackPlugin({
+      template: '../moonbow.github.io/html/admin.html',
+      filename: 'html/admin.html',
+      chunks: ['main', 'firebaseConfig', 'admin' ],
+    }),
     new MiniCssExtractPlugin({
-      filename: '[name].css', // Creates a main.css file (and others if multiple entry points exist)
+      filename: 'css/[name].css', // Creates a main.css file (and others if multiple entry points exist)
     }),
   ],
   devServer: {
@@ -102,6 +116,7 @@ module.exports = {
       directory: path.resolve(__dirname, 'dist'),
       watch: true,
     },
+    watchFiles: ['css/**/*.css'],
     port: 8000,
     hot: false,
     devMiddleware: {
@@ -109,3 +124,6 @@ module.exports = {
   },
 },
 };
+
+
+

@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "@tailwindcss/cli": "^4.0.14",
     "animejs": "^3.2.2",
     "firebase": "^11.5.0",
     "gsap": "^3.12.7"
@@ -13,8 +12,8 @@
     "start": "webpack serve --mode development",
     "build": "webpack --mode production",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
-    "tailwind:init": "npx tailwindcss init -p"
+    "deploy": "gh-pages -d dist"
+    
   },
   "repository": {
     "type": "git",

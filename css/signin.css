@@ -1,0 +1,150 @@
+#bodySignIn{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+#h2SignIn{
+    font-size: 200px;
+
+    text-align: center;
+
+    display: flex;
+    align-content: center;
+    justify-content: center;
+
+    position: absolute; /* Position relative to the container */
+    top: 50%; /* 50% from the top of the container */
+    left: 50%; /* 50% from the left of the container */
+    transform: translate(-50%, -50%);
+    line-height: 2;
+}
+
+
+
+
+
+input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    outline: none;
+  }
+
+  button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    color: black;
+    font-weight: bold;
+  }
+
+  button:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+
+
+
+  .form-sign-in-wrapper{
+    width:100vw;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    height: auto;
+    
+  }
+  .form-sign-in {
+    background: rgba(255, 255, 255, 0.2);
+    -webkit-backdrop-filter: blur(10px); /* ✅ Safari support */
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 45vw;
+    height: 100%;
+    justify-content: space-between;
+  }
+
+  .input-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    
+    margin-bottom: 10%;
+
+  }
+
+  .button-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+  }
+
+
+  @media(max-width:1300px){
+    #h2SignIn{
+        font-size: 180px;
+    }
+  }
+  @media(max-width:1150px){
+    #h2SignIn{
+        font-size: 160px;
+        line-height: 3;
+    }
+  }
+  @media(max-width:1050px){
+    #h2SignIn{
+        font-size: 140px;
+    }
+  }
+  @media(max-width:900px){
+    #h2SignIn{
+        font-size: 120px;
+    }
+  }
+  @media(max-width:800px){
+    #h2SignIn{
+        font-size: 100px;
+    }
+  }
+  @media(max-width:700px){
+    #h2SignIn{
+        font-size: 95px;
+    }
+  }
+  @media(max-width:600px){
+    #h2SignIn{
+        font-size: 80px;
+    }
+  }
+  @media(max-width:520px){
+    #h2SignIn{
+        font-size: 70px;
+    }
+  }
+  @media(max-width:450px){
+    #h2SignIn{
+        font-size: 65px;
+    }
+  }
+  @media(max-width:370px){
+    #h2SignIn{
+        font-size: 60px;
+    }
+  }
