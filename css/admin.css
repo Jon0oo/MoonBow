@@ -1,0 +1,70 @@
+body {
+   
+    
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+  }
+  
+  /* Button styles */
+button {
+    background-color: rgba(255, 255, 255, 0.8); /* Milky effect */
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 10px 15px;
+    margin-top: 10px;
+    border-radius: 10px; /* Rounded corners */
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Initial shadow */
+    transition: all 0.3s ease; /* Smooth transition for hover */
+  }
+  
+  button:hover {
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly more opaque on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Increased shadow on hover */
+    transform: translateY(-2px); /* Slightly lift the button */
+  }
+  
+  /* Specific button hover effect */
+  button:active {
+    transform: translateY(1px); /* Button will "press" down slightly when clicked */
+  }
+  
+  #demo-requests-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .demo-request {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .demo-request h3 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  
+  .demo-request p {
+    margin: 5px 0;
+  }
+  
+  .status {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  button.update-status {
+    margin-top: 10px;
+  }
+  
+  button.update-status:hover {
+    background-color: #28a745;
+  }
+  

@@ -497,7 +497,7 @@
     
     .slide1 .content-section p {
       font-size: 1.25rem;
-      color: #000000;
+      color: #ffffff;
       margin-top: 40px;
       margin-bottom:20px;
     }
@@ -950,7 +950,7 @@
   cursor: pointer;
 }
 
-#sceduleDemoPopupH2{
+#scheduleDemoPopupH2{
   font-size: 33px;
 }
 
@@ -1038,7 +1038,7 @@
   font-size: 30px;
 }
 
-form#scheduleDemoForm {
+#scheduleDemoForm {
   display: flex;
   flex-direction: column; /* Stack form entries vertically */
   gap: 15px; /* Space between form entries */
@@ -1145,8 +1145,8 @@ margin:0px !important;
   }
   50% {
     background-color: rgba(255, 0, 0, 0.337);
-    filter: blur(2px);
-    transform: scale(1.1);
+    filter: blur(1px);
+    transform: scale(1.05);
   }
   100% {
     background-color: transparent;
@@ -1166,6 +1166,7 @@ margin:0px !important;
   position: absolute;
   top: 27%;
 }
+
 
 
 /*begin paperplane css */
@@ -2147,5 +2148,3 @@ margin-left:-15%;
 
     list-style-type: none;
   }
-
-/*# sourceMappingURL=main.css.map*/
