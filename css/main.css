@@ -61,8 +61,8 @@
   }
   @font-face {
     font-family: "GatwickFont";
-    src: url(/MoonBow/56c82b48f3bbd803281b.woff2) format("woff2");
-    src: url(/MoonBow/30559e84fa4bb1a7c270.woff) format("woff");
+    src: url(/56c82b48f3bbd803281b.woff2) format("woff2");
+    src: url(/30559e84fa4bb1a7c270.woff) format("woff");
   }
   * {
     margin: 0;
@@ -505,6 +505,9 @@
       overflow: visible;
   }
 
+  #productValidationMessage{
+    color:black !important;
+  }
 
 
 
@@ -1555,7 +1558,67 @@ margin-left:-15%;
 
     overflow: hidden;
 
-    height: 300vh;
+    height: fit-content;
+    
+
+
+}
+
+
+
+@media (max-aspect-ratio: 500) {
+  .slide2 .image-section-wrapper {
+    height: 600vh;
+  }
+
+}
+
+@media (max-aspect-ratio: 5) {
+  .slide2 .image-section-wrapper {
+    height: 550vh;
+  }
+
+}
+
+@media (max-aspect-ratio: 4) {
+  .slide2 .image-section-wrapper {
+    height: 500vh;
+  }
+
+}
+
+@media (max-aspect-ratio: 3.5) {
+  .slide2 .image-section-wrapper {
+    height: 410vh;
+  }
+
+}
+
+@media (max-aspect-ratio: 3) {
+  .slide2 .image-section-wrapper {
+    height: 380vh;
+  }
+
+}
+
+@media (max-aspect-ratio: 2.6) {
+  .slide2 .image-section-wrapper {
+    height: 360vh;
+  }
+
+}
+
+@media (max-aspect-ratio: 2.25) {
+  .slide2 .image-section-wrapper {
+    height: 340vh;
+  }
+
+}
+
+@media (max-aspect-ratio: 2.12) {
+  .slide2 .image-section-wrapper {
+    height: 320vh;
+  }
 
 }
 
@@ -1724,7 +1787,7 @@ margin-left:-15%;
     position:absolute;
     width:5.5%;
     height: 5.5%;
-    background: url(/MoonBow/images/8be5f59581329ae83e60.png) no-repeat center center;
+    background: url(/images/8be5f59581329ae83e60.png) no-repeat center center;
   background-size: contain;
   
 
@@ -1787,7 +1850,8 @@ margin-left:-15%;
 
 
   .slide2 .info-box-link-1,
-  .slide2 .info-box-link-2{
+  .slide2 .info-box-link-2,
+  .slide2 .info-box-link-3{
 
     position: absolute;
     background-color: rgba(255, 255, 255, 0.149);
@@ -1842,7 +1906,119 @@ margin-left:-15%;
 
 
 
+
+.slide2 #button-box-link-3-contact{
+  position: absolute;
+
+  width: 100vw;
+
+  top:50%;
+
+}
+.slide2 #button-box-link-3-demo{
+  position: absolute;
+
+  width: 100vw;
+
+  top:70%;
+
+}
   
+
+
+
+.slide-2-button {
+  border: none;
+  width: 100vw;
+  height: fit-content;
+  display: inline-block;
+  justify-content: center;
+  align-content: center;
+  color: antiquewhite;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+  font-family: Gatwick;
+  font-weight: bolder;
+  border-radius: 10px;
+  position: relative;
+}
+
+/* Pseudo-element used for the slide effect */
+.slide-2-button:after {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 100%;
+  top: 0;
+  left: 0;
+  direction: rtl;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+  border-radius: 10px;
+}
+
+/* Hover state (existing behavior) */
+.slide-2-button:hover {
+  color: #000;
+}
+.slide-2-button:hover:after {
+  left: auto;
+  right: 0;
+  width: 100%;
+}
+
+/* Active click state for visual feedback */
+.slide-2-button:active {
+  top: 2px;
+}
+
+/* Styling for the text inside the button */
+.slide-2-button span {
+  position: relative;
+  z-index: 2;
+  mix-blend-mode: difference;
+  color: #fff;
+  transition: color 0.4s;
+  font-size: 200px;
+}
+
+/* Hide the extra info by default */
+.slide-2-button .label {
+  opacity: 1;
+  display:block;
+  transition: opacity 0s ease;
+}
+.slide-2-button .info {
+  text-align: start;
+  opacity: 0;
+  display:none;
+  transition: opacity 0.3s ease;
+}
+
+/* When the button has the clicked class, run the slide animation and show info */
+.slide-2-button.clicked:after {
+  left: auto;
+  right: 0;
+  width: 100%;
+}
+
+.slide-2-button.clicked .label {
+  opacity: 0;
+  display:none;
+  /* Optional: add a delay or transform if you want a more complex reveal */
+}
+.slide-2-button.clicked .info {
+  opacity: 1;
+  display:block;
+  /* Optional: add a delay or transform if you want a more complex reveal */
+}
+
+
+
+
 
 
 
