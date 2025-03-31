@@ -1637,7 +1637,7 @@ margin-left:-15%;
 
 @media (max-aspect-ratio: 1.41) {
   .slide2 .image-section-wrapper {
-    height: 150vh;
+    height: 190vh;
   }
 }
 
@@ -1983,6 +1983,15 @@ margin-left:-15%;
   color: #fff;
   transition: color 0.4s;
   font-size: 200px;
+  
+}
+.slide-2-button .label-3 {
+  
+  text-align: start;
+}
+.slide-2-button .label-4 {
+  
+  text-align: end;
 }
 
 /* Hide the extra info by default */
@@ -1990,6 +1999,7 @@ margin-left:-15%;
   opacity: 1;
   display:block;
   transition: opacity 0s ease;
+  text-align: center;
 }
 .slide-2-button .info {
   text-align: start;
@@ -1997,26 +2007,26 @@ margin-left:-15%;
   display:none;
   transition: opacity 0.3s ease;
 }
-
-/* When the button has the clicked class, run the slide animation and show info */
-.slide-2-button.clicked:after {
-  left: auto;
-  right: 0;
-  width: 100%;
-}
-
-.slide-2-button.clicked .label {
+.slide-2-button.invisible{
   opacity: 0;
-  display:none;
-  /* Optional: add a delay or transform if you want a more complex reveal */
+  display: none;
 }
-.slide-2-button.clicked .info {
+
+.slide-2-button.visible{
   opacity: 1;
-  display:block;
-  /* Optional: add a delay or transform if you want a more complex reveal */
+  display: block;
 }
 
-
+#contact-3 {
+  display: flex;
+  align-content: start;
+  flex-direction: column;
+  }
+#contact-2 {
+  display: flex;
+  justify-content: start;
+  
+}
 
 
 
@@ -2310,7 +2320,60 @@ margin-left:-15%;
 
   }
 
+@media(max-width:2010px){
 
+  .slide-2-button span{
+    font-size: 180px;
+  }
+}
+@media(max-width:1850px){
+
+  .slide-2-button span{
+    font-size: 160px;
+  }
+}
+@media(max-width:1630px){
+
+  .slide-2-button span{
+    font-size: 140px;
+  }
+}
+@media(max-width:1420px){
+
+  .slide-2-button span{
+    font-size: 120px;
+  }
+}
+@media(max-width:1220px){
+
+  .slide-2-button span{
+    font-size: 110px;
+  }
+}
+@media(max-width:1110px){
+
+  .slide-2-button span{
+    font-size: 95px;
+  }
+}
+@media(max-width:999px){
+
+  .slide-2-button span{
+    font-size: 90px;
+  }
+}
+@media(max-width:910px){
+
+  .slide-2-button span{
+    font-size: 80px;
+  }
+}
+@media(max-width:800px){
+
+  .slide-2-button span{
+    font-size: 75px;
+  }
+}
   
 
 
