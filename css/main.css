@@ -166,7 +166,7 @@
     transform: translateX(-200px);
     transition: transform 0.3s ease;
   }
-  @media (max-width: 800px) {
+  @media (max-width: 1200px) {
     .menu {
       transform: translateX(0);
     }
@@ -312,9 +312,20 @@
   .footer-nav a:hover {
     text-decoration: underline;
   }
-  
 
+.img-slide-3{
+    position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1; /* Ensure the image stays behind the content */
+}
 
+.slide3 .image-section{
+    overflow: hidden;
+}
 
 
     
@@ -327,7 +338,19 @@
 
 
 
-
+  :root {
+    --primary: #74aa57;
+    --primary-dark: #53793f;
+    --primary-darkest: #3f5d2f;
+    --text: #FFFFFF;
+    --text-opacity: 1;
+    --success: #2B3044;
+    --success-scale: .2;
+    --success-opacity: 0;
+    --border-radius: 7;
+    /* Add any others you need */
+  }
+  
 
   .slide1 {
     
@@ -505,7 +528,7 @@
       overflow: visible;
   }
 
-  #productValidationMessage{
+  .slide1 .validation-message{
     color:black !important;
   }
 
@@ -953,33 +976,33 @@
   cursor: pointer;
 }
 
-#scheduleDemoPopupH2{
+.modal-popup h2{
   font-size: 33px;
 }
 
-#scheduleDemoPopupP{
+.modal-popup p{
   color:black;
   margin-top: 3rem;
 }
 
-#scheduleDemoPopup .modal-content form {
+.modal-popup .modal-content form {
   display: flex;
   flex-direction: column;
   gap: 3rem; /* space between items, adjust as needed */
   align-items: stretch; /* makes items use the full width available */
 }
 
-#scheduleDemoPopup .modal-content form label,
-#scheduleDemoPopup .modal-content form input,
-#scheduleDemoPopup .modal-content form button {
+.modal-popup .modal-content form label,
+.modal-popup .modal-content form input,
+.modal-popup .modal-content form button {
   width: 20%;
   text-align: left; /* change to center if you prefer */
 }
 
 
 
-#scheduleDemoForm input, 
-#scheduleDemoForm textarea {
+.scheduleDemoForm input, 
+.scheduleDemoForm textarea {
   position: relative;
   border: none;
   font-size: 16px;
@@ -997,7 +1020,7 @@
   width: 100%;
 }
 
-.input-wrapper::after {
+.slide1 .input-wrapper::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -1017,8 +1040,12 @@
   width: 100%;
 }
 
+.slide1 .scheduleDemoForm{
+  caret-color: rgb(0, 0, 0);
+}
+
 /* Remove extra styling for telephone inputs */
-#scheduleDemoForm input[type="tel"] {
+.scheduleDemoForm input[type="tel"] {
   -webkit-appearance: none; /* Remove default styling on WebKit browsers */
   -moz-appearance: none;
   appearance: none;
@@ -1026,22 +1053,34 @@
 }
 
 
+.slide1 .product-toggle{
+  transition: transform 0.4s ease;
+}
+.slide1 .product-toggle:hover {
+  
+  box-shadow: 0 0 50px rgba(3, 3, 3, 0.651); /* Increased shadow on hover */
+  transform: translateY(-3px); /* Slightly lift the button */
+}
+
+.slide1 .product-toggle:active {
+  
+  transform: translateY(1px); /* Slightly lift the button */
+}
 
 
 
 
-
-#scheduleDemoPopup .modal-content form button{
+.modal-popup .modal-content form button{
   width:25%;
   text-align: center;
 }
 
 
-#scheduleDemoPopupH2{
+.modal-popup h2{
   font-size: 30px;
 }
 
-#scheduleDemoForm {
+.scheduleDemoForm {
   display: flex;
   flex-direction: column; /* Stack form entries vertically */
   gap: 15px; /* Space between form entries */
@@ -1170,6 +1209,9 @@ margin:0px !important;
   top: 27%;
 }
 
+.slide1 .pdemo{
+  color:black !important;
+}
 
 
 /*begin paperplane css */
@@ -1538,6 +1580,19 @@ margin-left:-15%;
   }
 }
 /* Image container: fills the viewport */
+
+
+.slide2 {
+  height: 100vh; /* Take full screen height */
+  overflow-y: auto; /* Enable vertical scrolling */
+  scroll-behavior: auto; /* Disable browser’s built-in smooth scroll */
+  -webkit-overflow-scrolling: touch; /* Improve touch scrolling */
+}
+
+
+
+
+
 .slide2 .image-section {
     position: relative;
     width: 100vw;
@@ -1566,144 +1621,8 @@ margin-left:-15%;
 
 
 
-@media (max-aspect-ratio: 500) {
-  .slide2 .image-section-wrapper {
-    height: 600vh;
-  }
 
-}
-
-@media (max-aspect-ratio: 5) {
-  .slide2 .image-section-wrapper {
-    height: 550vh;
-  }
-
-}
-
-@media (max-aspect-ratio: 4) {
-  .slide2 .image-section-wrapper {
-    height: 500vh;
-  }
-
-}
-
-@media (max-aspect-ratio: 3.5) {
-  .slide2 .image-section-wrapper {
-    height: 410vh;
-  }
-
-}
-
-@media (max-aspect-ratio: 3) {
-  .slide2 .image-section-wrapper {
-    height: 380vh;
-  }
-
-}
-
-@media (max-aspect-ratio: 2.6) {
-  .slide2 .image-section-wrapper {
-    height: 360vh;
-  }
-
-}
-
-@media (max-aspect-ratio: 2.25) {
-  .slide2 .image-section-wrapper {
-    height: 340vh;
-  }
-
-}
-
-@media (max-aspect-ratio: 2.12) {
-  .slide2 .image-section-wrapper {
-    height: 320vh;
-  }
-
-}
-
-@media (max-aspect-ratio: 2) {
-  .slide2 .image-section-wrapper {
-    height: 250vh;
-  }
-
-}
-
-@media (max-aspect-ratio: 1.7) {
-  .slide2 .image-section-wrapper {
-    height: 200vh;
-  }
-}
-
-@media (max-aspect-ratio: 1.41) {
-  .slide2 .image-section-wrapper {
-    height: 190vh;
-  }
-}
-
-@media (max-aspect-ratio: 1.11) {
-  .slide2 .image-section-wrapper {
-    height: 130vh;
-  }
-}
-
-@media (max-aspect-ratio: 0.97) {
-  .slide2 .image-section-wrapper {
-    height: 115vh;
-  }
-}
-
-@media (max-aspect-ratio: 0.82) {
-  .slide2 .image-section-wrapper {
-    height: 100vh;
-  }
-}
-
-@media (max-aspect-ratio: 0.76) {
-  .slide2 .image-section-wrapper {
-    height: 90vh;
-  }
-}
-
-@media (max-aspect-ratio: 0.68) {
-  .slide2 .image-section-wrapper {
-    height: 90vh;
-  }
-
-  .slide2 .image-section{
-    width: 120%;
-  }
-}
-
-@media (max-aspect-ratio: 0.57) {
-  .slide2 .image-section-wrapper {
-    height: 86vh;
-  }
-}
-
-@media (max-aspect-ratio: 0.47) {
-  .slide2 .image-section-wrapper {
-    height: 84vh;
-  }
-}
-
-@media (max-aspect-ratio: 0.40) {
-  .slide2 .image-section-wrapper {
-    height: 73vh;
-  }
-}
-
-@media (max-aspect-ratio: 0.33) {
-  .slide2 .image-section-wrapper {
-    height: 70vh;
-  }
-}
-
-@media (max-aspect-ratio: 0.27) {
-  .slide2 .image-section-wrapper {
-    height: 68vh;
-  }
-}
+  
 
 
 
@@ -1854,7 +1773,7 @@ margin-left:-15%;
   .slide2 .info-box-link-3{
 
     position: absolute;
-    background-color: rgba(255, 255, 255, 0.149);
+    background-color: rgba(255, 255, 255, 0.09);
     color: antiquewhite;
 
 
@@ -1862,8 +1781,8 @@ margin-left:-15%;
     border-radius: 10px;                         /* Optional: rounded corners */
     padding: 20px;                               /* Optional: inner spacing */
   /* Optional: add a backdrop blur effect for extra depth (works on modern browsers) */
-    -webkit-backdrop-filter: blur(8px); /* Safari support */
-    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(20px); /* Safari support */
+    backdrop-filter: blur(20px);
     
 
 
@@ -1920,7 +1839,7 @@ margin-left:-15%;
 
   width: 100vw;
 
-  top:70%;
+  top:75%;
 
 }
   
@@ -2009,7 +1928,7 @@ margin-left:-15%;
 }
 .slide-2-button.invisible{
   opacity: 0;
-  display: none;
+  display: none !important;
 }
 
 .slide-2-button.visible{
@@ -2026,6 +1945,95 @@ margin-left:-15%;
   display: flex;
   justify-content: start;
   
+}
+
+#demo{
+  display:inline-block !important;
+}
+
+
+
+.slide2 .image-section .modal-content{
+  background-color: #fff0;  
+  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
+}
+.slide2 .modal-content{
+  color:rgb(255, 255, 255);
+}
+
+.slide2 .pdemo{
+  color:rgb(255, 255, 255) !important;
+}
+.slide2 .validation-message{
+  color:rgb(255, 255, 255) !important;
+}
+.slide2 .image-section p {
+  font-size: 1.25rem;
+}
+
+
+
+
+.slide2 .input-wrapper::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  
+  
+  height: 2px;          /* Thickness of the underline */
+  background: rgb(255, 255, 255);
+  transition: width 0.3s ease-in-out;
+
+  left: 0%;
+  width: 20%;
+}
+
+
+.slide2 .form-group{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.slide2 .modal-popup .modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  align-items: stretch;
+}
+
+.slide2 .input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.slide2 .input-wrapper:hover::after,
+.slide2 .input-wrapper:focus-within::after {
+  width: 100%;
+}
+
+.slide2 .scheduleDemoForm{
+  caret-color: rgb(255, 255, 255);
+}
+
+
+
+
+
+.slide2 .product-toggle{
+  transition: transform 0.4s ease;
+}
+.slide2 .product-toggle:hover {
+  
+  box-shadow: 0 0 50px rgba(255, 255, 255, 0.475); /* Increased shadow on hover */
+  transform: translateY(-3px); /* Slightly lift the button */
+}
+
+.slide2 .product-toggle:active {
+  
+  transform: translateY(1px); /* Slightly lift the button */
 }
 
 

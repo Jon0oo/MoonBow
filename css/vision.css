@@ -166,7 +166,7 @@
     transform: translateX(-200px);
     transition: transform 0.3s ease;
   }
-  @media (max-width: 800px) {
+  @media (max-width: 1200px) {
     .menu {
       transform: translateX(0);
     }
@@ -312,7 +312,6 @@
   .footer-nav a:hover {
     text-decoration: underline;
   }
-  
 
 @font-face {
     font-family: "GatwickFont";
