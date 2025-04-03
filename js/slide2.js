@@ -2,162 +2,293 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import { CustomEase } from "gsap/CustomEase";
+import Lenis from 'lenis'
+
+
+import DemoModal from "./modalComponent.js";
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin, CustomEase);
 
 document.addEventListener("DOMContentLoaded", () => {
-    const car = document.querySelector('.carDiv');
-    const lightTrailElement = document.getElementById("lightTrail");
-    const lightTrailElement2 = document.getElementById("lightTrailOrange");
+  // Cache DOM elements
+  const car = document.querySelector('.carDiv');
+  const lightTrailElement = document.getElementById("lightTrail");
+  const lightTrailElement2 = document.getElementById("lightTrailOrange");
+  const imageSection = document.querySelector(".slide2 .image-section");
+  const slide2 = document.querySelector(".slide2");
+  const infoBoxLink1Text = document.getElementById("info-box-link-1-text");
+  const infoBoxLink2Text = document.getElementById("info-box-link-2-text");
+  const imageSectionWrapper = document.querySelector('.image-section-wrapper');
+  const contentSection = document.querySelector('.slide2 .content-section');
 
-    let timeline;
 
-    function setupPathAnimation(keepProgress = false) {
-        if (!car || !lightTrailElement || !lightTrailElement2) return;
+  let timeline;
+  let scrollRAF; // for scroll throttling
+  let lastScrollTop = 0;
 
-        const pathLength = lightTrailElement.getTotalLength();
-        const pathLength2 = lightTrailElement2.getTotalLength();
-        lightTrailElement.style.strokeDasharray = pathLength;
-        lightTrailElement.style.strokeDashoffset = pathLength;
-        lightTrailElement2.style.strokeDasharray = pathLength2;
-        lightTrailElement2.style.strokeDashoffset = pathLength2;
+  // Debounce helper function
+  const debounce = (fn, delay) => {
+    let timeout;
+    return (...args) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => fn(...args), delay);
+    };
+  };
 
-        let currentProgress = 0;
+  function setupPathAnimation(keepProgress = false) {
+    if (!car || !lightTrailElement || !lightTrailElement2) return;
 
-        if (timeline && keepProgress) {
-            currentProgress = timeline.progress(); // Save progress before recreating
-            timeline.kill(); // Remove old timeline without resetting progress
-        }
+    const pathLength = lightTrailElement.getTotalLength();
+    const pathLength2 = lightTrailElement2.getTotalLength();
 
-        timeline = gsap.timeline({
-            scrollTrigger: {
-                trigger: ".slide2 .image-section",
-                scroller: ".slide2",
-                start: "top top",
-                end: "100% bottom bottom",
-                scrub: 2,
-            }
-        });
+    // Set up stroke dash arrays and offsets
+    [lightTrailElement, lightTrailElement2].forEach((el, i) => {
+      const len = i === 0 ? pathLength : pathLength2;
+      el.style.strokeDasharray = len;
+      el.style.strokeDashoffset = len;
+    });
 
-        timeline.to(car, {
-            duration: 1.1,
-            motionPath: {
-                ease: "none",
-                path: lightTrailElement,
-                align: lightTrailElement,
-                autoRotate: 180,
-                alignOrigin: [0.5, 0.5]
-            }
-        }, 0);
-
-        timeline.to(car, {
-            y: "+=100",
-            duration: 0.3,
-            ease: "power2.out"
-        }, ">");
-
-        timeline.to(lightTrailElement, {
-            strokeDashoffset: 0,
-            duration: 0.5,
-            ease: CustomEase.create("custom", "M0,0 C0,0 0.074,0.072 0.092,0.084 0.097,0.087 0.141,0.123 0.202,0.184 0.232,0.214 0.306,0.255 0.35,0.286 0.393,0.317 0.456,0.355 0.5,0.4 0.564,0.467 0.677,0.489 0.741,0.559 0.779,0.6 0.906,0.671 0.906,0.671 0.906,0.671 0.962,0.746 0.988,0.818 1.02,0.907 1,1 1,1 "),
-        }, 0);
-
-        timeline.to(lightTrailElement2, {
-            strokeDashoffset: 0,
-            duration: 0.5,
-            ease: CustomEase.create("custom", "M0,0 C0,0 0.074,0.072 0.092,0.084 0.097,0.087 0.141,0.123 0.202,0.184 0.232,0.214 0.306,0.255 0.35,0.286 0.393,0.317 0.456,0.355 0.5,0.4 0.564,0.467 0.677,0.489 0.741,0.559 0.779,0.6 0.906,0.671 0.906,0.671 0.906,0.671 0.962,0.746 0.988,0.818 1.02,0.907 1,1 1,1 "),
-        }, 0);
-
-        if (keepProgress) {
-            timeline.progress(currentProgress); // Restore progress after refresh
-        }
+    let currentProgress = 0;
+    if (timeline && keepProgress) {
+      currentProgress = timeline.progress();
+      timeline.kill();
     }
 
-    setupPathAnimation(); // Run on page load
-
-    // Recalculate and update the animation on resize without losing scroll progress
-    window.addEventListener('resize', () => {
-        setTimeout(() => setupPathAnimation(true), 100);
-    });
-
-    // Scroll-triggered animations for slide2
-    const imageSection = document.querySelector(".slide2 .image-section");
-    const slide2 = document.querySelector(".slide2");
-
-    function initImageSectionAnimation() {
-        // Kill any existing ScrollTrigger instance for this animation.
-        const existingTrigger = ScrollTrigger.getById("imageSectionAnimation");
-        if (existingTrigger) {
-          existingTrigger.kill();
-        }
-      
-        if (window.innerWidth / window.innerHeight >= 0.52) {
-          gsap.timeline({
-            scrollTrigger: {
-              id: "imageSectionAnimation", // assign an ID for easy reference
-              trigger: imageSection,
-              scroller: ".slide2",
-              start: "top top",
-              end: "bottom bottom",
-              scrub: 2,
-            }
-          }).to(imageSection, {
-            y: "-60vh",
-            ease: CustomEase.create(
-              "custom",
-              "M0,0 C0,0 0.384,0.033 0.429,0.048 0.468,0.061 0.603,0.166 0.64,0.184 0.676,0.202 0.669,0.19 0.783,0.315 0.89,0.433 0.863,0.403 0.878,0.441 0.93,0.581 0.936,0.615 0.936,0.615 0.936,0.615 0.983,0.822 0.983,0.822 0.983,0.822 1,1 1,1 "
-            ),
-            duration: 2,
-          });
-        }
+    timeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".slide2 .image-section",
+        scroller: ".slide2",
+        start: "top top",
+        end: "100% bottom bottom",
+        scrub: 2,
       }
-      
-      // Initialize on page load
-      initImageSectionAnimation();
-      
-      // Reinitialize on resize
-      window.addEventListener("resize", () => {
-        setTimeout(initImageSectionAnimation, 100);
-      });
-      
-
-    // Stretch effect on links when scrolling
-    const infoBoxLink2Text = document.getElementById("info-box-link-2-text");
-    const infoBoxLink1Text = document.getElementById("info-box-link-1-text");
-    let scrollTimeout;
-    let lastScrollTop = 0;
-
-    slide2.addEventListener("scroll", () => {
-        clearTimeout(scrollTimeout);
-        const currentScrollTop = slide2.scrollTop;
-        const isScrollingDown = currentScrollTop > lastScrollTop;
-
-        if (isScrollingDown) {
-            infoBoxLink1Text.style.transformOrigin = "bottom center";
-            infoBoxLink2Text.style.transformOrigin = "bottom center";
-        } else {
-            infoBoxLink1Text.style.transformOrigin = "top center";
-            infoBoxLink2Text.style.transformOrigin = "top center";
-        }
-
-        lastScrollTop = currentScrollTop;
-
-        const minScale = 1;
-        const maxScale = 1.1;
-        const scaleFactor = Math.min(maxScale, Math.max(minScale, 1 + slide2.scrollTop / 1200));
-
-        gsap.to([infoBoxLink1Text, infoBoxLink2Text], {
-            scaleY: scaleFactor,
-            duration: 0.5,
-            ease: "power2.out",
-        });
-
-        scrollTimeout = setTimeout(() => {
-            gsap.to([infoBoxLink1Text, infoBoxLink2Text], {
-                scaleY: 1,
-                duration: 0.7,
-                ease: "power2.out",
-            });
-        }, 150);
     });
+
+    // Animate car along the motion path
+    timeline.to(car, {
+      duration: 1.1,
+      motionPath: {
+        ease: "none",
+        path: lightTrailElement,
+        align: lightTrailElement,
+        autoRotate: 180,
+        alignOrigin: [0.5, 0.5]
+      }
+    }, 0);
+
+    // Slight vertical movement
+    timeline.to(car, {
+      y: "+=100",
+      duration: 0.3,
+      ease: "power2.out"
+    }, ">");
+
+    // Define custom ease string once for reuse
+    const customEaseStr = "M0,0 C0,0 0.074,0.072 0.092,0.084 0.097,0.087 0.141,0.123 0.202,0.184 0.232,0.214 0.306,0.255 0.35,0.286 0.393,0.317 0.456,0.355 0.5,0.4 0.564,0.467 0.677,0.489 0.741,0.559 0.779,0.6 0.906,0.671 0.906,0.671 0.906,0.671 0.962,0.746 0.988,0.818 1.02,0.907 1,1 1,1 ";
+
+    // Animate the light trails
+    timeline.to(lightTrailElement, {
+      strokeDashoffset: 0,
+      duration: 0.5,
+      ease: CustomEase.create("custom", customEaseStr)
+    }, 0);
+
+    timeline.to(lightTrailElement2, {
+      strokeDashoffset: 0,
+      duration: 0.5,
+      ease: CustomEase.create("custom", customEaseStr)
+    }, 0);
+
+    if (keepProgress) {
+      timeline.progress(currentProgress);
+    }
+  }
+
+  setupPathAnimation();
+
+  // Use debounced resize event for recalculating animations
+  window.addEventListener('resize', debounce(() => setupPathAnimation(true), 100));
+
+  // Initialize image section animation with debouncing on resize
+  function initImageSectionAnimation() {
+
+
+    // Kill any existing ScrollTrigger on imageSectionAnimation
+    const existingTrigger = ScrollTrigger.getById("imageSectionAnimation");
+    if (existingTrigger) {
+      existingTrigger.kill();
+    }
+
+    
+    if (window.innerWidth < 1000) {
+
+        
+      // If screen width is below 1000px, apply a permanent zoom effect.
+      // Adjust scale value if width drops below 800px.
+      if (window.innerWidth < 800) {
+        
+
+
+
+
+        
+
+      } else {
+        
+
+
+        
+
+      }
+      // Optionally, you can reset any Y translation if needed:
+      gsap.set(imageSection, { y: 0 });
+    } else {
+      // Otherwise, use your scroll-triggered animation
+      
+
+
+
+
+
+      // Reset any permanent scale if necessary (or set it to 1)
+      gsap.set(imageSection, { scale: 1, transformOrigin: "center bottom" });
+    }
+  }
+      
+  initImageSectionAnimation();
+  window.addEventListener('resize', debounce(initImageSectionAnimation, 100));
+
+  function handleSlide2Scroll() {
+    const currentScrollTop = slide2.scrollTop;
+    const isScrollingUp = currentScrollTop < lastScrollTop;  // Check if scrolling up
+    lastScrollTop = currentScrollTop;
+  
+    if (isScrollingUp) {
+      // Set transform origin to "top center" when scrolling up
+      const origin = "top center";
+      infoBoxLink1Text.style.transformOrigin = origin;
+      infoBoxLink2Text.style.transformOrigin = origin;
+  
+      // Calculate scale factor within desired bounds
+      const minScale = 1;
+      const maxScale = 1.1;
+      const scaleFactor = Math.min(maxScale, Math.max(minScale, 1 + currentScrollTop / 1200));
+  
+      // GSAP animation for scaling/stretching when scrolling up
+      gsap.to([infoBoxLink1Text, infoBoxLink2Text], {
+        scaleY: scaleFactor,
+        duration: 0.5,
+        ease: "power2.out",
+      });
+    } else {
+      // Do nothing when scrolling down, no changes to scale
+      return;
+    }
+  
+    // Reset scale after a short delay using a debounced callback
+    clearTimeout(slide2.resetScaleTimeout);
+    slide2.resetScaleTimeout = setTimeout(() => {
+      gsap.to([infoBoxLink1Text, infoBoxLink2Text], {
+        scaleY: 1,
+        duration: 0.7,
+        ease: "power2.out",
+      });
+    }, 150);
+  }
+  
+
+  slide2.addEventListener("scroll", () => {
+    if (!scrollRAF) {
+      scrollRAF = requestAnimationFrame(() => {
+        handleSlide2Scroll();
+        scrollRAF = null;
+      });
+    }
+  });
+
+  // Visibility toggle functions and event listeners
+  function toggleVisibility() {
+    document.querySelectorAll(".slide-2-button").forEach(button => {
+      if (button.id !== "demo") {
+        button.classList.toggle("visible");
+        button.classList.toggle("invisible");
+      }
+    });
+  }
+
+  function addClickListener(id, callback) {
+    const element = document.getElementById(id);
+    if (element) {
+      element.addEventListener("click", callback);
+    } else {
+      console.warn(`Element with ID '${id}' not found.`);
+    }
+  }
+
+  // Handle visibility toggle for button-box-link-3-contact
+  addClickListener("button-box-link-3-contact", toggleVisibility);
+
+  // Handle call + visibility toggle for contact-2
+  addClickListener("contact-2", function() {
+    toggleVisibility();
+    setTimeout(() => {
+      window.location.href = "tel:+49152-28817386";
+    }, 100);
+  });
+
+  // Handle email + visibility toggle for contact-3
+  addClickListener("contact-3", function() {
+    toggleVisibility();
+    setTimeout(() => {
+      window.location.href = "mailto:contact@moonbow.online";
+    }, 100);
+  });
+
+  function createModalInstance() {
+    const template = document.getElementById('modalTemplate');
+    const modalContent = document.importNode(template.content, true);
+    const modalElement = modalContent.querySelector('.modal-popup');
+    modalElement.dataset.instanceId = Date.now();
+    
+    const container = document.querySelector('.slider-wrapper .slide2 .image-section');
+    if (container) {
+      container.appendChild(modalContent);
+    } else {
+      console.error("Container not found");
+    }
+    
+    const modalInstance = new DemoModal(modalElement);
+    return modalInstance;
+  }
+
+  const scheduleDemoBtn = document.getElementById("slide2DemoButton");
+  scheduleDemoBtn.addEventListener("click", () => {
+    const modalInstance = createModalInstance();
+    modalInstance.open();
+  });
+
+
+
+
+
+const lenis = new Lenis({
+  duration: 1.2,  // Adjusts speed (higher = slower)
+  easing: (t) => 1 - Math.pow(1 - t, 3),
+  smooth: true,
+  smoothTouch: false,
+  wrapper: slide2,  // 👈 Apply only to slide2
+  content: slide2,  // 👈 Set the scrollable content
+  gestureOrientation: "vertical", // 👈 Only allow vertical scroll
+});
+
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
+
+
+
+
+
 });

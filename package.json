@@ -1,8 +1,10 @@
 {
   "dependencies": {
+    
     "animejs": "^3.2.2",
     "firebase": "^11.5.0",
-    "gsap": "^3.12.7"
+    "gsap": "^3.12.7",
+    "lenis": "^1.2.3"
   },
   "name": "moonbow.github.io",
   "version": "1.0.0",
@@ -12,8 +14,10 @@
     "start": "webpack serve --mode development",
     "build": "webpack --mode production",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
-    
+    "deploy": "gh-pages -d dist",
+    "test": "webpack --config webpack.config.js --mode production"
+
+
   },
   "repository": {
     "type": "git",

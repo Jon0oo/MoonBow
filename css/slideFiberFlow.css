@@ -9,7 +9,19 @@
 
 
 
-
+  :root {
+    --primary: #74aa57;
+    --primary-dark: #53793f;
+    --primary-darkest: #3f5d2f;
+    --text: #FFFFFF;
+    --text-opacity: 1;
+    --success: #2B3044;
+    --success-scale: .2;
+    --success-opacity: 0;
+    --border-radius: 7;
+    /* Add any others you need */
+  }
+  
 
   .slide1 {
     
@@ -187,6 +199,9 @@
       overflow: visible;
   }
 
+  .slide1 .validation-message{
+    color:black !important;
+  }
 
 
 
@@ -632,33 +647,33 @@
   cursor: pointer;
 }
 
-#scheduleDemoPopupH2{
+.modal-popup h2{
   font-size: 33px;
 }
 
-#scheduleDemoPopupP{
+.modal-popup p{
   color:black;
   margin-top: 3rem;
 }
 
-#scheduleDemoPopup .modal-content form {
+.modal-popup .modal-content form {
   display: flex;
   flex-direction: column;
   gap: 3rem; /* space between items, adjust as needed */
   align-items: stretch; /* makes items use the full width available */
 }
 
-#scheduleDemoPopup .modal-content form label,
-#scheduleDemoPopup .modal-content form input,
-#scheduleDemoPopup .modal-content form button {
+.modal-popup .modal-content form label,
+.modal-popup .modal-content form input,
+.modal-popup .modal-content form button {
   width: 20%;
   text-align: left; /* change to center if you prefer */
 }
 
 
 
-#scheduleDemoForm input, 
-#scheduleDemoForm textarea {
+.scheduleDemoForm input, 
+.scheduleDemoForm textarea {
   position: relative;
   border: none;
   font-size: 16px;
@@ -676,7 +691,7 @@
   width: 100%;
 }
 
-.input-wrapper::after {
+.slide1 .input-wrapper::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -696,8 +711,12 @@
   width: 100%;
 }
 
+.slide1 .scheduleDemoForm{
+  caret-color: rgb(0, 0, 0);
+}
+
 /* Remove extra styling for telephone inputs */
-#scheduleDemoForm input[type="tel"] {
+.scheduleDemoForm input[type="tel"] {
   -webkit-appearance: none; /* Remove default styling on WebKit browsers */
   -moz-appearance: none;
   appearance: none;
@@ -705,22 +724,34 @@
 }
 
 
+.slide1 .product-toggle{
+  transition: transform 0.4s ease;
+}
+.slide1 .product-toggle:hover {
+  
+  box-shadow: 0 0 50px rgba(3, 3, 3, 0.651); /* Increased shadow on hover */
+  transform: translateY(-3px); /* Slightly lift the button */
+}
+
+.slide1 .product-toggle:active {
+  
+  transform: translateY(1px); /* Slightly lift the button */
+}
 
 
 
 
-
-#scheduleDemoPopup .modal-content form button{
+.modal-popup .modal-content form button{
   width:25%;
   text-align: center;
 }
 
 
-#scheduleDemoPopupH2{
+.modal-popup h2{
   font-size: 30px;
 }
 
-#scheduleDemoForm {
+.scheduleDemoForm {
   display: flex;
   flex-direction: column; /* Stack form entries vertically */
   gap: 15px; /* Space between form entries */
@@ -849,6 +880,9 @@ margin:0px !important;
   top: 27%;
 }
 
+.slide1 .pdemo{
+  color:black !important;
+}
 
 
 /*begin paperplane css */

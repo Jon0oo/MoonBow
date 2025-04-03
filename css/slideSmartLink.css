@@ -1,4 +1,17 @@
 /* Image container: fills the viewport */
+
+
+.slide2 {
+  height: 100vh; /* Take full screen height */
+  overflow-y: auto; /* Enable vertical scrolling */
+  scroll-behavior: auto; /* Disable browser’s built-in smooth scroll */
+  -webkit-overflow-scrolling: touch; /* Improve touch scrolling */
+}
+
+
+
+
+
 .slide2 .image-section {
     position: relative;
     width: 100vw;
@@ -19,92 +32,16 @@
 
     overflow: hidden;
 
-    height: 300vh;
+    height: fit-content;
+    
+
 
 }
 
-@media (max-aspect-ratio: 2) {
-  .slide2 .image-section-wrapper {
-    height: 250vh;
-  }
 
-}
 
-@media (max-aspect-ratio: 1.7) {
-  .slide2 .image-section-wrapper {
-    height: 200vh;
-  }
-}
 
-@media (max-aspect-ratio: 1.41) {
-  .slide2 .image-section-wrapper {
-    height: 150vh;
-  }
-}
-
-@media (max-aspect-ratio: 1.11) {
-  .slide2 .image-section-wrapper {
-    height: 130vh;
-  }
-}
-
-@media (max-aspect-ratio: 0.97) {
-  .slide2 .image-section-wrapper {
-    height: 115vh;
-  }
-}
-
-@media (max-aspect-ratio: 0.82) {
-  .slide2 .image-section-wrapper {
-    height: 100vh;
-  }
-}
-
-@media (max-aspect-ratio: 0.76) {
-  .slide2 .image-section-wrapper {
-    height: 90vh;
-  }
-}
-
-@media (max-aspect-ratio: 0.68) {
-  .slide2 .image-section-wrapper {
-    height: 90vh;
-  }
-
-  .slide2 .image-section{
-    width: 120%;
-  }
-}
-
-@media (max-aspect-ratio: 0.57) {
-  .slide2 .image-section-wrapper {
-    height: 86vh;
-  }
-}
-
-@media (max-aspect-ratio: 0.47) {
-  .slide2 .image-section-wrapper {
-    height: 84vh;
-  }
-}
-
-@media (max-aspect-ratio: 0.40) {
-  .slide2 .image-section-wrapper {
-    height: 73vh;
-  }
-}
-
-@media (max-aspect-ratio: 0.33) {
-  .slide2 .image-section-wrapper {
-    height: 70vh;
-  }
-}
-
-@media (max-aspect-ratio: 0.27) {
-  .slide2 .image-section-wrapper {
-    height: 68vh;
-  }
-}
+  
 
 
 
@@ -251,10 +188,11 @@
 
 
   .slide2 .info-box-link-1,
-  .slide2 .info-box-link-2{
+  .slide2 .info-box-link-2,
+  .slide2 .info-box-link-3{
 
     position: absolute;
-    background-color: rgba(255, 255, 255, 0.149);
+    background-color: rgba(255, 255, 255, 0.09);
     color: antiquewhite;
 
 
@@ -262,8 +200,8 @@
     border-radius: 10px;                         /* Optional: rounded corners */
     padding: 20px;                               /* Optional: inner spacing */
   /* Optional: add a backdrop blur effect for extra depth (works on modern browsers) */
-    -webkit-backdrop-filter: blur(8px); /* Safari support */
-    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(20px); /* Safari support */
+    backdrop-filter: blur(20px);
     
 
 
@@ -306,7 +244,218 @@
 
 
 
+
+.slide2 #button-box-link-3-contact{
+  position: absolute;
+
+  width: 100vw;
+
+  top:50%;
+
+}
+.slide2 #button-box-link-3-demo{
+  position: absolute;
+
+  width: 100vw;
+
+  top:75%;
+
+}
   
+
+
+
+.slide-2-button {
+  border: none;
+  width: 100vw;
+  height: fit-content;
+  display: inline-block;
+  justify-content: center;
+  align-content: center;
+  color: antiquewhite;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+  font-family: Gatwick;
+  font-weight: bolder;
+  border-radius: 10px;
+  position: relative;
+}
+
+/* Pseudo-element used for the slide effect */
+.slide-2-button:after {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 100%;
+  top: 0;
+  left: 0;
+  direction: rtl;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+  border-radius: 10px;
+}
+
+/* Hover state (existing behavior) */
+.slide-2-button:hover {
+  color: #000;
+}
+.slide-2-button:hover:after {
+  left: auto;
+  right: 0;
+  width: 100%;
+}
+
+/* Active click state for visual feedback */
+.slide-2-button:active {
+  top: 2px;
+}
+
+/* Styling for the text inside the button */
+.slide-2-button span {
+  position: relative;
+  z-index: 2;
+  mix-blend-mode: difference;
+  color: #fff;
+  transition: color 0.4s;
+  font-size: 200px;
+  
+}
+.slide-2-button .label-3 {
+  
+  text-align: start;
+}
+.slide-2-button .label-4 {
+  
+  text-align: end;
+}
+
+/* Hide the extra info by default */
+.slide-2-button .label {
+  opacity: 1;
+  display:block;
+  transition: opacity 0s ease;
+  text-align: center;
+}
+.slide-2-button .info {
+  text-align: start;
+  opacity: 0;
+  display:none;
+  transition: opacity 0.3s ease;
+}
+.slide-2-button.invisible{
+  opacity: 0;
+  display: none !important;
+}
+
+.slide-2-button.visible{
+  opacity: 1;
+  display: block;
+}
+
+#contact-3 {
+  display: flex;
+  align-content: start;
+  flex-direction: column;
+  }
+#contact-2 {
+  display: flex;
+  justify-content: start;
+  
+}
+
+#demo{
+  display:inline-block !important;
+}
+
+
+
+.slide2 .image-section .modal-content{
+  background-color: #fff0;  
+  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
+}
+.slide2 .modal-content{
+  color:rgb(255, 255, 255);
+}
+
+.slide2 .pdemo{
+  color:rgb(255, 255, 255) !important;
+}
+.slide2 .validation-message{
+  color:rgb(255, 255, 255) !important;
+}
+.slide2 .image-section p {
+  font-size: 1.25rem;
+}
+
+
+
+
+.slide2 .input-wrapper::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  
+  
+  height: 2px;          /* Thickness of the underline */
+  background: rgb(255, 255, 255);
+  transition: width 0.3s ease-in-out;
+
+  left: 0%;
+  width: 20%;
+}
+
+
+.slide2 .form-group{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.slide2 .modal-popup .modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  align-items: stretch;
+}
+
+.slide2 .input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.slide2 .input-wrapper:hover::after,
+.slide2 .input-wrapper:focus-within::after {
+  width: 100%;
+}
+
+.slide2 .scheduleDemoForm{
+  caret-color: rgb(255, 255, 255);
+}
+
+
+
+
+
+.slide2 .product-toggle{
+  transition: transform 0.4s ease;
+}
+.slide2 .product-toggle:hover {
+  
+  box-shadow: 0 0 50px rgba(255, 255, 255, 0.475); /* Increased shadow on hover */
+  transform: translateY(-3px); /* Slightly lift the button */
+}
+
+.slide2 .product-toggle:active {
+  
+  transform: translateY(1px); /* Slightly lift the button */
+}
+
+
 
 
 
@@ -598,7 +747,60 @@
 
   }
 
+@media(max-width:2010px){
 
+  .slide-2-button span{
+    font-size: 180px;
+  }
+}
+@media(max-width:1850px){
+
+  .slide-2-button span{
+    font-size: 160px;
+  }
+}
+@media(max-width:1630px){
+
+  .slide-2-button span{
+    font-size: 140px;
+  }
+}
+@media(max-width:1420px){
+
+  .slide-2-button span{
+    font-size: 120px;
+  }
+}
+@media(max-width:1220px){
+
+  .slide-2-button span{
+    font-size: 110px;
+  }
+}
+@media(max-width:1110px){
+
+  .slide-2-button span{
+    font-size: 95px;
+  }
+}
+@media(max-width:999px){
+
+  .slide-2-button span{
+    font-size: 90px;
+  }
+}
+@media(max-width:910px){
+
+  .slide-2-button span{
+    font-size: 80px;
+  }
+}
+@media(max-width:800px){
+
+  .slide-2-button span{
+    font-size: 75px;
+  }
+}
   
 
 

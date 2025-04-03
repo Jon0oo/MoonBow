@@ -37,6 +37,9 @@ button {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    padding:20px;
+
+    
   }
   
   .demo-request {
@@ -44,11 +47,24 @@ button {
     padding: 15px;
     border-radius: 8px;
     background-color: #f9f9f9;
+    width: 100%;
+
+
+
+    
+  }
+
+
+  .name-wrapper{
+    max-width: 50vw;
   }
   
   .demo-request h3 {
     margin: 0;
     font-size: 1.5rem;
+
+    word-wrap: break-word;       /* For older browsers */
+    overflow-wrap: break-word;
   }
   
   .demo-request p {
@@ -64,7 +80,67 @@ button {
     margin-top: 10px;
   }
   
-  button.update-status:hover {
+  button.update-status-pending:hover {
+    background-color: #ba1717;
+  }
+  button.update-status-working:hover {
+    background-color: #de6b12;
+  }
+  button.update-status-done:hover {
     background-color: #28a745;
+  }
+
+  .demo-request-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+    table-layout: fixed; /* Forces fixed column widths */
+    
+  }
+  
+  .demo-request-table td {
+    padding: 8px 5px;
+    line-break:anywhere;
+  }
+  
+  .demo-request-table td.label {
+    width: 150px; /* Adjust as needed */
+    text-align: left;
+    font-weight: bold;
+  }
+  
+  .demo-request-table td.value {
+    text-align: left;
+  }
+  
+  
+
+  #labelMessage{
+    line-break: auto !important;
+  }
+  
+  .demo-request-header {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .status-stripe {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30vw;
+    height: 100%;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+
+    max-height: 38px;
+
+    right: -15px;
+  }
+  
+  .tbody .tr{
+    max-width: 90vw;
   }
   

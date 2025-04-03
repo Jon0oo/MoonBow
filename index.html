@@ -237,24 +237,6 @@
 
                         
                     </div>
-                    
-    
-                  
-                
-              
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             </div>
 
@@ -270,121 +252,73 @@
               
           </div>
             
-                <!-- Modal popup markup, placed near the end of the body -->
-                <div id="scheduleDemoPopup" class="modal-popup" role="dialog" aria-modal="true" aria-hidden="true">
-                  <div class="modal-content">
-                    <button class="modal-close" aria-label="Close">&times;</button>
-                    <h2 id="scheduleDemoPopupH2">Get your Demo in 1 Minute</h2>
-
-                    <p id="scheduleDemoPopupP">Select what you're interested in</p>
-
-                    <div class="product-selection"role="group" aria-required="true">
-
-                      
-
-                      <button class="product-toggle active" data-product="product1">
-                        <span class="product-selection-span">FiberFlow</span>
-                      </button>
-                      <button class="product-toggle" data-product="product2">
-                        <span class="product-selection-span">SmartLink</span>
-                        </button>
-                      <button class="product-toggle" data-product="product3">
-                        <span class="product-selection-span">FastIT</span>
-                        </button>
-                      <button class="product-toggle" data-product="product4">
-                        <span class="product-selection-span">FactoryIT</span>
-                        </button>
-                    </div>
-                    
-                  <div class="validation-message-wrapper" id="productValidationMessageWrapper">
-                    <p class="validation-message" id="productValidationMessage" >
-                      Please select at least one product
-                    </p>
-                  </div>
-
-
-                    <form id="scheduleDemoForm">
-                      <div class="form-group">
-                        <label for="fullName">Full Name:</label>
-                        <div class="input-wrapper">
-                          <input type="text" 
-                                 id="fullName" 
-                                 name="fullName" 
-                                 required 
-                                 oninvalid="this.setCustomValidity('Please enter your full name')"
-                                 oninput="this.setCustomValidity('')">
-                        </div>
-                      </div>
-                    
-                      <div class="form-group">
-                        <label for="company">Company</label>
-                        <div class="input-wrapper">
-                          <input type="text" 
-                                 id="company" 
-                                 name="company" 
-                                 required
-                                 oninvalid="this.setCustomValidity('Please enter your company name')"
-                                 oninput="this.setCustomValidity('')">
-                        </div>
-                      </div>
-                    
-                      <div class="form-group">
-                        <label for="email">Email:</label>
-                        <div class="input-wrapper">
-                          <input type="email" 
-                                 id="email" 
-                                 name="email" 
-                                 required
-                                 oninvalid="this.setCustomValidity('Please enter a valid email address')"
-                                 oninput="this.setCustomValidity('')">
-                        </div>
-                      </div>
-                    
-                      <div class="form-group">
-                        <label for="phone">Phone:</label>
-                        <div class="input-wrapper">
-                        <input type="tel" id="phone" name="phone">
-                      </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label for="demo-message">Want to say more?</label>
-                        <div class="input-wrapper">
-                        <textarea id="demo-message" name="demo-message" rows="4" ></textarea>
-                      </div>
-                      </div>
-
-                      
-                    
-                      <button type="submit" class="button-sent-demo-request">
-                        <span class="default">Send</span>
-                        <span class="success">Sent, you'll hear from us</span>
-                        <div class="left"></div>
-                        <div class="right"></div>
-                    </button>
-                    
-                  
-                    
-
-
-
-
-
-
-
-                      
-                    </form>
-                    
-
-
-
-                    
-
-
-
-
-                  </div>
+          <template id="modalTemplate">
+            <div class="modal-popup" role="dialog" aria-modal="true" aria-hidden="true">
+              <div class="modal-content">
+                <button class="modal-close" aria-label="Close">&times;</button>
+                <h2>Get your Demo in 1 Minute</h2>
+                <p class="pdemo">Select what you're interested in</p>
+                <div class="product-selection" role="group" aria-required="true">
+                  <button class="product-toggle active" data-product="product1">
+                    <span class="product-selection-span">FiberFlow</span>
+                  </button>
+                  <button class="product-toggle" data-product="product2">
+                    <span class="product-selection-span">SmartLink</span>
+                  </button>
+                  <button class="product-toggle" data-product="product3">
+                    <span class="product-selection-span">FastIT</span>
+                  </button>
+                  <button class="product-toggle" data-product="product4">
+                    <span class="product-selection-span">FactoryIT</span>
+                  </button>
                 </div>
+                <div class="validation-message-wrapper" id="productValidationMessageWrapper">
+                  <p class="validation-message" id="productValidationMessage">
+                    Please select at least one product
+                  </p>
+                </div>
+                <form class="scheduleDemoForm">
+                  <div class="form-group">
+                    <label for="fullName">Full Name:</label>
+                    <div class="input-wrapper">
+                      <input type="text" name="fullName" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="company">Company:</label>
+                    <div class="input-wrapper">
+                      <input type="text" name="company" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email:</label>
+                    <div class="input-wrapper">
+                      <input type="email" name="email" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="phone">Phone:</label>
+                    <div class="input-wrapper">
+                      <input type="tel" name="phone">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="demo-message">Want to say more?</label>
+                    <div class="input-wrapper">
+                      <textarea name="demo-message" rows="4"></textarea>
+                    </div>
+                  </div>
+                  <button type="submit" class="button-sent-demo-request">
+                    <span class="default">Send</span>
+                    <span class="success">Sent, you'll hear from us</span>
+                    <div class="left"></div>
+                    <div class="right"></div>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </template>
+          
                             
             
 
@@ -590,7 +524,43 @@
 
 
 
+          
 
+          
+          
+          <div class="button-box-link-3" id="button-box-link-3-contact">
+            <button type="button" class="slide-2-button visible" id="contact-1">
+              <span class="label">Contact Us</span>
+            </button>
+            
+            <button type="button" class="slide-2-button invisible" id="contact-2">
+              <span class="label-2">Call: +49 152-28817386</span>
+              
+            </button>
+            
+
+             
+            <button type="button" class="slide-2-button invisible" id="contact-3">
+              <span class="label-3">| Email:   contact@</span>
+              <span class="label-4"> moonbow.online</span>
+              
+            </button>
+            
+          </div>
+          
+
+            <div class="button-box-link-3" id="button-box-link-3-demo">
+              <button type="button" class="slide-2-button" id="slide2DemoButton">
+                <span>Schedule Demo</span>
+              </button>
+            </div>
+        
+          
+          
+
+
+            
+          
 
 
           
@@ -643,6 +613,7 @@
                 <a href="/privacy">Privacy Policy</a>
                 <a href="/terms">Terms of Service</a>
                 <a href="/contact">Contact Us</a>
+                <a id="loginLink" href="#">Login</a>
               </nav>
             </div>
           </footer> 
@@ -652,11 +623,11 @@
       <!-- Slide 3 -->
       <div class="slide slide3" id="slide3" >
         <div class="image-section">
+          <img class="img-slide-3" src="images/backgroundFastIt.jpeg" alt="slide3">
           
         </div>
         <div class="content-section">
-          <h1>Slide 3 Title</h1>
-          <p>Interesting facts or text for Slide 3.</p>
+          
         </div>
       </div>
 

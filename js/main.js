@@ -22,8 +22,8 @@ if (!baseTag) {
     baseTag = document.createElement('base');
     document.head.appendChild(baseTag);
 }
-// Setzen der href-Eigenschaft des <base>-Tags auf das MoonBow-Verzeichnis
-baseTag.href = '/MoonBow/';
+// 
+baseTag.href = '/';
 
 
 
@@ -40,8 +40,8 @@ document.addEventListener('DOMContentLoaded', function () {
     
         const loginLink = document.getElementById("loginLink");
         if (loginLink) {
-          const basePath = window.location.pathname.includes("/MoonBow/") ? "/MoonBow" : "";
-          loginLink.href = `${basePath}/html/signin.html`;
+         
+          loginLink.href = `/html/signin.html`;
         }
       
       
@@ -141,7 +141,7 @@ function setupDropdownSlideNavigation() {
             const slideId = link.getAttribute('data-slide');
 
             // Ensure the base path is correct for MoonBow
-            const basePath = "/MoonBow/";
+            const basePath = "/";
 
             // Check if we are NOT already on the homepage
             if (!window.location.pathname.startsWith(basePath) || 
