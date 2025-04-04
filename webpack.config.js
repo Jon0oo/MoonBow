@@ -7,12 +7,12 @@ module.exports = {
     main: './js/main.js',
 
     
-    firebaseConfig: './js/firebaseConfig.js',
-    demoRequests: './js/demoRequests.js',
-    firebaseHelpers: './js/firebaseHelpers.js',
+    //firebaseConfig: './js/firebaseConfig.js',
+    //demoRequests: './js/demoRequests.js',
+    //firebaseHelpers: './js/firebaseHelpers.js',
    
     slide1: './js/slide1.js',
-    modalComponent: './js/modalComponent.js',
+    //modalComponent: './js/modalComponent.js',
 
     slide2: './js/slide2.js',
     slide3: './js/slide3.js',
@@ -82,7 +82,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'index.html',
       filename: 'index.html',
-      chunks: ['main', 'firebaseConfig', 'firebaseHelpers', 'modalComponent', 'demoRequests', 'slide1', 'slide2', 'slide3', 'slide4'],
+      chunks: ['main',  'slide1', 'slide2', 'slide3', 'slide4'],
       favicon: 'images/favicon.ico',
       minify: {
         html5                          : true,
@@ -161,7 +161,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'html/signin.html'),
       filename: 'html/signin.html',
-      chunks: ['main',  'firebaseConfig', 'signin'],
+      chunks: ['main', 'signin'],
       minify: {
         html5                          : true,
         collapseWhitespace             : true,
@@ -187,7 +187,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'html/admin.html'),
       filename: 'html/admin.html',
-      chunks: ['main', 'firebaseConfig', 'admin' ],
+      chunks: ['main',  'admin' ],
 
       minify: {
         html5                          : true,

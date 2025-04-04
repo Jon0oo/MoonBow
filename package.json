@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    
     "animejs": "^3.2.2",
     "firebase": "^11.5.0",
     "gsap": "^3.12.7",
@@ -14,9 +13,7 @@
     "start": "webpack serve --mode development",
     "build": "webpack --mode production",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
-    "test": "webpack --config webpack.config.js --mode production"
-
+    "deploy": "npm run build && cpy CNAME dist/ && gh-pages -d dist"
 
   },
   "repository": {
@@ -36,6 +33,7 @@
     "@babel/preset-react": "^7.26.3",
     "autoprefixer": "^10.4.21",
     "babel-loader": "^10.0.0",
+    "cpy-cli": "^5.0.0",
     "css-loader": "^7.1.2",
     "gh-pages": "^6.3.0",
     "html-loader": "^5.1.0",

@@ -2,7 +2,17 @@ import { gsap } from "gsap"; // assuming gsap is bundled via Parcel or similar
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CustomEase } from "gsap/CustomEase";
 
-import DemoModal from "./modalComponent.js";
+function loadModalComponent() {
+  // Return the promise so the caller can use the loaded module
+  return import(/* webpackChunkName: "modalComponent", webpackPrefetch: true */ './modalComponent.js')
+    .then(module => {
+      // Assuming the modal component exports a class or function (DemoModal)
+      return module.default;
+    })
+    .catch(error => {
+      console.error("Error loading modal component:", error);
+    });
+}
 
 gsap.registerPlugin(ScrollTrigger, CustomEase);
 
@@ -180,36 +190,36 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
- 
-
-
-  function createModalInstance() {
-  // Grab and clone the template
-  const template = document.getElementById('modalTemplate');
-  const modalContent = document.importNode(template.content, true);
-  // Get the root modal element from the cloned content
-  const modalElement = modalContent.querySelector('.modal-popup');
-  // Optionally assign a unique identifier
-  modalElement.dataset.instanceId = Date.now();
+  // Function to create a modal instance
+  function createModalInstance(DemoModal) {
+    // Grab and clone the template
+    const template = document.getElementById('modalTemplate');
+    const modalContent = document.importNode(template.content, true);
+    // Get the root modal element from the cloned content
+    const modalElement = modalContent.querySelector('.modal-popup');
+    // Optionally assign a unique identifier
+    modalElement.dataset.instanceId = Date.now();
   
-  // Instead of appending to body, append to the specific container:
-  const container = document.querySelector('.slider-wrapper .slide1 .content-section .content-wrapper');
-  if (container) {
-    container.appendChild(modalContent);
-  } else {
-    console.error("Container not found");
-  }
+    // Instead of appending to body, append to the specific container:
+    const container = document.querySelector('.slider-wrapper .slide1 .content-section .content-wrapper');
+    if (container) {
+      container.appendChild(modalContent);
+    } else {
+      console.error("Container not found");
+    }
   
-  // Create a new DemoModal instance for this modalElement
-  const modalInstance = new DemoModal(modalElement);
-  return modalInstance;
+    // Create a new DemoModal instance for this modalElement using the lazy-loaded module
+    const modalInstance = new DemoModal(modalElement);
+    return modalInstance;
   }
 
-  // Example: Create and open a modal instance when a button is clicked
   const scheduleDemoBtn = document.querySelector(".schedule-demo-btn");
   scheduleDemoBtn.addEventListener("click", () => {
-  const modalInstance = createModalInstance();
-  modalInstance.open();
+    loadModalComponent().then(DemoModal => {
+      if (DemoModal) {
+        const modalInstance = createModalInstance(DemoModal);
+        modalInstance.open();
+      }
+    });
   });
-
 });

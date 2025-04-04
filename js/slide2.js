@@ -2,12 +2,20 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import { CustomEase } from "gsap/CustomEase";
-import Lenis from 'lenis'
-
-
-import DemoModal from "./modalComponent.js";
+import Lenis from 'lenis';
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin, CustomEase);
+
+//
+// Lazy-load DemoModal (formerly imported statically)
+//
+function loadModalComponent() {
+  return import(/* webpackChunkName: "modalComponent", webpackPrefetch: true */ './modalComponent.js')
+    .then(module => module.default)
+    .catch(error => {
+      console.error("Error loading modal component:", error);
+    });
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   // Cache DOM elements
@@ -20,7 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const infoBoxLink2Text = document.getElementById("info-box-link-2-text");
   const imageSectionWrapper = document.querySelector('.image-section-wrapper');
   const contentSection = document.querySelector('.slide2 .content-section');
-
 
   let timeline;
   let scrollRAF; // for scroll throttling
@@ -111,45 +118,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initialize image section animation with debouncing on resize
   function initImageSectionAnimation() {
-
-
     // Kill any existing ScrollTrigger on imageSectionAnimation
     const existingTrigger = ScrollTrigger.getById("imageSectionAnimation");
     if (existingTrigger) {
       existingTrigger.kill();
     }
 
-    
     if (window.innerWidth < 1000) {
-
-        
       // If screen width is below 1000px, apply a permanent zoom effect.
       // Adjust scale value if width drops below 800px.
       if (window.innerWidth < 800) {
-        
-
-
-
-
-        
-
+        // Add adjustments if needed
       } else {
-        
-
-
-        
-
+        // Add adjustments if needed
       }
       // Optionally, you can reset any Y translation if needed:
       gsap.set(imageSection, { y: 0 });
     } else {
       // Otherwise, use your scroll-triggered animation
-      
-
-
-
-
-
       // Reset any permanent scale if necessary (or set it to 1)
       gsap.set(imageSection, { scale: 1, transformOrigin: "center bottom" });
     }
@@ -196,7 +182,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 150);
   }
   
-
   slide2.addEventListener("scroll", () => {
     if (!scrollRAF) {
       scrollRAF = requestAnimationFrame(() => {
@@ -244,7 +229,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 100);
   });
 
-  function createModalInstance() {
+  // Function to create a modal instance using the lazy-loaded DemoModal
+  function createModalInstance(DemoModal) {
     const template = document.getElementById('modalTemplate');
     const modalContent = document.importNode(template.content, true);
     const modalElement = modalContent.querySelector('.modal-popup');
@@ -261,34 +247,30 @@ document.addEventListener("DOMContentLoaded", () => {
     return modalInstance;
   }
 
+  // Update the event listener to lazy-load the modal component
   const scheduleDemoBtn = document.getElementById("slide2DemoButton");
   scheduleDemoBtn.addEventListener("click", () => {
-    const modalInstance = createModalInstance();
-    modalInstance.open();
+    loadModalComponent().then(DemoModal => {
+      if (DemoModal) {
+        const modalInstance = createModalInstance(DemoModal);
+        modalInstance.open();
+      }
+    });
   });
 
+  const lenis = new Lenis({
+    duration: 1.2,  // Adjusts speed (higher = slower)
+    easing: (t) => 1 - Math.pow(1 - t, 3),
+    smooth: true,
+    smoothTouch: false,
+    wrapper: slide2,  // 👈 Apply only to slide2
+    content: slide2,  // 👈 Set the scrollable content
+    gestureOrientation: "vertical", // 👈 Only allow vertical scroll
+  });
 
-
-
-
-const lenis = new Lenis({
-  duration: 1.2,  // Adjusts speed (higher = slower)
-  easing: (t) => 1 - Math.pow(1 - t, 3),
-  smooth: true,
-  smoothTouch: false,
-  wrapper: slide2,  // 👈 Apply only to slide2
-  content: slide2,  // 👈 Set the scrollable content
-  gestureOrientation: "vertical", // 👈 Only allow vertical scroll
-});
-
-function raf(time) {
-  lenis.raf(time);
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
   requestAnimationFrame(raf);
-}
-requestAnimationFrame(raf);
-
-
-
-
-
 });
