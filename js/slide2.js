@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
       gsap.set(imageSection, { scale: 1, transformOrigin: "center bottom" });
     }
   }
-      
+
   initImageSectionAnimation();
   window.addEventListener('resize', debounce(initImageSectionAnimation, 100));
 
@@ -148,18 +148,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const currentScrollTop = slide2.scrollTop;
     const isScrollingUp = currentScrollTop < lastScrollTop;  // Check if scrolling up
     lastScrollTop = currentScrollTop;
-  
+
     if (isScrollingUp) {
       // Set transform origin to "top center" when scrolling up
       const origin = "top center";
       infoBoxLink1Text.style.transformOrigin = origin;
       infoBoxLink2Text.style.transformOrigin = origin;
-  
+
       // Calculate scale factor within desired bounds
       const minScale = 1;
       const maxScale = 1.1;
       const scaleFactor = Math.min(maxScale, Math.max(minScale, 1 + currentScrollTop / 1200));
-  
+
       // GSAP animation for scaling/stretching when scrolling up
       gsap.to([infoBoxLink1Text, infoBoxLink2Text], {
         scaleY: scaleFactor,
@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Do nothing when scrolling down, no changes to scale
       return;
     }
-  
+
     // Reset scale after a short delay using a debounced callback
     clearTimeout(slide2.resetScaleTimeout);
     slide2.resetScaleTimeout = setTimeout(() => {
@@ -181,7 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }, 150);
   }
-  
+
   slide2.addEventListener("scroll", () => {
     if (!scrollRAF) {
       scrollRAF = requestAnimationFrame(() => {
@@ -194,7 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Visibility toggle functions and event listeners
   function toggleVisibility() {
     document.querySelectorAll(".slide-2-button").forEach(button => {
-      if (button.id !== "demo") {
+      if (button.id !== "slide2DemoButton") {
         button.classList.toggle("visible");
         button.classList.toggle("invisible");
       }
@@ -258,19 +258,51 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  const lenis = new Lenis({
-    duration: 1.2,  // Adjusts speed (higher = slower)
-    easing: (t) => 1 - Math.pow(1 - t, 3),
-    smooth: true,
-    smoothTouch: false,
-    wrapper: slide2,  // 👈 Apply only to slide2
-    content: slide2,  // 👈 Set the scrollable content
-    gestureOrientation: "vertical", // 👈 Only allow vertical scroll
-  });
+  // Conditionally initialize Lenis based on screen width
+  const isMobile = window.innerWidth <= 600;
 
+  // Move raf function definition outside
   function raf(time) {
-    lenis.raf(time);
+    if (lenis) {  // Add check to ensure lenis exists
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+  }
+
+  let lenis = null;
+  if (!isMobile) {
+    lenis = new Lenis({
+      duration: 1.2,  // Adjusts speed (higher = slower)
+      easing: (t) => 1 - Math.pow(1 - t, 3),
+      smooth: true,
+      smoothTouch: false,
+      wrapper: slide2,  // 👈 Apply only to slide2
+      content: slide2,  // 👈 Set the scrollable content
+      gestureOrientation: "vertical", // 👈 Only allow vertical scroll
+    });
+
     requestAnimationFrame(raf);
   }
-  requestAnimationFrame(raf);
+
+  // Resize listener to adjust scroll settings based on screen size
+  window.addEventListener("resize", () => {
+    const isMobileNow = window.innerWidth <= 600;
+
+    if (isMobileNow && lenis) {
+      lenis.destroy(); // Destroy Lenis on mobile screens
+      lenis = null;
+    } else if (!isMobileNow && !lenis) {
+      // Reinitialize Lenis if it was previously disabled on mobile
+      lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => 1 - Math.pow(1 - t, 3),
+        smooth: true,
+        smoothTouch: false,
+        wrapper: slide2,
+        content: slide2,
+        gestureOrientation: "vertical",
+      });
+      requestAnimationFrame(raf);
+    }
+  });
 });

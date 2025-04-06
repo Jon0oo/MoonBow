@@ -456,7 +456,14 @@
 }
 
 
+.slide2 .scheduleDemoForm input{
+  color:white;
+}
 
+.slide2 .button-sent-demo-request {
+  
+  --success: #ffffff !important;
+}
 
 
 

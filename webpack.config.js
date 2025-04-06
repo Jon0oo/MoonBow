@@ -1,6 +1,9 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin'); 
+
 
 module.exports = {
   entry: {
@@ -61,9 +64,16 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        // Replace 'style-loader' with MiniCssExtractPlugin.loader to extract CSS into files
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
-      },
+        use: [
+            MiniCssExtractPlugin.loader,
+            {
+                loader: 'css-loader',
+                options: {
+                    //esModule: false, // disable ES modules to remove export {} from output
+                },
+            },
+        ],
+    },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
@@ -100,7 +110,7 @@ module.exports = {
         removeScriptTypeAttributes     : true,
         // Remove type="text/css" from style and link tags. 
         // Other type attribute values are left intact
-        removeStyleLinkTypeAttributese : true,
+        removeStyleLinkTypeAttributes : true,
         // Replaces the doctype with the short (HTML5) doctype
         useShortDoctype                : true
     }
@@ -126,7 +136,7 @@ module.exports = {
         removeScriptTypeAttributes     : true,
         // Remove type="text/css" from style and link tags. 
         // Other type attribute values are left intact
-        removeStyleLinkTypeAttributese : true,
+        removeStyleLinkTypeAttributes : true,
         // Replaces the doctype with the short (HTML5) doctype
         useShortDoctype                : true
     }
@@ -152,7 +162,7 @@ module.exports = {
         removeScriptTypeAttributes     : true,
         // Remove type="text/css" from style and link tags. 
         // Other type attribute values are left intact
-        removeStyleLinkTypeAttributese : true,
+        removeStyleLinkTypeAttributes : true,
         // Replaces the doctype with the short (HTML5) doctype
         useShortDoctype                : true
     }
@@ -178,7 +188,7 @@ module.exports = {
         removeScriptTypeAttributes     : true,
         // Remove type="text/css" from style and link tags. 
         // Other type attribute values are left intact
-        removeStyleLinkTypeAttributese : true,
+        removeStyleLinkTypeAttributes : true,
         // Replaces the doctype with the short (HTML5) doctype
         useShortDoctype                : true
     }
@@ -205,7 +215,7 @@ module.exports = {
         removeScriptTypeAttributes     : true,
         // Remove type="text/css" from style and link tags. 
         // Other type attribute values are left intact
-        removeStyleLinkTypeAttributese : true,
+        removeStyleLinkTypeAttributes : true,
         // Replaces the doctype with the short (HTML5) doctype
         useShortDoctype                : true
     }
@@ -216,6 +226,27 @@ module.exports = {
       filename: 'css/[name].css', // Creates a main.css file (and others if multiple entry points exist)
     }),
   ],
+
+  optimization: {
+    minimize: true,
+    minimizer: [
+      // Minify JavaScript
+      new TerserPlugin({
+        terserOptions: {
+          compress: {
+            drop_console: true,
+          },
+        },
+      }),
+  
+      // Minify CSS
+      // Comment out this line temporarily
+      //new CssMinimizerPlugin(),
+    ],
+  },
+  
+  
+
   devServer: {
     static: {
       directory: path.join(__dirname, 'dist'),

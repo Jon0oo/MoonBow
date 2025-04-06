@@ -85,3 +85,46 @@
 }
 
 
+
+
+
+@media (max-width: 1500px) {
+    .contentHistory {
+        width: 80vw; 
+        line-break: strict;
+    }
+    .container-head {
+        max-width: 100vw;
+    }
+    .container-sub {
+      max-width: 100vw;  
+    }
+}
+
+@media (max-width: 1000px) {
+    .container-sub {
+        font-size: 35px;
+    }
+  }
+@media (max-width: 800px) {
+    .container-head {
+        font-size: 30px;
+        
+    }
+    .container-sub {
+        font-size: 30px;
+        text-align: left;
+    }
+  }
+@media (max-width: 600px) {
+  .contentHistory {
+    width: 95vw;
+  }
+    .container-head {
+        font-size: 25px;
+    }
+    .container-sub {
+        font-size: 25px;
+    }
+  }
+    
