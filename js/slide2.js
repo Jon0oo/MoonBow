@@ -9,13 +9,22 @@ gsap.registerPlugin(ScrollTrigger, MotionPathPlugin, CustomEase);
 //
 // Lazy-load DemoModal (formerly imported statically)
 //
+let modalComponentPromise;
+
 function loadModalComponent() {
-  return import(/* webpackChunkName: "modalComponent", webpackPrefetch: true */ './modalComponent.js')
-    .then(module => module.default)
-    .catch(error => {
-      console.error("Error loading modal component:", error);
-    });
+  if (!modalComponentPromise) {
+    modalComponentPromise = import(
+      /* webpackChunkName: "modalComponent", webpackPrefetch: true */
+      './modalComponent.js'
+    )
+      .then(module => module.default)
+      .catch(error => {
+        console.error("Error loading modal component:", error);
+      });
+  }
+  return modalComponentPromise;
 }
+
 
 document.addEventListener("DOMContentLoaded", () => {
   // Cache DOM elements
@@ -32,6 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let timeline;
   let scrollRAF; // for scroll throttling
   let lastScrollTop = 0;
+  let isResizing = false; // flag for debouncing scroll events during resize
 
   // Debounce helper function
   const debounce = (fn, delay) => {
@@ -114,7 +124,17 @@ document.addEventListener("DOMContentLoaded", () => {
   setupPathAnimation();
 
   // Use debounced resize event for recalculating animations
-  window.addEventListener('resize', debounce(() => setupPathAnimation(true), 100));
+  window.addEventListener('resize', debounce(() => {
+    isResizing = true;
+    setupPathAnimation(true);
+    initImageSectionAnimation();
+    initParallaxEffects();
+    // Delay turning off the resizing flag and refresh ScrollTrigger instances
+    setTimeout(() => {
+      isResizing = false;
+      ScrollTrigger.refresh();
+    }, 300);
+  }, 100));
 
   // Initialize image section animation with debouncing on resize
   function initImageSectionAnimation() {
@@ -144,7 +164,99 @@ document.addEventListener("DOMContentLoaded", () => {
   initImageSectionAnimation();
   window.addEventListener('resize', debounce(initImageSectionAnimation, 100));
 
+  function initParallaxEffects() {
+    console.log('Initializing parallax effects...');
+  
+    // Debug: Log initial elements and dimensions
+    const imageSection = document.querySelector(".slide2 .image-section");
+    const contentSection = document.querySelector(".slide2 .content-section");
+    
+    console.log('Sections found:', {
+      imageSection: Boolean(imageSection),
+      contentSection: Boolean(contentSection),
+      scrollHeight: slide2.scrollHeight,
+      viewportHeight: slide2.clientHeight
+    });
+  
+    // Kill existing ScrollTriggers if any
+    ScrollTrigger.getAll().forEach(st => {
+      if (st.vars.id === "slide2Parallax") {
+        console.log('Killing existing ScrollTrigger:', st.vars.id);
+        st.kill();
+      }
+    });
+  
+    // Create ScrollTrigger for image section (slower scroll - 0.8x speed)
+    gsap.to(".slide2 .image-section", {
+      y: () => {
+        const distance = -(slide2.scrollHeight - slide2.clientHeight) * 0.01; // 10% of scroll distance
+        console.log('Image section scroll distance:', distance);
+        return distance;
+      },
+      ease: "none",
+      scrollTrigger: {
+        id: "slide2Parallax",
+        trigger: ".slide2",
+        scroller: ".slide2",
+        start: "1% top 2% top",
+        end: () => {
+          if (window.innerWidth < 700) {
+            return "130% bottom bottom";
+          } else if (window.innerWidth < 800) {
+            return "140% bottom bottom";
+          } else if (window.innerWidth < 900) {
+            return "150% bottom bottom";
+          } else if (window.innerWidth < 1024) {
+            return "200% bottom bottom";
+          } else {
+            return "220% bottom bottom";
+          }
+        },
+        scrub: 1,
+        //markers: true,
+      }
+    });
+  
+    // Create ScrollTrigger for content section (faster scroll - 2x speed)
+    gsap.to(".slide2 .content-section", {
+      y: () => {
+        const distance = -(slide2.scrollHeight - slide2.clientHeight) * 1; // Negative for opposite direction
+        console.log('Content section scroll distance:', distance);
+        return distance;
+      },
+      ease: "none",
+      scrollTrigger: {
+        id: "slide2Parallax",
+        trigger: ".slide2",
+        scroller: ".slide2",
+        start: "1% top 2% top",
+        end: () => {
+          if (window.innerWidth < 700) {
+            return "130% bottom bottom";
+          } else if (window.innerWidth < 800) {
+            return "140% bottom bottom";
+          } else if (window.innerWidth < 900) {
+            return "150% bottom bottom";
+          } else if (window.innerWidth < 1024) {
+            return "200% bottom bottom";
+          } else {
+            return "220% bottom bottom";
+          }
+        },
+        scrub: 1,
+        //markers:true,
+      }
+    });
+  
+    console.log('Parallax effects initialization complete');
+  }
+    
+  initParallaxEffects();
+  window.addEventListener('resize', debounce(initParallaxEffects, 100));
+
   function handleSlide2Scroll() {
+    if (isResizing) return; // ignore scroll events if resizing
+
     const currentScrollTop = slide2.scrollTop;
     const isScrollingUp = currentScrollTop < lastScrollTop;  // Check if scrolling up
     lastScrollTop = currentScrollTop;
@@ -167,7 +279,6 @@ document.addEventListener("DOMContentLoaded", () => {
         ease: "power2.out",
       });
     } else {
-      // Do nothing when scrolling down, no changes to scale
       return;
     }
 
@@ -236,7 +347,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const modalElement = modalContent.querySelector('.modal-popup');
     modalElement.dataset.instanceId = Date.now();
     
-    const container = document.querySelector('.slider-wrapper .slide2 .image-section');
+    const container = document.querySelector('.slider-wrapper .slide2 .content-section');
     if (container) {
       container.appendChild(modalContent);
     } else {
@@ -249,13 +360,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Update the event listener to lazy-load the modal component
   const scheduleDemoBtn = document.getElementById("slide2DemoButton");
+  // Create a variable to hold your modal instance globally
+  let modalInstance = null;
+
   scheduleDemoBtn.addEventListener("click", () => {
-    loadModalComponent().then(DemoModal => {
-      if (DemoModal) {
-        const modalInstance = createModalInstance(DemoModal);
-        modalInstance.open();
-      }
-    });
+    if (modalInstance) {
+      // If a modal instance exists, just open it again
+      modalInstance.open();
+    } else {
+      // Otherwise, lazy-load the modal component and create a new instance
+      loadModalComponent().then(DemoModal => {
+        if (DemoModal) {
+          modalInstance = createModalInstance(DemoModal);
+          modalInstance.open();
+        }
+      });
+    }
   });
 
   // Conditionally initialize Lenis based on screen width

@@ -1,823 +1,721 @@
-/* Image container: fills the viewport */
-
-
-.slide2 {
-  height: 100vh; /* Take full screen height */
-  overflow-y: auto; /* Enable vertical scrolling */
-  scroll-behavior: auto; /* Disable browser’s built-in smooth scroll */
-  -webkit-overflow-scrolling: touch; /* Improve touch scrolling */
-}
-
-
-
-
-
-.slide2 .image-section {
+/* ==================================================
+   Slide2 Container & Common Helpers
+   ================================================== */
+   .slide2 {
+    height: 100vh; /* Take full screen height */
+    overflow-y: auto; /* Enable vertical scrolling */
+    scroll-behavior: auto; /* Disable browser’s built-in smooth scroll */
+    -webkit-overflow-scrolling: touch; /* Improve touch scrolling */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Prevent user selection/dragging in image section & its children */
+  .image-section,
+  .image-section * {
+    user-select: none;
+    -webkit-user-drag: none; /* Safari/Chrome */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+  
+  /* ==================================================
+     Image Section & Wrappers
+     ================================================== */
+  .slide2 .image-section {
     position: relative;
     width: 100vw;
-    /* Remove fixed height so the container grows with the full image */
-    height: auto;
+    height: auto; /* Container grows with the full image */
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-
-
-    
-    
-}
-
-
-.slide2 .image-section-wrapper{
-
-    overflow: hidden;
-
-    height: fit-content;
-    
-
-
-}
-
-
-
-
+    will-change: transform;
+  }
   
-
-
-
-
-/* The image: fills the container completely */
-.slide2 .image-section img {
+  /* The image fills the container completely */
+  .slide2 .image-section img {
     width: 100%;
-    height: auto;
+    height: fit-content;
     object-fit: cover;
     display: block;
-    
-}
-
-/* Overlay content on the image */
-.slide2 header,
-.slide2 main {
+  }
+  
+  .slide2 .image-section-wrapper {
+    position: absolute;
+    height: 250vh;
+    overflow: hidden;
+  }
+  
+  /* ==================================================
+     Content Section & Wrappers
+     ================================================== */
+  .slide2 .content-section-wrapper {
+    position: absolute;
+    height: 250vh;
+  }
+  
+  .slide2 .content-section {
+    position: relative;
+    z-index: 10;
+    height: 250vh;
+    overflow: visible;
+    background: transparent; /* Specified twice originally; kept once */
+    display: flex;
+    flex-direction: column;
+    will-change: transform;
+    box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Shared HR styles for content and footer */
+  .slide2 hr,
+  .slide2 .content-section hr {
+    border: none;
+    height: 2px;
+    background-color: #fff;
+    width: 100vw;
+    position: relative;
+  }
+  
+  /* ==================================================
+     Overlay Content (Header & Main)
+     ================================================== */
+  .slide2 header,
+  .slide2 main {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
     text-align: center;
-    z-index: 1; /* Ensure the overlay content is above the image */
-}
-
-/* Content section below the image */
-.slide2 .content-section {
-   
-    background: white;
-    box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.1);
-}
-
-
-
-.slide2 .content-section hr {
-    border: none;
-    height: 2px;
-    background-color: #fff;
-    width:100vw;
+    z-index: 1; /* Ensure overlay content is above the image */
   }
-
-
-.slide2 .content fluid {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.slide2 .content fluid ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.slide2 .content fluid ul li {
-    margin: 0 10px;
-    font-size: 1.5rem;
-}
-
-.svgCarLine {
-
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: fit-content;
-    height: 100%;
-
-}
-
-
-.svgCarPath {
-
-    position:absolute;
-    
-}
-
-.carDiv{
-    position:absolute;
-    width:5.5%;
-    height: 5.5%;
-    background: url('../images/911-gt3-rs-911-removebg.png') no-repeat center center;
-  background-size: contain;
   
-
-}
-
-
-
-.svgLightLine{
-
-
-
+  /* ==================================================
+     Footer Sections
+     ================================================== */
+  .slide2 .footer-wrapper {
+    position: relative;
+    width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  
+  .slide2 .footer-content {
+    width: 100vw;
+  }
+  
+  .slide2 .footer {
+    position: relative;
+    width: fit-content;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  
+  /* ==================================================
+     SVG, Car, and Light Elements
+     ================================================== */
+  .svgCarLine,
+  .svgLightLine {
     position: absolute;
     top: 0;
     left: 0;
     width: fit-content;
     height: 100%;
-
-}
-
-.svgCarLightPath{
-
-    position:absolute;
+  }
+  
+  .svgCarPath,
+  .svgCarLightPath {
+    position: absolute;
+  }
+  
+  .svgCarLightPath {
     stroke: url(#trailGradient); 
     stroke-width: 60; 
     fill: none; 
-    
     filter: url(#glow);
-    
-
-}
-
-
-
-
-
-.slide2 .content-section .footer{
-
-
-    position: relative;
-}
-
-/* Keyframes for the fade-out animation */
-@keyframes fadeOut {
-    0% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
   }
-
-  /* Apply the fade-out animation to the path */
+  
+  .carDiv {
+    position: absolute;
+    width: 5.5%;
+    height: 5.5%;
+    background: url('../images/911-gt3-rs-911-removebg.png') no-repeat center center;
+    background-size: contain;
+  }
+  
+  /* ==================================================
+     Fade-out Animation
+     ================================================== */
+  @keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  
   .fadeOutLine {
-    animation: fadeOut 5s linear forwards; /* 5s is the duration, you can adjust as needed */
+    animation: fadeOut 5s linear forwards; /* Duration adjustable */
   }
-
-
-
-
-
-
+  
+  /* ==================================================
+     Info Box Links
+     ================================================== */
   .slide2 .info-box-link-1,
   .slide2 .info-box-link-2,
-  .slide2 .info-box-link-3{
-
+  .slide2 .info-box-link-3 {
     position: absolute;
     background-color: rgba(255, 255, 255, 0.09);
     color: antiquewhite;
-
-
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);   /* Soft, diffused shadow */
-    border-radius: 10px;                         /* Optional: rounded corners */
-    padding: 20px;                               /* Optional: inner spacing */
-  /* Optional: add a backdrop blur effect for extra depth (works on modern browsers) */
-    -webkit-backdrop-filter: blur(20px); /* Safari support */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Soft shadow */
+    border-radius: 10px;
+    padding: 20px;
+    -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
-    
-
-
-
   }
-
-
-  .slide2 #info-box-link-1-head{
-
-    top: 3%;
+  
+  /* Info Box Link 1 */
+  .slide2 #info-box-link-1-head {
+    top: 9%;
     left: 4%;
     transform: translate(0, 0);
   }
-
-  .slide2 #info-box-link-1-text{
-
-    top: 5.5%;
+  
+  .slide2 #info-box-link-1-text {
+    top: 14.5%;
     left: 4%;
     transform: translate(0, 0);
     max-width: 30%;
   }
-
-
-
-
-
-
   
-  .slide2 #info-box-link-2-head{
-    top:22.5%;
-    left:64%;
+  /* Info Box Link 2 */
+  .slide2 #info-box-link-2-head {
+    top: 111.5%;
+    left: 64%;
   }
-
-  .slide2 #info-box-link-2-text{
-    top:25%;
-    left:64%;
+  
+  .slide2 #info-box-link-2-text {
+    top: 117%;
+    left: 64%;
     max-width: 30vw;
   }
-
-
-
-
-
-.slide2 #button-box-link-3-contact{
-  position: absolute;
-
-  width: 100vw;
-
-  top:50%;
-
-}
-.slide2 #button-box-link-3-demo{
-  position: absolute;
-
-  width: 100vw;
-
-  top:75%;
-
-}
   
-
-
-
-.slide-2-button {
-  border: none;
-  width: 100vw;
-  height: fit-content;
-  display: inline-block;
-  justify-content: center;
-  align-content: center;
-  color: antiquewhite;
-  background: transparent;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  outline: none;
-  font-family: Gatwick;
-  font-weight: bolder;
-  border-radius: 10px;
-  position: relative;
-}
-
-/* Pseudo-element used for the slide effect */
-.slide-2-button:after {
-  position: absolute;
-  content: "";
-  width: 0;
-  height: 100%;
-  top: 0;
-  left: 0;
-  direction: rtl;
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  transition: all 0.3s ease;
-  border-radius: 10px;
-}
-
-/* Hover state (existing behavior) */
-.slide-2-button:hover {
-  color: #000;
-}
-.slide-2-button:hover:after {
-  left: auto;
-  right: 0;
-  width: 100%;
-}
-
-/* Active click state for visual feedback */
-.slide-2-button:active {
-  top: 2px;
-}
-
-/* Styling for the text inside the button */
-.slide-2-button span {
-  position: relative;
-  z-index: 2;
-  mix-blend-mode: difference;
-  color: #fff;
-  transition: color 0.4s;
-  font-size: 200px;
-  
-}
-.slide-2-button .label-3 {
-  
-  text-align: start;
-}
-.slide-2-button .label-4 {
-  
-  text-align: end;
-}
-
-/* Hide the extra info by default */
-.slide-2-button .label {
-  opacity: 1;
-  display:block;
-  transition: opacity 0s ease;
-  text-align: center;
-}
-.slide-2-button .info {
-  text-align: start;
-  opacity: 0;
-  display:none;
-  transition: opacity 0.3s ease;
-}
-.slide-2-button.invisible{
-  opacity: 0;
-  display: none !important;
-}
-
-.slide-2-button.visible{
-  opacity: 1;
-  display: block;
-}
-
-#contact-3 {
-  display: flex;
-  align-content: start;
-  flex-direction: column;
+  /* ==================================================
+     Button Boxes
+     ================================================== */
+  .slide2 #button-box-link-3-contact {
+    position: absolute;
+    width: 100vw;
+    top: 180%;
   }
-#contact-2 {
-  display: flex;
-  justify-content: start;
   
-}
-
-#demo{
-  display:inline-block !important;
-}
-
-
-
-.slide2 .image-section .modal-content{
-  background-color: #fff0;  
-  -webkit-backdrop-filter: blur(15px);
-  backdrop-filter: blur(15px);
-}
-.slide2 .modal-content{
-  color:rgb(255, 255, 255);
-}
-
-.slide2 .pdemo{
-  color:rgb(255, 255, 255) !important;
-}
-.slide2 .validation-message{
-  color:rgb(255, 255, 255) !important;
-}
-.slide2 .image-section p {
-  font-size: 1.25rem;
-}
-
-
-
-
-.slide2 .input-wrapper::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
+  .slide2 #button-box-link-3-demo {
+    position: absolute;
+    width: 100vw;
+    top: 290%;
+  }
   
+  /* ==================================================
+     Slide-2 Button & Labels
+     ================================================== */
+  .slide-2-button {
+    border: none;
+    width: 100vw;
+    height: fit-content;
+    display: inline-block;
+    justify-content: center;
+    align-content: center;
+    color: antiquewhite;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+    font-family: Gatwick;
+    font-weight: bolder;
+    border-radius: 10px;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
   
-  height: 2px;          /* Thickness of the underline */
-  background: rgb(255, 255, 255);
-  transition: width 0.3s ease-in-out;
-
-  left: 0%;
-  width: 20%;
-}
-
-
-.slide2 .form-group{
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  justify-content: space-between;
-}
-
-.slide2 .modal-popup .modal-content form {
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-  align-items: stretch;
-}
-
-.slide2 .input-wrapper {
-  position: relative;
-  width: 100%;
-}
-
-.slide2 .input-wrapper:hover::after,
-.slide2 .input-wrapper:focus-within::after {
-  width: 100%;
-}
-
-.slide2 .scheduleDemoForm{
-  caret-color: rgb(255, 255, 255);
-}
-
-
-
-
-
-.slide2 .product-toggle{
-  transition: transform 0.4s ease;
-}
-.slide2 .product-toggle:hover {
+  .slide-2-button:hover {
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
   
-  box-shadow: 0 0 50px rgba(255, 255, 255, 0.475); /* Increased shadow on hover */
-  transform: translateY(-3px); /* Slightly lift the button */
-}
-
-.slide2 .product-toggle:active {
+  .slide-2-button:hover:after {
+    left: auto;
+    right: 0;
+    width: 100%;
+  }
   
-  transform: translateY(1px); /* Slightly lift the button */
-}
-
-
-.slide2 .scheduleDemoForm input{
-  color:white;
-}
-
-.slide2 .button-sent-demo-request {
+  .slide-2-button:active {
+    top: 2px;
+  }
   
-  --success: #ffffff !important;
-}
-
-
-
-  @media (max-aspect-ratio:2.11){
-    .slide2 #info-box-link-1-head{
-      font-size: 16px;
-      top:4%
-    }
-    .slide2 #info-box-link-1-text{
-      font-size: 14px;
-      top:7.5%;
-    }
-
-    .slide2 #info-box-link-2-head{
-      top:21.5%;
-      font-size: 16px;
-    }
+  /* Button Text & Labels */
+  .slide-2-button span {
+    position: relative;
+    z-index: 2;
+    mix-blend-mode: difference;
+    color: #fff;
+    transition: color 0.4s;
+    font-size: 200px;
+  }
   
-    .slide2 #info-box-link-2-text{
-      top:25%;
-      font-size: 14px;
-    }
-
+  .slide-2-button .label-3 {
+    text-align: start;
   }
-
-  @media (max-aspect-ratio:2){
-    .slide2 #info-box-link-1-head{
-      font-size: 14px;
-      top:4%
-    }
-    .slide2 #info-box-link-1-text{
-      font-size: 13px;
-      max-width:25%;
-    }
-
-    .slide2 #info-box-link-2-head{
-      top:21.5%;
-      font-size: 14px;
-    }
   
-    .slide2 #info-box-link-2-text{
-      top:25%;
-      font-size: 13px;
-    }
-
+  .slide-2-button .label-4 {
+    text-align: end;
   }
-
-  @media (max-aspect-ratio:1.9){
-    .slide2 #info-box-link-1-head{
-      font-size: 14px;
-      top:3%
-    }
-    
-    .slide2 #info-box-link-1-text{
-      font-size: 12px;
-      top:6%;
-    }
-
-    .slide2 #info-box-link-2-head{
-      top:20.5%;
-      font-size: 14px;
-    }
   
-    .slide2 #info-box-link-2-text{
-      top:23.5%;
-      font-size: 12px;
-    }
-
+  .slide-2-button .label {
+    opacity: 1;
+    display: block;
+    transition: opacity 0s ease;
+    text-align: center;
   }
-
-  @media (max-aspect-ratio:1.7){
-    .slide2 #info-box-link-1-head{
-      top:4%;
-      left:2%;
-    }
-    .slide2 #info-box-link-1-text{
-      font-size: 13px;
-      top:7.2%;
-      left:2%
-    }
-
-    .slide2 #info-box-link-2-head{
-      top:21.5%;
-      font-size: 14px;
-    }
   
-    .slide2 #info-box-link-2-text{
-      top:24.7%;
-      font-size: 13px;
-    }
-
+  .slide-2-button .info {
+    text-align: start;
+    opacity: 0;
+    display: none;
+    transition: opacity 0.3s ease;
   }
-
-  @media (max-aspect-ratio:1.47){
-    .slide2 #info-box-link-1-head{
-      font-size: 14px;
-      padding:10px;
-      top:4%;
-      left:2%;
-    }
-    .slide2 #info-box-link-1-text{
-      font-size: 12px;
-      top:8%;
-      padding:10px;
-    }
-
-    .slide2 #info-box-link-2-head{
-      font-size: 14px;
-      padding:10px;
-      top:21.5%;
-    }
   
-    .slide2 #info-box-link-2-text{
-      top:25.5%;
-      font-size: 12px;
-      padding:10px;
-    }
-
+  .slide-2-button.invisible {
+    opacity: 0;
+    display: none !important;
   }
-
-  @media (max-aspect-ratio:1.23){
-    .slide2 #info-box-link-1-head{
-      font-size: 13px;
-      top:6%;
-      left:2%;
-    }
-    .slide2 #info-box-link-1-text{
-      top:10%;
-    }
-
-    .slide2 #info-box-link-2-head{
-      font-size: 13.5px;
-      padding:10px;
-      top:18%;
-      font-size: 14px;
-      left: 62%;
-    }
   
-    .slide2 #info-box-link-2-text{
-      top:22%;
-      font-size: 12px;
-      padding:10px;
-      left: 62%;
-    }
-
+  .slide-2-button.visible {
+    opacity: 1;
+    display: block;
   }
-
-  @media (max-aspect-ratio:0.97){
-    .slide2 #info-box-link-1-head{
-      font-size: 12px;
-      top:7%;
-      left:2%;
-    }
-    .slide2 #info-box-link-1-text{
-      top:12%;
-    }
-
-    .slide2 #info-box-link-2-head{
-      font-size: 12px;
-      padding:10px;
-      top:16%;
-      left: 64%;
-      max-width:220px;
-    }
   
-    .slide2 #info-box-link-2-text{
-      top:22%;
-      font-size: 12px;
-      padding:10px;
-      left: 64%;
-    }
-
+  /* ==================================================
+     Contact & Demo
+     ================================================== */
+  #contact-3 {
+    display: flex;
+    align-content: start;
+    flex-direction: column;
   }
-
-  @media (max-aspect-ratio:0.83){
-    .slide2 #info-box-link-1-head{
-      font-size: 11px;
-      left:2%;
-      
-    }
-    .slide2 #info-box-link-1-text{
-      font-size: 10px;
-    }
-
-    .slide2 #info-box-link-2-head{
-      font-size: 11px;
-      padding:10px;
-      top:16%;
-      left: 64%;
-      max-width:220px;
-    }
   
-    .slide2 #info-box-link-2-text{
-      top:22%;
-      font-size: 10px;
-      padding:10px;
-      left: 64%;
-    }
-
+  #contact-2 {
+    display: flex;
+    justify-content: start;
   }
-
-  @media (max-aspect-ratio:0.785){
-    .slide2 #info-box-link-1-head{
-      top:8%;
-      left:2%;
-    }
-    .slide2 #info-box-link-1-text{
-      font-size: 9px;
-    }
-
-    .slide2 #info-box-link-2-head{
-      font-size: 10px;
-      padding:10px;
-      top:16%;
-      left: 64%;
-      max-width:200px;
-    }
   
-    .slide2 #info-box-link-2-text{
-      top:22%;
-      font-size: 9px;
-      padding:10px;
-      left: 64%;
-    }
-
+  #demo {
+    display: inline-block !important;
   }
-
-  @media (max-aspect-ratio:0.705){
-
-    .slide2 #info-box-link-2-head{
-      font-size: 9px;
-      padding:9px;
-      top:16%;
-      left: 45%;
-      max-width:180px;
-    }
   
-    .slide2 #info-box-link-2-text{
-      top:22%;
-      font-size: 9px;
-      padding:10px;
-      left: 45%;
-      max-width:220px;
-      font-size: 8px;
-    }
-
+  /* ==================================================
+     Modal, Form & Input Styles
+     ================================================== */
+  .slide2 .content-section .modal-content {
+    margin-top: 300vh;
+    background-color: #fff0;
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
   }
-
-  @media (max-aspect-ratio:0.61){
-    
-    .slide2 #info-box-link-1-text{
-      top:13.5%;
-    }
-
-
-
-  }
-
-  @media (max-aspect-ratio:0.537){
-    .slide2 #info-box-link-1-head{
-      font-size: 9px;
-      top:9%;
-      left:2%;
-      
-    }
-    .slide2 #info-box-link-1-text{
-      font-size: 7.5px;
-      top:14%;
-      
-    }
-
-.slide2 #info-box-link-2-head{
-      font-size: 9px;
-      padding:8px;
-      top:15%;
-      left: 45%;
-      max-width:180px;
-    }
   
-    .slide2 #info-box-link-2-text{
-      top:22%;
-      font-size: 9px;
-      padding:10px;
-      left: 45%;
-      max-width:190px;
-      font-size: 8px;
-    }
-
+  .slide2 .modal-content {
+    color: rgb(255, 255, 255);
   }
-
-@media(max-width:2010px){
-
-  .slide-2-button span{
-    font-size: 180px;
-  }
-}
-@media(max-width:1850px){
-
-  .slide-2-button span{
-    font-size: 160px;
-  }
-}
-@media(max-width:1630px){
-
-  .slide-2-button span{
-    font-size: 140px;
-  }
-}
-@media(max-width:1420px){
-
-  .slide-2-button span{
-    font-size: 120px;
-  }
-}
-@media(max-width:1220px){
-
-  .slide-2-button span{
-    font-size: 110px;
-  }
-}
-@media(max-width:1110px){
-
-  .slide-2-button span{
-    font-size: 95px;
-  }
-}
-@media(max-width:999px){
-
-  .slide-2-button span{
-    font-size: 90px;
-  }
-}
-@media(max-width:910px){
-
-  .slide-2-button span{
-    font-size: 80px;
-  }
-}
-@media(max-width:800px){
-
-  .slide-2-button span{
-    font-size: 75px;
-  }
-}
   
-
-
-
-
-
-
+  .slide2 .pdemo,
+  .slide2 .validation-message {
+    color: rgb(255, 255, 255) !important;
+  }
   
-
-  .slide2 #ul-element-info-link{
-
+  .slide2 .image-section p {
+    font-size: 1.25rem;
+  }
+  
+  .slide2 .input-wrapper {
+    position: relative;
+    width: 100%;
+  }
+  
+  .slide2 .input-wrapper::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    height: 2px; /* Underline thickness */
+    background: rgb(255, 255, 255);
+    transition: width 0.3s ease-in-out;
+    left: 0%;
+    width: 20%;
+  }
+  
+  .slide2 .input-wrapper:hover::after,
+  .slide2 .input-wrapper:focus-within::after {
+    width: 100%;
+  }
+  
+  .slide2 .form-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: space-between;
+  }
+  
+  .slide2 .modal-popup {
+    height: 250%;
+  }
+  
+  .slide2 .modal-popup .modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    align-items: stretch;
+  }
+  
+  .slide2 .scheduleDemoForm {
+    caret-color: rgb(255, 255, 255);
+  }
+  
+  .slide2 .scheduleDemoForm input {
+    color: white;
+  }
+  
+  .slide2 .button-sent-demo-request {
+    --success: #ffffff !important;
+  }
+  
+  /* ==================================================
+     List Reset
+     ================================================== */
+  .slide2 #ul-element-info-link {
     list-style-type: none;
   }
+  
+  /* ==================================================
+     Will-Change Optimization
+     ================================================== */
+  .slide2 .image-section > *,
+  .slide2 .content-section > * {
+    will-change: transform;
+  }
+  
+  /* ==================================================
+     Product Toggle
+     ================================================== */
+  .slide2 .product-toggle {
+    transition: transform 0.4s ease;
+  }
+  
+  .slide2 .product-toggle:hover {
+    box-shadow: 0 0 50px rgba(255, 255, 255, 0.475); /* Increased shadow */
+    transform: translateY(-3px); /* Lift on hover */
+  }
+  
+  .slide2 .product-toggle:active {
+    transform: translateY(1px); /* Slightly adjust on click */
+  }
+  
+  /* ==================================================
+     Responsive Media Queries
+     ================================================== */
+  
+  /* max-aspect-ratio: 2 */
+  @media (max-aspect-ratio: 2) {
+    .slide2 .modal-popup {
+      height: 350%;
+    }
+  }
+  
+  /* max-width: 1300px */
+  @media (max-width: 1300px) {
+    .slide2 #info-box-link-2-head {
+      top: 108.5%;
+      left: 60%;
+    }
+    .slide2 #info-box-link-2-text {
+      top: 114%;
+      left: 60%;
+      max-width: 35vw;
+    }
+  }
+  
+  /* max-width: 1200px */
+  @media (max-width: 1200px) {
+    .slide2 .content-section,
+    .slide2 .content-section-wrapper {
+      height: 240vh;
+    }
+    .slide2 #info-box-link-2-head {
+      top: 75%;
+    }
+    .slide2 #info-box-link-2-text {
+      top: 79%;
+    }
+    .slide2 #button-box-link-3-contact {
+      top: 180%;
+    }
+    .slide2 #button-box-link-3-demo {
+      top: 250%;
+    }
+  }
+  
+  /* max-width: 1150px */
+  @media (max-width: 1150px) {
+    .slide2 .content-section,
+    .slide2 .content-section-wrapper,
+    .slide2 .image-section-wrapper {
+      height: 220vh;
+    }
+    /* Duplicate font-size declarations consolidated */
+    .slide2 #info-box-link-1-text {
+      font-size: 18px;
+      max-width: 45%;
+      top: 16.5%;
+    }
+    .slide2 #info-box-link-1-head,
+    .slide2 #info-box-link-2-head {
+      font-size: 20px;
+    }
+    .slide2 #info-box-link-2-text {
+      font-size: 18px;
+      top: 82%;
+      left: 50%;
+      max-width: 43.2vw;
+    }
+  }
+  
+  /* max-width: 970px */
+  @media (max-width: 970px) {
+    .slide2 #info-box-link-2-head,
+    .slide2 #info-box-link-2-text {
+      left: 45%;
+    }
+    .slide2 .image-section-wrapper,
+    .slide2 .content-section-wrapper,
+    .slide2 .content-section {
+      height: 200vh;
+    }
+  }
+  
+  /* max-width: 900px */
+  @media (max-width: 900px) {
+    .slide2 #info-box-link-2-head,
+    .slide2 #info-box-link-2-text {
+      left: 4%;
+    }
+    .slide2 .image-section-wrapper,
+    .slide2 .content-section-wrapper {
+      height: 160vh;
+    }
+    .slide2 .content-section {
+      height: 100vh;
+    }
+    .slide2 .footer-wrapper {
+      margin-top: 60vh;
+    }
+    .slide2 #info-box-link-1-text,
+    .slide2 #info-box-link-2-text {
+      max-width: 65%;
+    }
+    .slide2 #info-box-link-1-text {
+      top: 19.5%;
+    }
+    .slide2 #info-box-link-2-text {
+      top: 125.5%;
+    }
+    .slide2 #info-box-link-2-head {
+      top: 115%;
+    }
+    .slide2 #button-box-link-3-contact {
+      top: 250%;
+    }
+    .slide2 #button-box-link-3-demo {
+      top: 350%;
+    }
+  }
+  
+  /* max-width: 850px */
+  @media (max-width: 850px) {
+    .slide2 #info-box-link-2-head {
+      top: 85%;
+    }
+    .slide2 #info-box-link-2-text {
+      top: 92%;
+    }
+    .slide2 #button-box-link-3-contact {
+      top: 190%;
+    }
+    .slide2 #button-box-link-3-demo {
+      top: 260%;
+    }
+  }
+  
+  /* max-width: 800px */
+  @media (max-width: 800px) {
+    .slide2 #info-box-link-2-head {
+      left: auto;
+      right: 4%;
+      top: 95%;
+    }
+    .slide2 #info-box-link-2-text {
+      left: auto;
+      right: 4%;
+      top: 102%;
+    }
+    .slide2 .content-section {
+      height: 90vh;
+    }
+  }
+  
+  /* max-width: 750px */
+  @media (max-width: 750px) {
+    .slide2 .content-section {
+      height: 70vh;
+    }
+    .slide2 .content-section-wrapper,
+    .slide2 .image-section-wrapper {
+      height: 140vh;
+    }
+    .slide2 #button-box-link-3-demo {
+      top: 230%;
+    }
+    .slide2 #info-box-link-1-text {
+      top: 28.5%;
+      max-width: 85%;
+    }
+    .slide2 #info-box-link-2-head {
+      top: 145%;
+    }
+    .slide2 #info-box-link-2-text {
+      top: 160%;
+      max-width: 85%;
+    }
+    .slide2 #button-box-link-3-demo {
+      top: 330%;
+    }
+    .slide2 #button-box-link-3-contact {
+      top: 270%;
+    }
+  }
+  
+  /* max-width: 700px */
+  @media (max-width: 700px) {
+    .slide2 #info-box-link-2-head {
+      top: 105%;
+    }
+    .slide2 #info-box-link-2-text {
+      top: 112%;
+    }
+    .slide2 #button-box-link-3-contact {
+      top: 210%;
+    }
+    .slide2 #button-box-link-3-demo {
+      top: 240%;
+    }
+    .slide2 .content-section {
+      height: 60vh;
+    }
+    .slide2 #info-box-link-2-head {
+      top: 160%;
+    }
+    .slide2 #info-box-link-2-text {
+      top: 177%;
+    }
+    .slide2 #button-box-link-3-contact {
+      top: 280%;
+    }
+    .slide2 #button-box-link-3-demo {
+      top: 320%;
+    }
+  }
+  
+  /* max-width: 600px */
+  @media (max-width: 600px) {
+    .slide2 .content-section {
+      height: 55vh;
+    }
+  }
+  
+  /* max-width: 750px (additional adjustments) */
+  @media (max-width: 750px) {
+    .slide2 .content-section-wrapper {
+      height: 100vh;
+    }
+    .slide2 .image-section-wrapper {
+      height: 130vh;
+    }
+    .slide2 #info-box-link-2-head {
+      top: 180%;
+    }
+    .slide2 #info-box-link-2-text {
+      top: 199%;
+    }
+    .slide2 #button-box-link-3-contact {
+      top: 330%;
+    }
+    .slide2 #button-box-link-3-demo {
+      top: 380%;
+    }
+  }
+  
+  /* max-width: 550px */
+  @media (max-width: 550px) {
+    .slide2 .image-section-wrapper {
+      height: 120vh;
+    }
+    .slide2 .content-section {
+      height: 40vh;
+    }
+    .slide2 #info-box-link-1-text {
+      top: 38.5%;
+      max-width: 90%;
+    }
+    .slide2 #info-box-link-1-head {
+      font-size: 18px;
+      top: 19%;
+    }
+    .slide2 #info-box-link-2-head {
+      top: 190%;
+    }
+    .slide2 #info-box-link-2-text {
+      top: 209%;
+    }
+    .slide2 #button-box-link-3-contact {
+      top: 350%;
+    }
+    .slide2 #button-box-link-3-demo {
+      top: 400%;
+    }
+  }
+  
+  /* Font size scaling for button text */
+  @media (max-width: 2010px) {
+    .slide-2-button span { font-size: 180px; }
+  }
+  @media (max-width: 1850px) {
+    .slide-2-button span { font-size: 160px; }
+  }
+  @media (max-width: 1630px) {
+    .slide-2-button span { font-size: 140px; }
+  }
+  @media (max-width: 1420px) {
+    .slide-2-button span { font-size: 120px; }
+  }
+  @media (max-width: 1220px) {
+    .slide-2-button span { font-size: 110px; }
+  }
+  @media (max-width: 1110px) {
+    .slide-2-button span { font-size: 95px; }
+  }
+  @media (max-width: 999px) {
+    .slide-2-button span { font-size: 90px; }
+  }
+  @media (max-width: 910px) {
+    .slide-2-button span { font-size: 80px; }
+  }
+  @media (max-width: 800px) {
+    .slide-2-button span { font-size: 75px; }
+  }
+  

@@ -317,3 +317,14 @@
   .footer-nav a:hover {
     text-decoration: underline;
   }
+
+
+
+
+
+
+  body.cursor-none *,
+body.cursor-none *::before,
+body.cursor-none *::after {
+  cursor: none !important;
+}

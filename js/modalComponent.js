@@ -217,13 +217,20 @@ class DemoModal {
     this.modalElement.setAttribute("aria-hidden", "false");
     this.isActive = true;  // Mark this modal as active
     document.dispatchEvent(new Event("dialogOpened"));
-
+  
+    // Ensure the default span inside the demo request button is visible
+    const defaultSpan = this.modalElement.querySelector(".button-sent-demo-request span.default");
+    if (defaultSpan) {
+      defaultSpan.style.display = "block";
+    }
+  
     const firstInput = this.modalElement.querySelector("input");
     if (firstInput) firstInput.focus();
-
+  
     // Call validation on open
     this.updateValidationMessage();
   }
+  
 
   close() {
     this.modalElement.classList.remove("active");

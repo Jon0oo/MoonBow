@@ -2,17 +2,22 @@ import { gsap } from "gsap"; // assuming gsap is bundled via Parcel or similar
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CustomEase } from "gsap/CustomEase";
 
+let modalComponentPromise;
+
 function loadModalComponent() {
-  // Return the promise so the caller can use the loaded module
-  return import(/* webpackChunkName: "modalComponent", webpackPrefetch: true */ './modalComponent.js')
-    .then(module => {
-      // Assuming the modal component exports a class or function (DemoModal)
-      return module.default;
-    })
-    .catch(error => {
-      console.error("Error loading modal component:", error);
-    });
+  if (!modalComponentPromise) {
+    modalComponentPromise = import(
+      /* webpackChunkName: "modalComponent", webpackPrefetch: true */
+      './modalComponent.js'
+    )
+      .then(module => module.default)
+      .catch(error => {
+        console.error("Error loading modal component:", error);
+      });
+  }
+  return modalComponentPromise;
 }
+
 
 gsap.registerPlugin(ScrollTrigger, CustomEase);
 
@@ -214,12 +219,22 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const scheduleDemoBtn = document.querySelector(".schedule-demo-btn");
+  
+  // Create a variable to hold your modal instance globally
+  let modalInstance = null;
+
   scheduleDemoBtn.addEventListener("click", () => {
-    loadModalComponent().then(DemoModal => {
-      if (DemoModal) {
-        const modalInstance = createModalInstance(DemoModal);
-        modalInstance.open();
-      }
-    });
+    if (modalInstance) {
+      // If a modal instance exists, just open it again
+      modalInstance.open();
+    } else {
+      // Otherwise, lazy-load the modal component and create a new instance
+      loadModalComponent().then(DemoModal => {
+        if (DemoModal) {
+          modalInstance = createModalInstance(DemoModal);
+          modalInstance.open();
+        }
+      });
+    }
   });
 });
