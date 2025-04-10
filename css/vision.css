@@ -51,21 +51,30 @@
 .menu li:hover > .dropdown {
   opacity: 1;
   visibility: visible;
+  
 }
 
 .menu li:hover  .nav-overlay {
   opacity: 1;
   visibility: visible;
+  
 }
 
 .nav-container:hover .nav-overlay {
   opacity: 1;
   visibility: visible;
+  
 }
 
+.nav-container:hover .logo{
+  filter: brightness(10);
+  }    
 
-
-
+@media (max-width: 800px) {
+  .nav-container:hover .logo{
+    filter: brightness(1.5);
+  }
+}
 
 
 
@@ -308,6 +317,17 @@
   .footer-nav a:hover {
     text-decoration: underline;
   }
+
+
+
+
+
+
+  body.cursor-none *,
+body.cursor-none *::before,
+body.cursor-none *::after {
+  cursor: none !important;
+}
 
 @font-face {
     font-family: "GatwickFont";
