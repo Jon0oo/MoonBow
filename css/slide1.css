@@ -1,0 +1,1018 @@
+/* ====================================
+   Slide 1 Styles
+   ==================================== */
+
+/* ---------- Root Variables ---------- */
+:root {
+  --primary: #74aa57;
+  --primary-dark: #53793f;
+  --primary-darkest: #3f5d2f;
+  --text: #FFFFFF;
+  --text-opacity: 1;
+  --success: #2B3044;
+  --success-scale: .2;
+  --success-opacity: 0;
+  --border-radius: 7;
+  /* Add any others you need */
+}
+
+/* ---------- Slide 1 Container ---------- */
+.slide1 {
+  overflow-y: auto;
+}
+
+/* ---------- Fixed Background Section ---------- */
+.slide1 .image-section {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+  position: sticky;
+}
+
+.slide1 .image-section img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ---------- Content Section & Wrapper ---------- */
+.slide1 .content-section {
+  position: relative;
+  will-change: transform;
+  z-index: 2;
+  height: calc(100% - 20vh);
+  /* somehow does destroy the timing of the svg draw if set to 0 */
+  /* Disable native scroll on this container */
+}
+
+.slide1 .content-wrapper {
+  will-change: transform;
+  margin-top: 150vh; /* Starts below the fixed image */
+  min-height: 150vh;
+  position: relative; /* Ensure it moves relative to .content-section */
+  background: rgba(0, 0, 0, 1);
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.slide1 .content-spacer {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+}
+
+/* ---------- Additional Content Styles ---------- */
+.slide1 .content-section hr {
+  border: none;
+  height: 2px;
+  background-color: #fff;
+  width: 100vw;
+}
+
+.slide1 .content-section .svg-animation-words {
+  width: 100%;
+  height: 135.2vh;
+  position: relative;
+}
+
+.slide1 .info-box-fiber-1-1,
+.slide1 .info-box-fiber-1-2,
+.slide1 .info-box-fiber-1-3,
+.slide1 .info-box-fiber-2 {
+  position: relative;
+  color: #fff;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.slide1 .info-box-fiber-1-1 {
+  width: fit-content;
+  height: fit-content;
+  left: 3vw;
+  padding-left: 2vw;
+}
+
+.slide1 .info-box-fiber-1-2 {
+  width: fit-content;
+  height: fit-content;
+  left: 65%;
+  padding-left: 2vw;
+}
+
+.slide1 .info-box-fiber-1-3 {
+  width: fit-content;
+  height: fit-content;
+  left: 3vw;
+  padding-left: 2vw;
+}
+
+.slide1 .info-box-fiber-1-1 h2,
+.slide1 .info-box-fiber-1-2 h2,
+.slide1 .info-box-fiber-1-3 h2 {
+  font-size: 50px;
+}
+
+.slide1 .info-box-fiber-1-1 ul,
+.slide1 .info-box-fiber-1-2 ul,
+.slide1 .info-box-fiber-1-3 ul {
+  font-size: 30px;
+  list-style: none;
+}
+
+.slide1 .info-box-fiber-2 {
+  /* Example positioning; adjust as needed */
+  width: fit-content;
+  height: fit-content;
+  left: 71.2vw;
+  position: relative;
+  overflow: visible;
+}
+
+.slide1 .info-box-fiber-2 h2 {
+  font-size: 50px;
+}
+
+.slide1 .info-box-fiber-2 ul {
+  font-size: 30px;
+}
+
+/* ---------- Content Text ---------- */
+.slide1 .content-section h1 {
+  font-size: 4rem;
+  text-transform: uppercase;
+  text-align: center;
+  color: #fff;
+  margin-top: 20px;
+}
+
+.slide1 .content-section p {
+  font-size: 1.25rem;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.svg-overflow-visible {
+  overflow: visible;
+}
+
+.slide1 .validation-message {
+  color: black !important;
+}
+
+/* ---------- FIBER FLOW Text CSS ---------- */
+.fiberflow-hero {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  transform: translate(-50%, -50%);
+  pointer-events: none; /* So the text can be interactive if needed */
+}
+
+.fiberflow-hero .heading {
+  position: relative;
+  z-index: 2;
+  mix-blend-mode: difference;
+  perspective: 1000px;
+  backface-visibility: visible;
+  transform: rotate(0.1deg);
+}
+
+.fiberflow-hero .pin {
+  position: relative;
+}
+
+.fiberflow-hero h1 {
+  position: relative;
+  font-size: 12rem; /* Adjust for your design */
+  text-transform: uppercase;
+  text-align: center;
+  color: white;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.fiberflow-hero .clamp {
+  position: relative;
+  z-index: -1; /* Allows the arc to sit behind the text if you have blend modes */
+}
+
+.fiberflow-hero .clamp svg {
+  position: absolute;
+  width: 112%;
+  top: 50%;
+  left: -6%;
+  transform: translateY(-50%) rotate(2deg);
+}
+
+.fiberflow-hero .yt {
+  z-index: 3; /* Renders above the arc if you’re using blend modes */
+}
+
+/* ---------- SVG/Rect Info Box ---------- */
+.svg-info-box {
+  x: 0;
+  y: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  margin-left: -2vw;
+  margin-top: -2vh;
+  overflow: visible;
+}
+
+.rect-info-box {
+  x: 0;
+  y: 0;
+  stroke-linecap: round;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 4;
+  overflow: visible;
+}
+
+#svg-info-box-get-to-know {
+  margin-left: 0;
+}
+
+/* ---------- Info Box Fiber 2 Button Wrapper ---------- */
+.info-box-fiber-2-button-wrapper {
+  display: flex;
+  width: 22vw;
+  justify-content: space-around;
+}
+
+/* ---------- Contact & Schedule Demo ---------- */
+.contact-container {
+  position: relative;
+  display: inline-block;
+  padding: 0 15%;
+  height: 10vh;
+  width: 18vw;
+  margin-left: -10%;
+  align-items: center;
+  display: flex;
+}
+
+.schedule-demo-container {
+  position: relative;
+  display: inline-block;
+  height: 10vh;
+  width: 18vw;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.contact-btn {
+  background-color: #00000000;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 22px;
+  position: absolute;
+  transition: opacity 0.3s ease-in-out;
+  font-family: Gatwick;
+  width: 110px;
+  height: 50px;
+  overflow: visible;
+}
+
+.schedule-demo-btn {
+  position: relative;
+  padding: 10px 20px;
+  background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 22px;
+  white-space: nowrap;
+  height: 50%;
+  font-family: Gatwick;
+  overflow: hidden;
+  transition: color 0.3s ease-in-out;
+}
+
+/* Gradient border effect */
+.schedule-demo-btn::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border-radius: 10px;
+  padding: 3px;
+  background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+  -webkit-mask: linear-gradient(white, white) content-box, linear-gradient(white, white);
+  mask: linear-gradient(white, white) content-box, linear-gradient(white, white);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Animated white background sliding from left to right */
+.schedule-demo-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: white;
+  transform: skewX(-20deg);
+  transition: left 0.5s ease-in-out;
+}
+
+/* Hover Effect */
+.schedule-demo-btn:hover {
+  color: black;
+}
+.schedule-demo-btn:hover::before {
+  opacity: 1;
+}
+.schedule-demo-btn:hover::after {
+  left: 0;
+}
+.schedule-demo-btn span {
+  position: relative;
+  z-index: 3;
+  display: inline-block;
+  width: 100%;
+  transition: color 0.3s ease-in-out;
+}
+
+/* ---------- SVG Info Box Buttons ---------- */
+#svg-info-box-button-contact {
+  position: relative;
+  width: 110px;
+  height: 50%;
+  margin: 0;
+  background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+  clip-path: inset(0 round 8px);
+}
+
+#svg-info-box-button-demo {
+  position: relative;
+  width: 150px;
+  height: 50%;
+  margin: 0;
+  background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+  clip-path: inset(0 round 15px);
+  transition: transform 0.2s ease;
+}
+
+/* ---------- Contact Button Wrapper & Options ---------- */
+.contact-button-wrapper {
+  position: relative;
+  width: auto;
+  height: auto;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 50px;
+}
+
+.contact-options {
+  position: absolute;
+  height: 50px;
+  display: flex;
+  gap: 10px;
+  opacity: 1;
+  pointer-events: none;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  z-index: 10;
+}
+
+.contact-option {
+  position: relative;
+  padding: 8px 16px;
+  border-radius: 8px;
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  z-index: 10;
+  height: 50px;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+}
+
+.contact-option::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border-radius: 10px;
+  padding: 3px;
+  background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+  -webkit-mask: linear-gradient(white, white) content-box, linear-gradient(white, white);
+  mask: linear-gradient(white, white) content-box, linear-gradient(white, white);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Individual Button Styles */
+.email {
+  background-color: rgb(255, 255, 255);
+  left: 30%;
+  color: rgb(0, 0, 0);
+}
+
+.call {
+  background-color: rgb(255, 255, 255);
+  right: 70%;
+  color: rgb(0, 0, 0);
+}
+
+/* ---------- Modal Popup & Content ---------- */
+.modal-popup {
+  display: none; /* Hidden by default */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent backdrop */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it's above other content */
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+.modal-popup.active {
+  display: flex;
+  opacity: 1;
+}
+
+.modal-content {
+  position: relative;
+  margin-top: 190vh;
+  background-color: #fff;
+  padding: 20px 30px;
+  border-radius: 8px;
+  max-width: 650px;
+  width: 90%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.modal-popup h2 {
+  font-size: 33px;
+}
+
+.modal-popup p {
+  color: black;
+  margin-top: 3rem;
+}
+
+.modal-popup .modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  align-items: stretch;
+}
+
+.modal-popup .modal-content form label,
+.modal-popup .modal-content form input,
+.modal-popup .modal-content form button {
+  width: 24%;
+  text-align: left;
+}
+
+/* ---------- Schedule Demo Form & Input Styles ---------- */
+.scheduleDemoForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  caret-color: rgb(0, 0, 0);
+}
+
+.scheduleDemoForm input,
+.scheduleDemoForm textarea {
+  position: relative;
+  border: none;
+  font-size: 16px;
+  width: 100% !important;
+  background: transparent;
+  transition: all 0.3s ease-in-out;
+  outline: none;
+  box-shadow: none;
+}
+
+.slide1 .input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.slide1 .input-wrapper::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  height: 2px; /* Thickness of the underline */
+  background: rgb(0, 0, 0);
+  left: 0%;
+  width: 20%;
+  transition: width 0.3s ease-in-out;
+}
+
+/* Expand underline on hover or focus */
+.input-wrapper:hover::after,
+.input-wrapper:focus-within::after {
+  width: 100%;
+}
+
+.slide1 .scheduleDemoForm {
+  caret-color: rgb(0, 0, 0);
+}
+
+/* Remove extra styling for telephone inputs */
+.scheduleDemoForm input[type="tel"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+}
+
+.slide1 .form-group {
+  display: flex;
+  align-items: center;
+  gap:
+10px;
+  justify-content: space-between;
+}
+
+.modal-popup .modal-content .button-sent-demo-request {
+  text-align: center !important;
+}
+
+.slide1 .product-toggle:hover {
+  box-shadow: 0 0 50px rgba(3, 3, 3, 0.651);
+  transform: translateY(-3px);
+}
+.slide1 .product-toggle {
+  transition:transform 0.4s ease;
+}
+.slide1 .input-wrapper textarea {
+  max-height: 100px;
+}
+
+/* ---------- Product Selection & Toggle ---------- */
+.product-selection {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+  margin-bottom: 11vh;
+}
+
+.product-toggle {
+  padding: 8px 16px;
+  background: #eee;
+  border: 0px solid #ccc;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background 0.3s, border-color 0.3s, color 0.3s;
+  width: 20%;
+  font-family: Gatwick;
+  font-size: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  transition: box-shadow 0.3s ease;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+}
+
+.product-toggle:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(-3px);
+}
+
+.product-toggle:active {
+  transform: translateY(1px);
+}
+
+.product-toggle.active {
+  background: #74aa57;
+  color: #fff;
+  border-color: #ffffff00;
+}
+
+input:invalid {
+  border-color: #ff3860;
+}
+
+/* ---------- Validation Message Styles ---------- */
+input::-webkit-validation-bubble-message {
+  color: white;
+  background: #333;
+  border-radius: 5px;
+  padding: 8px;
+  font-size: 14px;
+}
+
+.validation-message {
+  background-color: transparent;
+  display: none;
+  color: rgb(0, 0, 0);
+  font-size: 0.8em;
+  margin: 0 !important;
+}
+
+.validation-message-wrapper {
+  display: inline-block;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: transparent;
+  width: fit-content;
+  height: fit-content;
+  position: absolute;
+  top: 27%;
+}
+
+.validation-message-wrapper.isVisible {
+  display: block;
+  animation: pulse 0.5s ease-in-out 1;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: transparent;
+    filter: blur(0);
+    transform: scale(1);
+  }
+  50% {
+    background-color: rgba(255, 0, 0, 0.337);
+    filter: blur(1px);
+    transform: scale(1.05);
+  }
+  100% {
+    background-color: transparent;
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+
+.slide1 .pdemo {
+  color: black !important;
+}
+
+/* ---------- Paperplane Button (Demo Request) ---------- */
+.button-sent-demo-request[disabled] {
+  pointer-events: none;
+}
+
+.button-sent-demo-request {
+  --primary: #74aa57;
+  --primary-dark: #53793f;
+  --primary-darkest: #3f5d2f;
+  --text: #FFFFFF;
+  --text-opacity: 1;
+  --success: #2B3044;
+  --success-scale: .2;
+  --success-opacity: 0;
+  --border-radius: 7;
+  --overflow: hidden;
+  --rotate: 0;
+  --plane-x: 0;
+  --plane-y: 0;
+  --plane-opacity: 1;
+  --left-wing-background: var(--primary);
+  --left-wing-first-x: 0;
+  --left-wing-first-y: 0;
+  --left-wing-second-x: 50;
+  --left-wing-second-y: 0;
+  --left-wing-third-x: 0;
+  --left-wing-third-y: 100;
+  --left-body-background: var(--primary);
+  --left-body-first-x: 50;
+  --left-body-first-y: 0;
+  --left-body-second-x: 50;
+  --left-body-second-y: 100;
+  --left-body-third-x: 0;
+  --left-body-third-y: 100;
+  --right-wing-background: var(--primary);
+  --right-wing-first-x: 50;
+  --right-wing-first-y: 0;
+  --right-wing-second-x: 100;
+  --right-wing-second-y: 0;
+  --right-wing-third-x: 100;
+  --right-wing-third-y: 100;
+  --right-body-background: var(--primary);
+  --right-body-first-x: 50;
+  --right-body-first-y: 0;
+  --right-body-second-x: 50;
+  --right-body-second-y: 100;
+  --right-body-third-x: 100;
+  --right-body-third-y: 100;
+  overflow: visible;
+  display: block;
+  cursor: pointer;
+  position: relative;
+  border: 0;
+  padding: 8px 0;
+  min-width: 100px;
+  text-align: center;
+  margin: 0;
+  line-height: 24px;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 14px;
+  background: none;
+  outline: none;
+  color: var(--text);
+  transform: rotate(calc(var(--rotate) * 1deg)) translateZ(0);
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.button-sent-demo-request .left,
+.button-sent-demo-request .right {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  opacity: var(--plane-opacity);
+  transform: translate(calc(var(--plane-x) * 1px), calc(var(--plane-y) * 1px)) translateZ(0);
+}
+.button-sent-demo-request .left:before,
+.button-sent-demo-request .left:after,
+.button-sent-demo-request .right:before,
+.button-sent-demo-request .right:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: calc(var(--border-radius) * 1px);
+  transform: translate(var(--x, .4%), var(--y, 0)) translateZ(0);
+  z-index: var(--z-index, 2);
+  background: var(--background, var(--left-wing-background));
+  clip-path: polygon(calc(var(--first-x, var(--left-wing-first-x)) * 1%) calc(var(--first-y, var(--left-wing-first-y)) * 1%), calc(var(--second-x, var(--left-wing-second-x)) * 1%) calc(var(--second-y, var(--left-wing-second-y)) * 1%), calc(var(--third-x, var(--left-wing-third-x)) * 1%) calc(var(--third-y, var(--left-wing-third-y)) * 1%));
+}
+.button-sent-demo-request .left:after {
+  --x: 0;
+  --z-index: 1;
+  --background: var(--left-body-background);
+  --first-x: var(--left-body-first-x);
+  --first-y: var(--left-body-first-y);
+  --second-x: var(--left-body-second-x);
+  --second-y: var(--left-body-second-y);
+  --third-x: var(--left-body-third-x);
+  --third-y: var(--left-body-third-y);
+}
+.button-sent-demo-request .right:before {
+  --x: -.4%;
+  --z-index: 2;
+  --background: var(--right-wing-background);
+  --first-x: var(--right-wing-first-x);
+  --first-y: var(--right-wing-first-y);
+  --second-x: var(--right-wing-second-x);
+  --second-y: var(--right-wing-second-y);
+  --third-x: var(--right-wing-third-x);
+  --third-y: var(--right-wing-third-y);
+}
+.button-sent-demo-request .right:after {
+  --x: 0;
+  --z-index: 1;
+  --background: var(--right-body-background);
+  --first-x: var(--right-body-first-x);
+  --first-y: var(--right-body-first-y);
+  --second-x: var(--right-body-second-x);
+  --second-y: var(--right-body-second-y);
+  --third-x: var(--right-body-third-x);
+  --third-y: var(--right-body-third-y);
+}
+.button-sent-demo-request span {
+  display: block;
+  position: relative;
+  z-index: 4;
+  opacity: var(--text-opacity);
+}
+.button-sent-demo-request span.success {
+  z-index: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -20px;
+  transform: rotate(calc(var(--rotate) * -1deg)) scale(var(--success-scale)) translateZ(0);
+  opacity: var(--success-opacity);
+  color: var(--success);
+  width: fit-content;
+}
+
+/* ====================================
+   Media Queries
+   ==================================== */
+@media (max-width:2000px) {
+  .slide1 .info-box-fiber-1-2 {
+    left: 55%;
+  }
+}
+
+@media (max-width:1900px) {
+  .slide1 .info-box-fiber-2 {
+    left: 60%;
+  }
+  .info-box-fiber-2-button-wrapper {
+    width: 24vw;
+  }
+}
+
+@media (max-width:1700px) {
+  .slide1 .info-box-fiber-1-2 {
+    left: 50%;
+  }
+  .info-box-fiber-2-button-wrapper {
+    width: 26vw;
+  }
+  .slide1 .schedule-demo-container {
+    width: 21vw;
+  }
+}
+
+@media (max-width:1500px) {
+  .slide1 .info-box-fiber-1-2 {
+    left: 45%;
+  }
+  .slide1 .content-section .svg-animation-words {
+    height: 100vh;
+  }
+  .slide1 .content-wrapper {
+    gap: 70px;
+  }
+  .slide1 .info-box-fiber-2 {
+    left: 50%;
+  }
+  .info-box-fiber-2-button-wrapper {
+    width: 29vw;
+  }
+}
+
+@media (max-width:1400px) {
+  .slide1 .schedule-demo-container {
+    width: 25vw;
+  }
+}
+
+@media (max-width:1300px) {
+  .slide1 .info-box-fiber-1-2 {
+    left: 40%;
+  }
+  .info-box-fiber-2-button-wrapper {
+    width: 33vw;
+  }
+}
+
+@media (max-width:1150px) {
+  .slide1 .info-box-fiber-1-2 {
+    left: 32%;
+  }
+  .info-box-fiber-2-button-wrapper {
+    width: 35vw;
+  }
+  .slide1 .schedule-demo-container {
+    width: 40vw;
+  }
+}
+
+@media (max-width:1050px) {
+  .slide1 .info-box-fiber-1-2 {
+    left: 25%;
+  }
+  .slide1 .fiberflow-hero h1 {
+    font-size: 11rem;
+  }
+  .info-box-fiber-2-button-wrapper {
+    width: 43vw;
+  }
+  .slide1 .info-box-fiber-2-button-wrapper {
+    justify-content: space-between;
+  }
+}
+
+@media (max-width:1000px) {
+  .info-box-fiber-2-button-wrapper {
+    width: 42vw;
+  }
+}
+
+@media (max-width:900px) {
+  .slide1 .info-box-fiber-1-2 {
+    left: 18%;
+  }
+  .slide1 .info-box-fiber-2 {
+    left: 10%;
+  }
+  .slide1 .fiberflow-hero h1 {
+    font-size: 10rem;
+  }
+  .info-box-fiber-2-button-wrapper {
+    width: 48vw;
+  }
+}
+
+@media (max-width:850px) {
+  .slide1 .info-box-fiber-1-1 {
+    max-width: 90vw;
+  }
+  .slide1 .info-box-fiber-1-2 {
+    left: 0%;
+    max-width: 90vw;
+  }
+  .slide1 .info-box-fiber-1-3 {
+    max-width: 90vw;
+  }
+  .slide1 .info-box-fiber-2 .contact-container {
+    margin-left: -15%;
+  }
+  .slide1 .info-box-fiber-2 {
+    left: 10%;
+    max-width: 80vw;
+  }
+  .slide1 .fiberflow-hero h1 {
+    font-size: 9rem;
+  }
+  .info-box-fiber-2-button-wrapper {
+    width: 55vw;
+    justify-content: space-around;
+  }
+  .slide1 .info-box-fiber-2-button-wrapper {
+    width: 75vw;
+  }
+}
+
+@media (max-width:666px) {
+  .slide1 .fiberflow-hero h1 {
+    font-size: 8rem;
+  }
+  .info-box-fiber-2-button-wrapper {
+    width: 60vw;
+  }
+  .slide1 .product-selection-span {
+    font-size: 20px;
+  }
+  .slide1 .product-toggle {
+    width: 23%;
+  }
+}
+
+@media (max-width:570px) {
+  .slide1 .fiberflow-hero h1 {
+    font-size: 7rem;
+  }
+  .info-box-fiber-2-button-wrapper {
+    width: 70vw;
+  }
+}
+
+@media (max-width:500px) {
+  .slide1 .fiberflow-hero h1 {
+    font-size: 6rem;
+  }
+  .info-box-fiber-2-button-wrapper {
+    width: 83vw;
+  }
+  .slide1 .product-toggle {
+    width: 24%;
+  }
+  .slide1 .product-selection-span {
+    font-size: 18px;
+  }
+}
+
