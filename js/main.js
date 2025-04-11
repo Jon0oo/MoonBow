@@ -1,10 +1,4 @@
 import '../css/global.css';
-import '../css/slideFastIt.css';
-import '../css/slideFactoryIt.css';
-import '../css/slideFiberFlow.css';
-import '../css/slideSmartLink.css';
-
-
 
 
 
@@ -12,9 +6,6 @@ import '../css/slideSmartLink.css';
 
 
 import { observeSlides, setupDotNavigation,updateIndicatorPosition } from './animations.js';
-
-
-
 
 // Überprüfen, ob der <base>-Tag bereits existiert
 let baseTag = document.querySelector('base');
@@ -24,9 +15,6 @@ if (!baseTag) {
 }
 // 
 baseTag.href = '/';
-
-
-
 
 document.addEventListener('DOMContentLoaded', function () {
     setupDropdowns();
@@ -44,15 +32,6 @@ document.addEventListener('DOMContentLoaded', function () {
           loginLink.href = `/html/signin.html`;
         }
       
-      
-
-
-
-
-
-
-
-
 
     // Check for slide parameter in URL
     const params = new URLSearchParams(window.location.search);
@@ -61,8 +40,6 @@ document.addEventListener('DOMContentLoaded', function () {
         navigateToSlide(slideId);
     }
 });
-
-
 
 // Function to handle smooth scrolling to a slide
 function navigateToSlide(slideId) {
@@ -80,15 +57,6 @@ function navigateToSlide(slideId) {
         }
     }
 }
-
-
-
-
-
-
-
-
-
 
 
 // Opens a dropdown while closing any other open dropdowns.
@@ -130,9 +98,7 @@ function setupDropdowns() {
 }
 
 
-
-
-
+// Initializes dropdown navigation for slides.
 function setupDropdownSlideNavigation() {
     const dropdownLinks = document.querySelectorAll('.dropdown a[data-slide]');
     dropdownLinks.forEach(link => {
@@ -160,17 +126,6 @@ function setupDropdownSlideNavigation() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 // Scroll smoothly to the slide.
 export function scrollToSlide(event, slideId) {
     event.preventDefault();
@@ -191,11 +146,7 @@ function setupDotClickHandlers() {
     });
 }
 
-
-
-
-
-
+// Adjusts the size of slides based on window size.
 function adjustSlides() {
     const slides = document.querySelectorAll('.slide');
     const slidesContainer = document.querySelector('.slides-container');

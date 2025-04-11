@@ -1,3 +1,8 @@
+// Import the CSS file for this component
+import '../css/slideFastIt.css';
+
+
+
 import gsap from "../node_modules/gsap/index.js";
 
 // Import images and variants; in this example, each box will have an array of images.
@@ -9,36 +14,43 @@ import image1c from '../images/slide3Image1-2.webp';
 import image2a from '../images/slide3Image2.webp';
 import image2b from '../images/slide3Image2-1.webp';
 import image2c from '../images/slide3Image2-2.webp';
+import image2d from '../images/slide3Image2-3.webp';
 
 import image3a from '../images/slide3Image3.webp';
 import image3b from '../images/slide3Image3-1.webp';
 import image3c from '../images/slide3Image3-2.webp';
 
+
 import image4a from '../images/slide3Image4.webp';
 import image4b from '../images/slide3Image4-1.webp';
 import image4c from '../images/slide3Image4-2.webp';
+import image4d from '../images/slide3Image4-3.webp';
+import image4e from '../images/slide3Image4-4.webp';
+
+
 
 // Structure each box's images as an array of variants
 const images = [
   [ image1a, image1b, image1c ],
-  [ image2a, image2b, image2c ],
+  [ image2a, image2b, image2c, image2d ],
   [ image3a, image3b, image3c ],
-  [ image4a, image4b, image4c ],
+  [ image4a, image4b, image4c, image4d, image4e  ],
 ];
 
 const originalTexts = [
-  'Streamlined IT Management',
+  'Sleek IT Control',
   'Accelerate Digital Workflows',
   'Intelligent Automation',
-  'Future-Proof Your IT'
+  'Future- Proof Your IT'
 ];
 
 const hoverTexts = [
-  '         Experience effortless control with FastIT’s intuitive design that simplifies your internal communications while enhancing overall operational efficiency.',
-  '         Boost productivity with smart, high-performance tools that fast-track your digital processes and keep your business moving at the speed of innovation.',
-  '         Discover how FastIT leverages automation to minimize manual tasks—providing precision, reducing errors, and freeing up your team to focus on core initiatives.',
-  '         Embrace tomorrow’s technology today with solutions that adapt to evolving IT landscapes, ensuring seamless integration with emerging innovations like AI and IoT.'
+  '           <span class="quote-mark">❝</span>      Experience effortless control with FastIT’s intuitive design that simplifies your internal communications while enhancing overall operational efficiency.      <span class="quote-mark">❞</span>',
+  '           <span class="quote-mark">❝</span>      Boost productivity with smart, high-performance tools that fast-track your digital processes and keep your business moving at the speed of innovation.      <span class="quote-mark">❞</span>',
+  '           <span class="quote-mark">❝</span>      Discover how FastIT leverages automation to minimize manual tasks—providing precision, reducing errors, and freeing up your team to focus on core initiatives.      <span class="quote-mark">❞</span>',
+  '           <span class="quote-mark">❝</span>      Embrace tomorrow’s technology today with solutions that adapt to evolving IT landscapes, ensuring seamless integration with emerging innovations like AI and IoT.      <span class="quote-mark">❞</span>'
 ];
+
 
 let modalComponentPromise;
 function loadModalComponent() {
@@ -54,6 +66,50 @@ function loadModalComponent() {
   }
   return modalComponentPromise;
 }
+
+
+
+
+
+
+
+
+
+// Cache for preloaded images
+const preloadedImages = new Map();
+
+function preloadImagesDuringIdle(imagesArray) {
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(() => {
+      imagesArray.flat().forEach(src => {
+        const img = new Image();
+        img.src = src;
+        preloadedImages.set(src, img); // Cache the image object
+      });
+    });
+  } else {
+    setTimeout(() => {
+      imagesArray.flat().forEach(src => {
+        const img = new Image();
+        img.src = src;
+        preloadedImages.set(src, img);
+      });
+    }, 2000);
+  }
+}
+
+// Call this early
+preloadImagesDuringIdle(images);
+
+
+
+
+
+
+
+
+
+
 
 document.addEventListener('DOMContentLoaded', () => {
   const cursor = document.getElementById('custom-cursor');
@@ -127,8 +183,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let hoverOutOverlayTimer = null;
   let hoverOutBoxTimer = null;
   const hoverInDelay = 100;
-  const hoverOutOverlayDelay = 200;
-  const hoverOutBoxDelay = 400;
+  const hoverOutOverlayDelay = 100;
+  const hoverOutBoxDelay = 100;
 
   // Clear any pending timeouts when needed
   function clearAllTimers() {
@@ -175,9 +231,30 @@ document.addEventListener('DOMContentLoaded', () => {
         if (headlineEl) headlineEl.style.display = 'none';
         if (hoverTextEl) {
           hoverTextEl.style.display = 'block';
-          hoverTextEl.textContent = hoverTexts[index];
+          hoverTextEl.innerHTML = hoverTexts[index];
+
         }
-        overlay.style.backgroundImage = `url(${imageToShow})`;
+
+
+        const preloaded = preloadedImages.get(imageToShow);
+        if (preloaded && preloaded.complete) {
+          // It was preloaded and is ready
+          overlay.style.backgroundImage = `url(${imageToShow})`;
+        } else {
+          // Fallback if it wasn't cached properly
+          const fallbackImg = new Image();
+          fallbackImg.src = imageToShow;
+          fallbackImg.onload = () => {
+            overlay.style.backgroundImage = `url(${imageToShow})`;
+          };
+        }
+        
+
+
+
+
+
+
         overlay.style.opacity = 1;
         container.classList.add('hover-active');
       }, hoverInDelay);

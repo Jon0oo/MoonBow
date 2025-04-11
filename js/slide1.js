@@ -1,3 +1,9 @@
+// Importing the CSS file for styling
+import '../css/slideFiberFlow.css';
+
+
+
+
 import { gsap } from "gsap"; // assuming gsap is bundled via Parcel or similar
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CustomEase } from "gsap/CustomEase";

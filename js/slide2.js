@@ -1,3 +1,7 @@
+// Importing necessary styles
+import '../css/slideSmartLink.css';
+
+
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
