@@ -74,13 +74,23 @@ module.exports = {
             },
         ],
     },
-      {
-        test: /\.(png|jpe?g|gif|svg|webp)$/i,
-        type: 'asset/resource',
-        generator: {
-          filename: 'images/[hash][ext][query]',
-        },
-      },
+      // For images
+{
+  test: /\.(png|jpe?g|gif|svg|webp)$/i,
+  type: 'asset/resource',
+  generator: {
+    filename: 'images/[hash][ext][query]',
+  },
+},
+// For videos
+{
+  test: /\.(mp4|webm)$/i,
+  type: 'asset/resource',
+  generator: {
+    filename: 'videos/[hash][ext][query]',  // <--- now videos go into /videos/
+  },
+},
+
       {
         test: /\.html$/,
         use: 'html-loader',

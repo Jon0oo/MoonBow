@@ -52,6 +52,7 @@ const hoverTexts = [
 ];
 
 
+
 let modalComponentPromise;
 function loadModalComponent() {
   if (!modalComponentPromise) {
@@ -67,15 +68,6 @@ function loadModalComponent() {
   return modalComponentPromise;
 }
 
-
-
-
-
-
-
-
-
-// Cache for preloaded images
 const preloadedImages = new Map();
 
 function preloadImagesDuringIdle(imagesArray) {
@@ -84,7 +76,7 @@ function preloadImagesDuringIdle(imagesArray) {
       imagesArray.flat().forEach(src => {
         const img = new Image();
         img.src = src;
-        preloadedImages.set(src, img); // Cache the image object
+        preloadedImages.set(src, img);
       });
     });
   } else {
@@ -98,20 +90,11 @@ function preloadImagesDuringIdle(imagesArray) {
   }
 }
 
-// Call this early
 preloadImagesDuringIdle(images);
 
-
-
-
-
-
-
-
-
-
-
 document.addEventListener('DOMContentLoaded', () => {
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
   const cursor = document.getElementById('custom-cursor');
   const cursorInner = document.querySelector('.cursor-inner');
   const slide3 = document.getElementById('slide3');
@@ -129,55 +112,56 @@ document.addEventListener('DOMContentLoaded', () => {
     entries.forEach(entry => {
       if (entry.target.id === 'slide3') {
         slide3Active = entry.isIntersecting;
-        if (slide3Active) {
+        if (slide3Active && !isMobile) {
           cursor.style.display = 'flex';
           document.body.classList.add('cursor-none');
         } else {
           cursor.style.display = 'none';
           document.body.classList.remove('cursor-none');
           isClickable = false;
-          targetScale = 1;
+          targetScale = 3;
         }
       }
     });
   }, { threshold: 0.6 });
   if (slide3) observer.observe(slide3);
 
-  document.addEventListener('mousemove', (e) => {
-    if (!slide3Active) return;
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-  });
+  if (!isMobile) {
+    document.addEventListener('mousemove', (e) => {
+      if (!slide3Active) return;
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
 
-  document.addEventListener('mouseover', (e) => {
-    if (!slide3Active) return;
-    const isNowClickable = !!e.target.closest('a, button, .nav-dot, [role="button"], .box');
-    if (isNowClickable !== isClickable) {
-      isClickable = isNowClickable;
-      targetScale = isClickable ? 20 : 3;
-      cursorInnerIsActive = isNowClickable;
-      cursorInner.style.opacity = cursorInnerIsActive ? '1' : '0';
-    }
-  });
+    document.addEventListener('mouseover', (e) => {
+      if (!slide3Active) return;
+      const isNowClickable = !!e.target.closest('a, button, .nav-dot, [role="button"], .box');
+      if (isNowClickable !== isClickable) {
+        isClickable = isNowClickable;
+        targetScale = isClickable ? 20 : 3;
+        cursorInnerIsActive = isNowClickable;
+        cursorInner.style.opacity = cursorInnerIsActive ? '1' : '0';
+      }
+    });
 
-  function animateCursor() {
-    if (!cursor || !slide3Active) {
+    function animateCursor() {
+      if (!cursor || !slide3Active) {
+        requestAnimationFrame(animateCursor);
+        return;
+      }
+      currentX += (mouseX - currentX) * speed;
+      currentY += (mouseY - currentY) * speed;
+      scale += (targetScale - scale) * speed;
+      cursor.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) scale(${scale})`;
       requestAnimationFrame(animateCursor);
-      return;
     }
-    currentX += (mouseX - currentX) * speed;
-    currentY += (mouseY - currentY) * speed;
-    scale += (targetScale - scale) * speed;
-    cursor.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) scale(${scale})`;
-    requestAnimationFrame(animateCursor);
+    animateCursor();
   }
-  animateCursor();
 
   const container = document.querySelector('.boxes-container');
   const overlay = document.querySelector('.hover-background');
   const boxes = container.querySelectorAll('.box');
 
-  // State tracking timers and hovered box for overlay transitions
   let currentHoveredBox = null;
   let hoverInTimer = null;
   let hoverOutOverlayTimer = null;
@@ -186,15 +170,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const hoverOutOverlayDelay = 100;
   const hoverOutBoxDelay = 100;
 
-  // Clear any pending timeouts when needed
   function clearAllTimers() {
     clearTimeout(hoverInTimer);
     clearTimeout(hoverOutOverlayTimer);
     clearTimeout(hoverOutBoxTimer);
   }
 
-  // Instead of updating innerHTML on every event,
-  // set static markup for each box with two spans:
   boxes.forEach((box, index) => {
     box.innerHTML = `
       <span class="span-box-head">${originalTexts[index]}</span>
@@ -202,29 +183,25 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
   });
 
-  // Maintain an index for the variant per box.
-  // Initially, each box starts at variant index 0.
   const variantIndices = Array(images.length).fill(0);
 
   boxes.forEach((box, index) => {
-    box.addEventListener('pointerenter', () => {
+    const triggerEvent = isMobile ? 'click' : 'pointerenter';
+    const endEvent = isMobile ? null : 'pointerleave';
+
+    box.addEventListener(triggerEvent, () => {
       clearAllTimers();
-      // Get current variant index for this box and decide on image.
       let currentVariantIndex = variantIndices[index];
       const imageToShow = images[index][currentVariantIndex];
-      // Update the variant index by cycling through the available images.
       variantIndices[index] = (currentVariantIndex + 1) % images[index].length;
 
-      hoverInTimer = setTimeout(() => {
-        // Reset all boxes: show headlines and hide hover texts.
+      if (!box.classList.contains('is-hovered')) {
         boxes.forEach((b, i) => {
           b.classList.remove('is-hovered');
-          const headEl = b.querySelector('.span-box-head');
-          const hoverEl = b.querySelector('.span-box-text');
-          if (headEl) headEl.style.display = 'block';
-          if (hoverEl) hoverEl.style.display = 'none';
+          b.querySelector('.span-box-head').style.display = 'block';
+          b.querySelector('.span-box-text').style.display = 'none';
         });
-        // For the hovered box, hide the headline and show the hover text.
+
         box.classList.add('is-hovered');
         const headlineEl = box.querySelector('.span-box-head');
         const hoverTextEl = box.querySelector('.span-box-text');
@@ -232,54 +209,51 @@ document.addEventListener('DOMContentLoaded', () => {
         if (hoverTextEl) {
           hoverTextEl.style.display = 'block';
           hoverTextEl.innerHTML = hoverTexts[index];
-
         }
-
 
         const preloaded = preloadedImages.get(imageToShow);
         if (preloaded && preloaded.complete) {
-          // It was preloaded and is ready
           overlay.style.backgroundImage = `url(${imageToShow})`;
         } else {
-          // Fallback if it wasn't cached properly
           const fallbackImg = new Image();
           fallbackImg.src = imageToShow;
           fallbackImg.onload = () => {
             overlay.style.backgroundImage = `url(${imageToShow})`;
           };
         }
-        
-
-
-
-
-
 
         overlay.style.opacity = 1;
         container.classList.add('hover-active');
-      }, hoverInDelay);
-
-      currentHoveredBox = box;
+        currentHoveredBox = box;
+      } else if (isMobile) {
+        box.classList.remove('is-hovered');
+        box.querySelector('.span-box-head').style.display = 'block';
+        box.querySelector('.span-box-text').style.display = 'none';
+        overlay.style.opacity = 0;
+        container.classList.remove('hover-active');
+      }
     });
 
-    box.addEventListener('pointerleave', () => {
-      hoverOutOverlayTimer = setTimeout(() => {
-        if (![...boxes].some(b => b.matches(':hover'))) {
-          overlay.style.opacity = 0;
-          container.classList.remove('hover-active');
-        }
-      }, hoverOutOverlayDelay);
+    if (endEvent) {
+      box.addEventListener(endEvent, () => {
+        hoverOutOverlayTimer = setTimeout(() => {
+          if (![...boxes].some(b => b.matches(':hover'))) {
+            overlay.style.opacity = 0;
+            container.classList.remove('hover-active');
+          }
+        }, hoverOutOverlayDelay);
 
-      hoverOutBoxTimer = setTimeout(() => {
-        if (currentHoveredBox === box) {
-          box.classList.remove('is-hovered');
-          const headlineEl = box.querySelector('.span-box-head');
-          const hoverTextEl = box.querySelector('.span-box-text');
-          if (headlineEl) headlineEl.style.display = 'block';
-          if (hoverTextEl) hoverTextEl.style.display = 'none';
-          currentHoveredBox = null;
-        }
-      }, hoverOutBoxDelay);
-    });
+        hoverOutBoxTimer = setTimeout(() => {
+          if (currentHoveredBox === box) {
+            box.classList.remove('is-hovered');
+            const headlineEl = box.querySelector('.span-box-head');
+            const hoverTextEl = box.querySelector('.span-box-text');
+            if (headlineEl) headlineEl.style.display = 'block';
+            if (hoverTextEl) hoverTextEl.style.display = 'none';
+            currentHoveredBox = null;
+          }
+        }, hoverOutBoxDelay);
+      });
+    }
   });
 });
