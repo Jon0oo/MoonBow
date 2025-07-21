@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin'); 
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 
 module.exports = {
@@ -87,7 +88,7 @@ module.exports = {
   test: /\.(mp4|webm)$/i,
   type: 'asset/resource',
   generator: {
-    filename: 'videos/[hash][ext][query]',  // <--- now videos go into /videos/
+    filename: 'videos/[hash][ext][query]',
   },
 },
 
@@ -98,6 +99,20 @@ module.exports = {
     ],
   },
   plugins: [
+
+    new CopyWebpackPlugin({
+           patterns: [
+             {
+               from: path.resolve(__dirname, 'images/anim'),
+               // `to` is relative to your `output.path` (dist/)
+               // use [name][ext] so you get `frame_0001.webp` etc.
+               to: 'images/[name][ext]',
+               noErrorOnMissing: true,
+             },
+           ],
+         }),
+
+
     // Index page (loads everything except vision.js and history.js)
     new HtmlWebpackPlugin({
       template: 'index.html',
