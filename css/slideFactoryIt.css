@@ -42,7 +42,8 @@
   display: flex;
   gap: 30px;
   height: 80vh;
-  overflow: hidden;
+  overflow: visible;
+  position: relative;
 }
 
 .image-column {
@@ -51,6 +52,9 @@
   transition: flex 0.4s ease;
   border-radius: 15px;
   cursor: pointer;
+
+   transition: transform 0.4s ease, flex 0.4s ease;
+
   position: relative;
 }
 .deco-element {
@@ -67,7 +71,7 @@ align-content: center;
 .deco-element #deco1 {
   position: absolute;
   top: 115.5%;
-  left: 5%;
+  left: 4%;
   width: 2vw;
   height: auto;
   opacity: 1;
@@ -78,7 +82,7 @@ align-content: center;
 .deco-element #deco2 {
   position: absolute;
   top: 115.5%;
-  left: 93%;
+  left: 94%;
   width: 2vw;
   height: auto;
   opacity: 1;
@@ -157,4 +161,123 @@ align-content: center;
 
 }
 
+.image-column .overlay-hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(0, 0, 0, 55), rgba(0, 0, 0, 0.35));
+  opacity: 0; /* initially hidden */
+  transition: opacity 0.3s ease; /* smooth transition */
+}
+.image-column.right .overlay-hover {
+ background: linear-gradient(to left, rgba(0, 0, 0, 55), rgba(0, 0, 0, 0.35));
+}
 
+
+
+.image-column .overlay-hover2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(0, 0, 0, 95), rgba(0, 0, 0, 0.85));
+  opacity: 0; /* initially hidden */
+  transition: opacity 0.3s ease; /* smooth transition */
+}
+.image-column.right .overlay-hover2 {
+ background: linear-gradient(to left, rgba(0, 0, 0, 95), rgba(0, 0, 0, 0.85));
+}
+
+
+
+
+.image-column:hover .overlay-hover {
+  opacity: 1; /* show overlay on hover */
+}
+
+
+
+.image-column.active {
+  transform: scale(1.2);
+  z-index: 999;
+  
+}
+
+.image-column.inactive .overlay-hover2 {
+  opacity: 1; /* show overlay on hover */
+}
+
+
+
+
+.marker {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+
+.line {
+  position: absolute;
+  background-color: white;
+  border-radius: 1px;
+}
+
+/* Horizontal line */
+.line.horizontal {
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 0.5px;
+}
+
+/* Vertical line */
+.line.vertical {
+  top: 0;
+  left: 0;
+  width: 0.5px;
+  height: 12px;
+}
+
+/* Caps */
+.cap {
+  position: absolute;
+  background-color: white;
+  border-radius: 1px;
+}
+
+/* Horizontal cap: short vertical bar at the end of horizontal line */
+.cap-horizontal {
+  width: 0.5px;
+  height: 6px;
+  top: -2.5px;           /* move up by half cap thickness (2px / 2) */
+  left: 12px;          /* right end of horizontal line */
+}
+
+/* Vertical cap: short horizontal bar at the end of vertical line */
+.cap-vertical {
+  width: 6px;
+  height: 0.5px;
+  top: 12px;           /* bottom end of vertical line */
+  left: -2.5px;          /* move left by half cap thickness */
+}
+
+
+.marker.top-left {
+  transform: scale(5) rotate(0deg);
+}
+
+.marker.top-right {
+  transform: scale(5) rotate(90deg);
+}
+
+.marker.bottom-right {
+  transform: scale(5) rotate(180deg);
+}
+
+.marker.bottom-left {
+  transform: scale(5) rotate(270deg);
+}
