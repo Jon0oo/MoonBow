@@ -6,8 +6,13 @@ module.exports = {
       "./css/**/*.css",
     ],
     theme: {
-      extend: {},
+  extend: {
+    fontFamily: {
+      sans: ['var(--font-ppgatwick)', 'sans-serif'],
     },
+  },
+},
+
     plugins: [],
   };
   

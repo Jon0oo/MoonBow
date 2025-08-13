@@ -25,6 +25,11 @@ module.exports = {
     history: './js/history.js',
     signin:  './js/signin.js',
     admin:  './js/admin.js',
+    privacy:  './js/privacy.js',
+    cookies:  './js/cookies.js',
+    terms:  './js/terms.js',
+    legal:  './js/legal.js',
+    contact:  './js/contact.js',
   },
 
 
@@ -247,6 +252,145 @@ module.exports = {
 
 
     }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'html/privacy.html'),
+      filename: 'html/privacy.html',
+      chunks: ['main',  'privacy'],
+      
+      minify: {
+        html5                          : true,
+        collapseWhitespace             : true,
+        minifyCSS                      : true,
+        minifyJS                       : true,
+        minifyURLs                     : false,
+        removeComments                 : true,
+        removeEmptyAttributes          : true,
+        removeOptionalTags             : true,
+        // Remove attributes when value matches default.
+        removeRedundantAttributes      : true,
+        // Remove type="text/javascript" from script tags. 
+        // Other type attribute values are left intact
+        removeScriptTypeAttributes     : true,
+        // Remove type="text/css" from style and link tags. 
+        // Other type attribute values are left intact
+        removeStyleLinkTypeAttributes : true,
+        // Replaces the doctype with the short (HTML5) doctype
+        useShortDoctype                : true
+    }
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'html/cookies.html'),
+      filename: 'html/cookies.html',
+      chunks: ['main',  'cookies' ],
+
+      minify: {
+        html5                          : true,
+        collapseWhitespace             : true,
+        minifyCSS                      : true,
+        minifyJS                       : true,
+        minifyURLs                     : false,
+        removeComments                 : true,
+        removeEmptyAttributes          : true,
+        removeOptionalTags             : true,
+        // Remove attributes when value matches default.
+        removeRedundantAttributes      : true,
+        // Remove type="text/javascript" from script tags. 
+        // Other type attribute values are left intact
+        removeScriptTypeAttributes     : true,
+        // Remove type="text/css" from style and link tags. 
+        // Other type attribute values are left intact
+        removeStyleLinkTypeAttributes : true,
+        // Replaces the doctype with the short (HTML5) doctype
+        useShortDoctype                : true
+    }
+
+
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'html/terms.html'),
+      filename: 'html/terms.html',
+      chunks: ['main',  'terms' ],
+
+      minify: {
+        html5                          : true,
+        collapseWhitespace             : true,
+        minifyCSS                      : true,
+        minifyJS                       : true,
+        minifyURLs                     : false,
+        removeComments                 : true,
+        removeEmptyAttributes          : true,
+        removeOptionalTags             : true,
+        // Remove attributes when value matches default.
+        removeRedundantAttributes      : true,
+        // Remove type="text/javascript" from script tags. 
+        // Other type attribute values are left intact
+        removeScriptTypeAttributes     : true,
+        // Remove type="text/css" from style and link tags. 
+        // Other type attribute values are left intact
+        removeStyleLinkTypeAttributes : true,
+        // Replaces the doctype with the short (HTML5) doctype
+        useShortDoctype                : true
+    }
+
+
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'html/legal.html'),
+      filename: 'html/legal.html',
+      chunks: ['main',  'legal' ],
+
+      minify: {
+        html5                          : true,
+        collapseWhitespace             : true,
+        minifyCSS                      : true,
+        minifyJS                       : true,
+        minifyURLs                     : false,
+        removeComments                 : true,
+        removeEmptyAttributes          : true,
+        removeOptionalTags             : true,
+        // Remove attributes when value matches default.
+        removeRedundantAttributes      : true,
+        // Remove type="text/javascript" from script tags. 
+        // Other type attribute values are left intact
+        removeScriptTypeAttributes     : true,
+        // Remove type="text/css" from style and link tags. 
+        // Other type attribute values are left intact
+        removeStyleLinkTypeAttributes : true,
+        // Replaces the doctype with the short (HTML5) doctype
+        useShortDoctype                : true
+    }
+
+
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'html/contact.html'),
+      filename: 'html/contact.html',
+      chunks: ['main',  'contact' ],
+
+      minify: {
+        html5                          : true,
+        collapseWhitespace             : true,
+        minifyCSS                      : true,
+        minifyJS                       : true,
+        minifyURLs                     : false,
+        removeComments                 : true,
+        removeEmptyAttributes          : true,
+        removeOptionalTags             : true,
+        // Remove attributes when value matches default.
+        removeRedundantAttributes      : true,
+        // Remove type="text/javascript" from script tags. 
+        // Other type attribute values are left intact
+        removeScriptTypeAttributes     : true,
+        // Remove type="text/css" from style and link tags. 
+        // Other type attribute values are left intact
+        removeStyleLinkTypeAttributes : true,
+        // Replaces the doctype with the short (HTML5) doctype
+        useShortDoctype                : true
+    }
+
+
+    }),
+    
     new MiniCssExtractPlugin({
       filename: 'css/[name].css', // Creates a main.css file (and others if multiple entry points exist)
     }),

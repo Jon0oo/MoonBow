@@ -1,0 +1,134 @@
+@font-face {
+    font-family: "GatwickFont";
+    src: url("../fonts/PPGatwick-GliderSemibold.woff2") format("woff2"),
+         url("../fonts/PPGatwick-GliderSemibold.woff") format("woff");
+}
+
+body {
+  background: #e7e8e9;
+  font-family: GatwickFont, sans-serif;
+}
+
+.lock-section {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10%;
+  position: relative; /* needed for absolute locks */
+}
+
+.lock-icon {
+  cursor: pointer;
+  position: relative;
+}
+
+/* Toggle switch styling */
+.toggle {
+  background-color: #ddddde;
+  border-radius: 60px;
+  box-shadow:
+    0 1px 1px 0 rgba(255, 255, 255, 0.4),
+    0 1px 0 0 rgba(0, 0, 0, 0.1) inset;
+  cursor: pointer;
+  width: 152px;
+  height: 76px;
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.25s linear;
+  transform: scale(2);
+  overflow: visible;
+}
+
+.lock-section .toggle .slide {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 66px !important; 
+  height: 66px !important;
+  border-radius: 50%;
+  background: #efefef;
+  color: rgba(0, 0, 0, 0.15);
+  font-size: 30px;
+  line-height: 66px;
+  text-align: center;
+  box-shadow:
+    0 1px 2px 0 rgba(0, 0, 0, 0.15),
+    0 1px 1px 0 rgba(255, 255, 255, 0.8) inset;
+  transition: left 0.4s cubic-bezier(0.43, 1.3, 0.86, 1), color 0.4s;
+  z-index: 999;
+  
+}
+
+.toggle.on {
+  background-color: #00dc00;
+}
+
+.toggle.on .slide {
+  left: 80px;
+  color: #00d100;
+}
+.footer,
+.nav-container,
+.lock-section {
+
+ 
+  transition: opacity 0.5s ease, display 0s linear 0.5s; /* delay display change */
+}
+.footer{
+  z-index: 1000; 
+}
+.footer.invisible{
+  display: none; /* hide immediately */
+  opacity: 0; /* fade out */
+}
+.nav-container.invisible,
+.lock-section.invisible {
+  opacity: 0;
+  
+  pointer-events: none; /* prevent clicks while hidden */
+
+}
+.footery.visible,
+.nav-container.visible,
+.lock-section.visible {
+  display: block;
+}
+
+/* Lock styling with fade effect */
+.lock-open,
+.lock-closed {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.5s ease;
+}
+
+.lock-open {
+  left: 30%;
+  opacity: 1; /* hidden initially */
+  pointer-events: none; /* avoid accidental clicks */
+}
+
+.lock-closed {
+  left: 70%;
+  opacity: 0; /* visible initially */
+  transition: left 0.8s cubic-bezier(0.68, -0.25, 0.57, 1.45); /* overshoot effect */
+}
+
+.lock.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.lock.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Optional: scale SVGs responsively */
+.lock-open svg,
+.lock-closed svg {
+  width: 200px; /* or adjust as needed */
+  height: auto;
+}

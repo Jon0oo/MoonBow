@@ -53,8 +53,9 @@
   border-radius: 15px;
   cursor: pointer;
 
-   transition: transform 0.4s ease, flex 0.4s ease;
-
+  transition: transform 0.4s ease, z-index 0s, flex 0.4s ease;
+  
+  z-index: 1;
   position: relative;
 }
 .deco-element {
@@ -161,20 +162,85 @@ align-content: center;
 
 }
 
+/* container left intact, remove direct background (we use pseudo-layers) */
 .image-column .overlay-hover {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to right, rgba(0, 0, 0, 55), rgba(0, 0, 0, 0.35));
-  opacity: 0; /* initially hidden */
-  transition: opacity 0.3s ease; /* smooth transition */
-}
-.image-column.right .overlay-hover {
- background: linear-gradient(to left, rgba(0, 0, 0, 55), rgba(0, 0, 0, 0.35));
+  inset: 0;
+  background: none;              /* gradient moved to pseudo-elements */
+  opacity: 0;                     /* keep your initial hidden state */
+  transition: opacity 0.3s ease;  /* same container opacity transition */
+  pointer-events: none;
 }
 
+/* shared pseudo-layer setup */
+.image-column .overlay-hover::before,
+.image-column .overlay-hover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease; /* crossfade timing (changeable) */
+  will-change: opacity;
+  z-index: 0;
+}
+
+/* -----------------------
+   LEFT / default columns
+   (fade comes from left -> use `to right`)
+   ----------------------- */
+/* default (non-active) layer */
+.image-column .overlay-hover::before {
+  opacity: 1;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.7) 30%,
+    rgba(0, 0, 0, 0.15) 100%
+  );
+}
+
+/* active (intensified) layer, same direction */
+.image-column .overlay-hover::after {
+  opacity: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.8) 50%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+}
+
+/* -----------------------
+   RIGHT columns
+   (fade comes from right -> use `to left`)
+   ----------------------- */
+.image-column.right .overlay-hover::before {
+  background: linear-gradient(
+    to left,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.7) 30%,
+    rgba(0, 0, 0, 0.15) 100%
+  );
+}
+
+.image-column.right .overlay-hover::after {
+  background: linear-gradient(
+    to left,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.8) 50%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+}
+
+/* -----------------------
+   Active crossfade: show ::after, hide ::before
+   ----------------------- */
+.image-column.active .overlay-hover::after {
+  opacity: 1;
+}
+.image-column.active .overlay-hover::before {
+  opacity: 0;
+}
 
 
 .image-column .overlay-hover2 {
@@ -186,6 +252,7 @@ align-content: center;
   background: linear-gradient(to right, rgba(0, 0, 0, 95), rgba(0, 0, 0, 0.85));
   opacity: 0; /* initially hidden */
   transition: opacity 0.3s ease; /* smooth transition */
+  z-index: 100;
 }
 .image-column.right .overlay-hover2 {
  background: linear-gradient(to left, rgba(0, 0, 0, 95), rgba(0, 0, 0, 0.85));
@@ -203,6 +270,7 @@ align-content: center;
 .image-column.active {
   transform: scale(1.2);
   z-index: 999;
+   transition: transform 0.4s ease, z-index 0s; /* instant z-index rise */
   
 }
 
@@ -211,7 +279,14 @@ align-content: center;
 }
 
 
-
+.image-column.active .animated-text {
+  transform: translateX(100%);
+  transition: transform 0.3s ease-out;
+}
+.image-column.left.active .animated-text {
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-out;
+}
 
 .marker {
   position: absolute;
@@ -280,4 +355,130 @@ align-content: center;
 
 .marker.bottom-left {
   transform: scale(5) rotate(270deg);
+}
+
+
+
+.image-column .animated-text-full {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 10px;       /* optional spacing from edges */
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: left;    /* align text to left */
+  transition: transform 0.3s ease-out;
+  opacity:0;
+  transform: translateX(-100%);         /* <- Set initial state */
+  transform-origin: left;  
+
+  height:100%;
+  padding:7%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+} 
+.image-column.left .animated-text-full {
+  transform: translateX(100%);         /* <- Set initial state */
+  
+}
+
+.image-column.active .animated-text-full {
+  opacity: 1;
+  transform: translateX(0%);
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+
+/* tune these to change size/positioning */
+.sentence {
+ --indent: -0.7rem;
+  --gap: -8.7rem;
+  --thickness: 2px;
+  --vert-height: 1.1em;
+  --vert-top: 0.2em;
+  position: relative;
+  display: block;
+  padding-left: var(--indent);
+  margin: 0 0 1rem 0;
+  color: inherit;
+  pointer-events: none;
+}
+
+/* HORIZONTAL part (runs under first line, right-edge sits at text start) */
+.sentence::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: calc(var(--vert-top) + var(--vert-height) - (var(--thickness) / 2));
+  width: calc(var(--indent) - var(--gap));
+  height: var(--thickness);
+  background: #fff;        /* white line */
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* VERTICAL part (the upright stroke, located at the right end of the horizontal) */
+.sentence::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--indent) - var(--gap) - (var(--thickness) / 2));
+  top: var(--vert-top);
+  width: var(--thickness);
+  height: var(--vert-height);
+  background: #fff;        /* white line */
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* -------------------------
+   Mirrored variant (horizontal goes left, vertical sits at the left end of text)
+   Apply by adding the `mirrored` class to .sentence
+   ------------------------- */
+.sentence.mirrored {
+  padding-left: 0;
+  padding-right: var(--indent); /* reserve same space on the right */
+}
+
+/* horizontal shifted to right edge */
+.sentence.mirrored::after {
+  left: auto;
+  right: 0;
+  top: calc(var(--vert-top) + var(--vert-height) - (var(--thickness) / 2));
+  width: calc(var(--indent) - var(--gap));
+  height: var(--thickness);
+  background: #fff;
+}
+
+/* vertical placed at the inner end of the horizontal (near the text start) */
+.sentence.mirrored::before {
+  left: auto;
+  right: calc(var(--indent) - var(--gap) - (var(--thickness) / 2));
+  top: var(--vert-top);
+  width: var(--thickness);
+  height: var(--vert-height);
+  background: #fff;
+}
+
+
+@media (max-width: 2500px) {
+  .image-column .animated-text-full {
+    font-size: 2.05rem; 
+  }
+}
+@media (max-width: 2000px) {
+.image-column .animated-text-full {
+    font-size: 1.5rem; 
+  }
+}
+@media (max-width: 768px) {
+.image-column .animated-text-full {
+    font-size: 1rem; 
+  }
+}
+@media (max-width: 500px) {
+.image-column .animated-text-full {
+    font-size: 0.8rem; 
+  }
 }

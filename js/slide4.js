@@ -55,15 +55,8 @@ imageColumns.forEach(column => {
 
 
 
-
-
-
-
-
-
-
-window.addEventListener("load", () => {
-  const markers = {
+function positionMarkers() {
+const markers = {
     "top-left": document.querySelector(".marker.top-left"),
     "top-right": document.querySelector(".marker.top-right"),
     "bottom-left": document.querySelector(".marker.bottom-left"),
@@ -106,5 +99,24 @@ window.addEventListener("load", () => {
       marker.style.top = top + offsetY + "px";
     }
   });
-});
+
+}
+
+
+function debounce(fn, delay) {
+  let timeout; 
+  return function (...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => fn.apply(this, args), delay);
+  };
+}
+
+
+// Run on load
+window.addEventListener("load", positionMarkers);
+
+// Run on resize with debounce
+window.addEventListener("resize", debounce(positionMarkers, 200));
+
+
 

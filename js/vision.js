@@ -22,7 +22,7 @@ if (window.location.pathname.endsWith("vision.html")) {
     // Split text into tokens (words, spaces, <br> tags)
     const tokens = fullText.split(/(<big>.*?<\/big>|\s+|<br\s*\/?>)/gi).filter(token => token !== "");
     let tokenIndex = 0;
-    const delay = 30; // Delay in ms between tokens
+    const delay = 1; // Delay in ms between tokens
 
     function typeWriter() {
         if (tokenIndex < tokens.length) {
