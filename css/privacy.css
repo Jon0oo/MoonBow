@@ -78,7 +78,8 @@ body {
 .footer{
   z-index: 1000; 
 }
-.footer.invisible{
+.footer.invisible,
+.footer-shadow.invisible{
   display: none; /* hide immediately */
   opacity: 0; /* fade out */
 }
@@ -90,6 +91,7 @@ body {
 
 }
 .footery.visible,
+.footer-shadow.visible,
 .nav-container.visible,
 .lock-section.visible {
   display: block;
@@ -106,14 +108,40 @@ body {
 
 .lock-open {
   left: 30%;
-  opacity: 1; /* hidden initially */
-  pointer-events: none; /* avoid accidental clicks */
+  opacity: 1;
+  pointer-events: auto; /* allow clicks if needed */
+  display: inline-block;
+  font-size: 48px;
+  
+  /* floating animation applied continuously */
+  animation: float 2s ease-in-out infinite alternate;
 }
+
+@keyframes float {
+  0% { transform: translate(-50%, -50%) translateY(0); }
+  100% { transform: translate(-50%, -50%) translateY(-15px); }
+}
+
+
+
+
+h1{
+  font-size:3.5rem;
+}
+
+
+
 
 .lock-closed {
   left: 70%;
   opacity: 0; /* visible initially */
   transition: left 0.8s cubic-bezier(0.68, -0.25, 0.57, 1.45); /* overshoot effect */
+  pointer-events: auto; /* allow clicks if needed */
+  display: inline-block;
+  font-size: 48px;
+  
+  /* floating animation applied continuously */
+  animation: float 2s ease-in-out infinite alternate;
 }
 
 .lock.visible {
@@ -131,4 +159,234 @@ body {
 .lock-closed svg {
   width: 200px; /* or adjust as needed */
   height: auto;
+}
+
+.text-privacy-wrapper {
+  display: flex;
+  width: 50%;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(245, 235, 220, 0.6); /* pastel beige with transparency */
+  backdrop-filter: blur(8px);           /* blur background behind it */
+  -webkit-backdrop-filter: blur(8px);   /* Safari support */
+  border-radius: 12px;                  /* rounded corners */
+  padding: 1rem; 
+  z-index: 999; /* bring above background */
+  opacity: 0; /* hidden by default */
+  display: none;
+  position: relative;
+  margin-top: -85vh;
+  margin-left: 5vw;
+  margin-bottom: 20vh;
+
+  /* Realistic depth shadow */
+  box-shadow: 
+    inset 0 10px 15px rgba(0, 0, 0, 0.2),   /* inner shadow for depth */
+    0 10px 20px rgba(0, 0, 0, 0.3),         /* main outer shadow */
+    0 5px 10px rgba(0, 0, 0, 0.2);          /* softer bottom fade */
+
+  transition: all 0.5s ease-in; /* smooth transitions */
+}
+.nav-container:hover .logo{
+  filter: brightness(10);
+  
+  } 
+.nav-container:hover{
+  z-index: 9999999999;
+}
+
+li{
+  padding-left:25px;
+  list-style-position: inside; 
+}
+
+
+
+
+
+
+
+
+/* Base styles */
+:root {
+  --text: #2B3044;
+  --line: #BBC1E1;
+  --line-active: #275EFE;
+}
+
+p {
+  font-size: 18px;
+  margin: 0;
+  
+}
+
+a.drip-link {
+  display: inline-block;
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+  margin: 0 var(--spacing, 0px);
+  transition: margin .25s;
+}
+
+a.drip-link svg {
+  width: 76px;
+  height: 40px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transform: translate(-50%, 7px) translateZ(0);
+  fill: none;
+  stroke: var(--stroke, var(--line));
+  stroke-linecap: round;
+  stroke-width: 3px;
+  stroke-dasharray: var(--offset, 69px) 278px;
+  stroke-dashoffset: 361px;
+  transition: stroke .25s ease var(--stroke-delay, 0s), stroke-dasharray .35s;
+  transform: scale(3);
+}
+
+a.drip-link:hover {
+  --spacing: 4px;
+  --stroke: var(--line-active);
+  --stroke-delay: .1s;
+  --offset: 180px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.text-privacy{
+  position: relative;
+  margin-left: 2vw;
+  
+}
+.bar-net {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 65%; /* target width */
+  height: 100%;
+  pointer-events: none;
+  z-index: 999;
+  overflow: hidden;
+  transform-origin: left center; /* grows from left */
+  transform: scaleX(0); /* start collapsed */
+}
+
+.bar-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Dark on left 15%, then fade to transparent on right */
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,0.8) 0%,
+    rgba(0,0,0,0.8) 10%,
+    rgba(0,0,0,0) 100%
+  );
+  opacity: 0;
+  transition: opacity 1.8s ease;
+}
+
+
+.bar {
+  position: absolute;
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,0.8) 0%,
+    rgba(0,0,0,0.8) 30%,
+    rgba(0,0,0,0) 100%
+  );
+  opacity: 0;
+  border-radius: 5px;
+}
+
+.bar.vertical {
+  width: 4px;
+  height: 100%;
+  transform: scaleY(0);
+  transform-origin: center center;
+}
+
+.bar.horizontal {
+  height: 4px;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+
+
+
+.footer-shadow {
+  position: relative;
+  width: 100%;
+  height: 70px;
+clip-path: polygon(0 100%, 15% 0, 85% 0, 100% 100%);
+  background: linear-gradient(to bottom, rgba(0,0,0,0.85), rgba(0,0,0,1));
+  
+  z-index: 9999;
+  overflow: visible;
+
+  /* inset shadow to make it look like it's going inside the screen */
+  box-shadow: inset 0 8px 15px rgba(0,0,0,0.5), 0 5px 10px rgba(0,0,0,0.3);
+}
+
+/* Top highlight to enhance slope */
+.footer-shadow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  clip-path: inherit;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.15), transparent);
+  pointer-events: none;
+}
+
+/* Extra depth shadow along slopes */
+.footer-shadow::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  clip-path: inherit;
+  background: linear-gradient(to right, rgba(0,0,0,0.5) 0%, transparent 15%, transparent 85%, rgba(0,0,0,0.5) 100%);
+  pointer-events: none;
+  z-index: -1; /* behind the footer */
+}
+
+
+
+
+
+.content-section hr {
+  border: none;
+  height: 2px;
+  background-color: #fff;
+  width: 100vw;
+  position: relative;
+  z-index: 99999;
 }
