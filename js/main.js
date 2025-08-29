@@ -1,5 +1,8 @@
 import '../css/global.css';
 
+import lottie from 'lottie-web';
+import animationData from '../assets/animation_mobile_desktop.json';
+
 
 
 
@@ -16,12 +19,48 @@ if (!baseTag) {
 // 
 baseTag.href = '/';
 
+
+
+
+
+const anim = lottie.loadAnimation({
+  container: document.getElementById('lottie-container'),
+  renderer: 'svg',
+  loop: true,
+  autoplay: false, // ❌ don't start immediately
+  animationData: animationData,
+});
+
+
+
+
 document.addEventListener('DOMContentLoaded', function () {
     setupDropdowns();
     setupDotClickHandlers();
     observeSlides();
     setupDotNavigation();
     setupDropdownSlideNavigation(); 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //handle animation for mobile block
+anim.goToAndStop(0, true); // build everything at frame 0
+  requestAnimationFrame(() => anim.play()); // ✅ start smoothly
+
+
+
 
 
 //handle footer links

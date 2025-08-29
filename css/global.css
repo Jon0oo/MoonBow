@@ -25,6 +25,70 @@
   /* Overlay for nav menu */
 
 
+
+
+  .mobile-block{
+    display:none;
+    justify-content: center;
+    z-index:999999;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+  }
+
+
+  .mobile-block h1{
+    color:white;
+    text-align: center;
+    
+    padding: 20px;
+  }
+
+
+
+
+  #lottie-container{
+    width:30vw;
+    height:30vh;
+  }
+
+  .mobile-block .block-container{
+    position:absolute;
+    width: 100vw;
+    height: 100vh;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    background: #000000a6;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .mobile-block .block-text-container{
+   position: absolute;
+   display: flex;
+   margin: 15%;
+   background: #000000;
+   border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.6rem;
+    flex-direction: column;
+  }
+
+@media (max-width: 800px) {
+  .mobile-block{
+    display: block;
+  }
+
+
+  body {
+  overflow: hidden !important;
+}
+
+}
+
   .nav-container {
     position: fixed;
     width: 100%;

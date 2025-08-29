@@ -5,6 +5,7 @@
     "firebase": "^11.5.0",
     "gsap": "^3.12.7",
     "lenis": "^1.2.3",
+    "lottie-web": "^5.13.0",
     "matter-js": "^0.20.0",
     "split.js": "^1.6.5",
     "tweakpane": "^4.0.5"
